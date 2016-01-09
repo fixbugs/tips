@@ -10,6 +10,8 @@ class News extends CI_Controller {
 
     public function index()
     {
+        $params = $this->input->get();
+        var_dump($params);
         $data['news'] = $this->news_model->get_news();
     }
 
