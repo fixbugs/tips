@@ -48,6 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Model {
 
+    /**
+     * model error info
+     */
+    $_error_message = ''
+
 	/**
 	 * Class constructor
 	 *
@@ -76,5 +81,19 @@ class CI_Model {
 		//	most likely a typo in your model code.
 		return get_instance()->$key;
 	}
+
+    /**
+     *@param stirng $message
+     */
+    public function setModelError($message){
+        $this->_error_message = $message;
+    }
+
+    /**
+     *@return string error message
+     */
+    public function getModelError(){
+        return $this->_error_message;
+    }
 
 }
