@@ -15,4 +15,11 @@ class test extends CI_Controller{
         $this->load->view('templates/footer', $data);
 
     }
+
+    public function testuser(){
+        $this->load->model('user_model');
+        $params['username'] = 'admin';
+        $params['password'] = '123456';
+        $this->user_model->checkLogin($params);
+    }
 }

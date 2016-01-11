@@ -51,7 +51,7 @@ class CI_Model {
     /**
      * model error info
      */
-    $_error_message = ''
+    protected $_error_message = '';
 
 	/**
 	 * Class constructor
@@ -92,8 +92,8 @@ class CI_Model {
     /**
      *@return string error message
      */
-    public function getModelError(){
+     public function getModelError(){
         return $this->_error_message;
-    }
+     }
 
 }
