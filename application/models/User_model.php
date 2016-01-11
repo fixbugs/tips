@@ -11,8 +11,11 @@ class User_model extends CI_Model {
         //$this->db->from('user');
     }
 
-    //        return $query->row_array();
-
+    /**
+     * 登录验证函数,true 通过，false失败
+     * @param array $params
+     * @return bool
+     */
     public function checkLogin($params){
         if(!$params['username']){
             $this->setModelError('username undefine');
@@ -34,10 +37,20 @@ class User_model extends CI_Model {
         return true;
     }
 
+    /**
+     * 生成密码md5串
+     * @param string $password
+     * @return string  md5 value
+     */
     private function createPasswordString($password){
         return MD5(MD5($password).'goitt'.MD5($password) );
     }
 
+    /**
+     * 添加用户
+     * @param array $params
+     * @return bool
+     */
     public function addUser($params){
         if(!$params['username']){
             $this->setModelError('username undefine');
@@ -49,7 +62,7 @@ class User_model extends CI_Model {
         }
         $data['username'] = $params['username'];
         $data['password'] = $this->createPasswordString($params['password']);
-        
+
     }
 
 }
