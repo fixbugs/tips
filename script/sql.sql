@@ -1,7 +1,7 @@
-CREATE DATABASE `tips` if not exists;
+CREATE DATABASE  if not exists `tips`;
 USE tips;
 
-CREATE TABLE `user` if not exists (
+CREATE TABLE  if not exists `user` (
 `user_id` BIGINT(20) NOT NULL,
 `username` CHAR(32) NOT NULL COMMENT '用户名',
 `password` CHAR(32) NOT NULL COMMENT '密码',
@@ -16,7 +16,7 @@ KEY `user_name_password` (`username`,`password`),
 UNIQUE KEY `username` (`username`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
-CREATE TABLE `log` if not exists(
+CREATE TABLE if not exists `log`(
 `id` BIGINT(20) NOT NULL,
 `lever` CHAR(10) NOT NULL COMMENT '等级',
 `message` CHAR(80) NOT NULL COMMENT '信息内容',
@@ -28,7 +28,7 @@ KEY `create_time` (`create_time`),
 KEY `user_id` (`user_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='日志表';
 
-CREATE TABLE `api_log` if not exists(
+CREATE TABLE if not exists `api_log`(
 `id` BIGINT(20) NOT NULL,
 `lever` CHAR(10) NOT NULL COMMENT '等级',
 `error_num` INT(4) NOT NULl DEFAULT '0' COMMENT '错误状态码',
@@ -41,7 +41,7 @@ KEY `create_time` (`create_time`),
 KEY `user_id` (`user_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='API日志表';
 
-CREATE TABLE `trace` if not exists(
+CREATE TABLE if not exists `trace`(
 `id` BIGINT(20) NOT NULL,
 `lever` CHAR(10) NOT NULL COMMENT '等级',
 `message` CHAR(80) NOT NULL COMMENT '信息内容',
@@ -56,7 +56,7 @@ KEY `user_id` (`user_id`),
 KEY `obj_id_type` (`obj_id`,`obj_type`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
-CREATE TABLE `tips` if not exists(
+CREATE TABLE if not exists `tips`(
 `tips_id` BIGINT(20) NOT NULL,
 `parent_id` BIGINT(20) NOT NULL DEFAULT '0' COMMENT '父ID',
 `tips_message` TEXT NOT NULL COMMENT '信息内容',
