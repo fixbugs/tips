@@ -22,4 +22,14 @@ class test extends CI_Controller{
         $ret = $this->user_model->checkLogin($params);
         var_dump($ret);
     }
+
+    public function testhooks(){
+        $params = $this->input->post();
+        $last_line = system('bash /var/www/tips/.git/hooks/post-receive', $retval);
+        $return_arr['line'] = $last_line;
+        $return_arr['cmret'] = $retval;
+        $return_arr['status'] = true;
+        $this->renderJson($return_arr);
+    }
 }
+
