@@ -15,7 +15,6 @@ class test extends CI_Controller{
         $this->load->view('templates/footer', $data);
 
     }
-    
 
     public function testuser(){
         $this->load->model('user_model');
