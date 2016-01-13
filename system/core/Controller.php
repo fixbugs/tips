@@ -93,4 +93,28 @@ class CI_Controller {
 		return self::$instance;
 	}
 
+	/**
+     * 渲染JSON数据
+     * @param array $data
+     * @param array $options  json_encode的参数,详细参见json_encode参数
+     */
+    public function renderJson($data=array(), $options=JSON_UNESCAPED_UNICODE)
+    {
+        ob_clean();
+        $content = json_encode($data, $options);
+        //gzip压缩
+        if(!headers_sent() && extension_loaded("zlib") && strstr($_SERVER["HTTP_ACCEPT_ENCODING"],"gzip")
+            && strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6') === false){
+            $content = gzencode($content,9);
+            header("Content-Encoding: gzip");
+            header("Vary: Accept-Encoding");
+            header("Content-Length: ".strlen($content));
+        }
+        if(!headers_sent()){
+            header('Content-type: application/json; charset=utf-8');
+        }
+        echo $content;
+        exit(0);
+    }
+
 }
