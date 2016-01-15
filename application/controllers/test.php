@@ -1,4 +1,6 @@
 <?PHP
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class test extends CI_Controller{
     //contronller name cannot same as app name
     //public function test($params='home'){
