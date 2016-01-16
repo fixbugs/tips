@@ -67,6 +67,7 @@ class User_model extends CI_Model {
         $data['username'] = $params['username'];
         $data['password'] = $this->createPasswordString($params['password']);
         $data['create_time'] = time();
+        $data['user_id'] = make_shard_id(VSID);
         return $this->db->insert($this->_table_name, $data);
     }
 
@@ -79,6 +80,21 @@ class User_model extends CI_Model {
         $cond['username'] = $username;
         $query = $this->db->get_where($this->_table_name,$cond);
         return $query->row_array();
+    }
+
+    /**
+     * 返回所有用户数据
+     * @return array
+     */
+    public function findAll(){
+        $cond['is_enabled'] = '1';
+        $query = $this->db->get_where($this->_table_name,$cond);
+        $data = $query->result_array();
+        if(!empty($data)){
+            return $data;
+        }else{
+            return array();
+        }
     }
 
 }
