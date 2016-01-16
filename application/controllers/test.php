@@ -18,6 +18,8 @@ class test extends CI_Controller{
     }
 
     public function testuser(){
+        $id = make_shard_id(VSID);
+        echo $id;
         $this->load->model('user_model');
         $params['username'] = 'admin';
         $params['password'] = '123456';
