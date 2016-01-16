@@ -282,6 +282,8 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder);
 
+
+    include FCPATH.'include/define.php';
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
