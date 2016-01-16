@@ -117,4 +117,22 @@ class CI_Controller {
         exit(0);
     }
 
+    /**
+     * 返回是否为ajax请求
+     * @return boolean
+     */
+    public function isAjax()
+    {
+        return array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER);
+    }
+
+    /**
+     * 返回是否为post表单
+     * @return boolean
+     */
+    public function isPost()
+    {
+        return 'POST' == $_SERVER['REQUEST_METHOD'];
+    }
+
 }
