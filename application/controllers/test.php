@@ -23,8 +23,8 @@ class test extends CI_Controller{
         $this->load->model('user_model');
         $params['username'] = 'admin';
         $params['password'] = '123456';
-        $ret = $this->user_model->checkLogin($params);
-        var_dump($ret);
+        //        $ret = $this->user_model->deleteById('6094095278095511561');
+        //var_dump($ret);
     }
 
     public function testhooks(){

@@ -12,6 +12,20 @@ class User_model extends CI_Model {
     }
 
     /**
+     * 根据id获取用户信息
+     * @return array
+     */
+    public function getById($id){
+        $cond['user_id'] = $id;
+        $query = $this->db->get_where($this->_table_name, $cond);
+        $result = $query->row_array();
+        if(!empty($result)){
+            return $result;
+        }
+        return array();
+    }
+
+    /**
      * 登录验证函数,true 通过，false失败
      * @param array $params
      * @return bool
@@ -94,6 +108,53 @@ class User_model extends CI_Model {
             return $data;
         }else{
             return array();
+        }
+    }
+
+    /**
+     * 通过id删除用户
+     * @return bool
+     */
+    public function deleteById($id){
+        $cond['user_id'] = $id;
+        $ret = $this->db->delete($this->_table_name, $cond);
+        return $ret;
+    }
+
+    /**
+     * 根据用id或id数组删除用户
+     * @param $ids array
+     * @return bool
+     */
+    public function deleteUser($ids){
+        if(!is_array($ids)){
+            $ids = (array)$ids;
+        }
+        $success_num = 0;
+        $total_num = count($ids);
+        foreach($ids as $id){
+            if($id <= 0){
+                $_error = 'undefined blank list id';
+                $this->setModelError($_error);
+            }else{
+                $message = $this->getById($id);
+                $ret = $this->deleteById($id);
+                $ret = (bool)$ret;
+                if($ret == false){
+                    $_error = 'delete fail';
+                    $this->setModelError($_error);
+                }else{
+                    $success_num ++;
+                    $this->_traceModel->addTrace('delete', 'delete ip blank list, id:'.$message['id']);
+                }
+            }
+        }
+        if($success_num == $total_num){
+            $this->setModelError('delete success');
+            return true;
+        }else{
+            $this->setModelError("delete data total num:$total_num, success num:$success_num");
+            return false;
         }
     }
 
