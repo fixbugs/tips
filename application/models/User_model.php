@@ -123,7 +123,7 @@ class User_model extends CI_Model {
 
     /**
      * 根据用id或id数组删除用户
-     * @param $ids array
+     * @param array $ids
      * @return bool
      */
     public function deleteUser($ids){
