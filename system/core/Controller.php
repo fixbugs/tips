@@ -93,6 +93,76 @@ class CI_Controller {
 		return self::$instance;
 	}
 
+    /**
+     * init controller more thing
+     * @return null
+     */
+    public function _initContorller(){
+        $this->_loginCheck();
+        $this->_initConst();
+    }
+
+    /**
+     * init const var
+     * @return null
+     */
+    public function _initConst(){
+
+    }
+
+    /**
+     * check user login and set session
+     * @return null
+     */
+    public function _loginCheck(){
+        if(!$this->isLogin()){
+            $this->_gotoLogin();
+        }else{
+            //get usr info
+            
+        }
+    }
+
+    /**
+     * check is login
+     * @return boolean [description]
+     */
+    public function isLogin(){
+        return true;
+    }
+
+    /**
+     * redirect to error page
+     * @return null redirect
+     */
+    public function _gotoError($message,$return_url=''){
+        if ($return_url == '') {
+            $return_url = ! empty ( $_SERVER ['HTTP_REFERER'] ) ? $_SERVER ['HTTP_REFERER'] : '/';
+        }
+        if (_IS_AJAX_) {
+            $result = array_for_result ( false, $message, array(), $return_url );
+            echo $this->renderJson($result);
+            exit ();
+        } else {
+            $this->assign ( 'message', $message );
+            $this->assign ( 'return_url', $return_url );
+            //todo view to show message v
+            //echo $this->render ( 'message' );
+            exit ($message);
+        }
+    }
+
+    /**
+     * redirect to login page
+     * @return null redirect
+     */
+    public function _gotoLogin($return_url=''){
+        $total_login_url = 'http://'.$_SERVER['HTTP_HOST'].'/index.php/login/index';
+        $return_url = $return_url==''? urlencode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) : urlencode($return_url);
+        header("Location:" . $total_login_url . "?returnurl=" . $return_url);
+        exit();
+    }
+
 	/**
      * 渲染JSON数据
      * @param array $data
