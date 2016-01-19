@@ -23,6 +23,8 @@ class test extends CI_Controller{
         $this->load->model('user_model');
         $params['username'] = 'admin';
         $params['password'] = '123456';
+        echo USER_ID;
+        echo USER_NAME;
         //        $ret = $this->user_model->deleteById('6094095278095511561');
         //var_dump($ret);
     }

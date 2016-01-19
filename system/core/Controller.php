@@ -77,6 +77,7 @@ class CI_Controller {
 
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
+        $this->_initContorller();
 		log_message('info', 'Controller Class Initialized');
 	}
 
@@ -107,7 +108,8 @@ class CI_Controller {
      * @return null
      */
     public function _initConst(){
-
+        define('USER_ID', $this->_user['user_id']);
+        define('USER_NAME', $this->_user['username']);
     }
 
     /**
@@ -118,8 +120,9 @@ class CI_Controller {
         if(!$this->isLogin()){
             $this->_gotoLogin();
         }else{
-            //get usr info
-            
+            //get user info
+            $this->load->model('user_model');
+            $this->_user = $this->user_model->findByUsername('admin');
         }
     }
 
