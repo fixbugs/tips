@@ -1,13 +1,12 @@
 <?php
-
 /**
- * log表模型，记录用户操作记录
+ * api_log表模型，记录api获取相关log
  */
-class Log_model extends CI_Model {
+class Api_log_model extends CI_Model {
     /**
      * table name
      */
-    protected $_table_name = 'log';
+    protected $_table_name = 'api_log';
 
     public function __construct()
     {
@@ -16,13 +15,14 @@ class Log_model extends CI_Model {
     }
 
     /**
-     * 添加操作log
+     * 添加apilog
      * @param string $level
      * @param string $message
+     * @param string $error_num
      * @param array $params
      * @return array
      */
-    public function addLog($level='', $message='', $params=array()){
+    public function addLog($level='', $message='', $error_num='', $params=array()){
         $data = array();
         $return = false;
         $allow_level = array('warning', 'notice', 'error', 'add', 'edit', 'update', 'delete');
@@ -35,6 +35,7 @@ class Log_model extends CI_Model {
             $data['user_id'] = USER_ID;
             $data['level'] = $level;
             $data['message'] = $message;
+            $data['error_num'] = $error_num;
             $data['create_time'] = _NOW_;
             $data['id'] = make_shard_id(CORE_VSID);
             $ret = $this->db->insert($this->_table_name, $data);
@@ -79,7 +80,7 @@ class Log_model extends CI_Model {
     }
 
     /**
-     * 通过id删除日志
+     * 通过id删除API日志
      * @return bool
      */
     public function deleteById($id){
@@ -89,7 +90,7 @@ class Log_model extends CI_Model {
     }
 
     /**
-     * 根据用id或id数组删除日志
+     * 根据用id或id数组删除API日志
      * @param  array $ids
      * @return bool
      */
