@@ -2,8 +2,15 @@
 class User_model extends CI_Model {
     /**
      * table name
+     * @var string
      */
     protected $_table_name = 'user';
+
+    /**
+     * table private key
+     * @var string
+     */
+    protected $_pk = 'user_id';
 
     public function __construct()
     {
@@ -16,7 +23,7 @@ class User_model extends CI_Model {
      * @return array
      */
     public function getById($id){
-        $cond['user_id'] = $id;
+        $cond[$this->_pk] = $id;
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
         if(!empty($result)){
@@ -81,7 +88,7 @@ class User_model extends CI_Model {
         $data['username'] = $params['username'];
         $data['password'] = $this->createPasswordString($params['password']);
         $data['create_time'] = time();
-        $data['user_id'] = make_shard_id(VSID);
+        $data[$this->_pk] = make_shard_id(VSID);
         return $this->db->insert($this->_table_name, $data);
     }
 
@@ -116,7 +123,7 @@ class User_model extends CI_Model {
      * @return bool
      */
     public function deleteById($id){
-        $cond['user_id'] = $id;
+        $cond[$this->_pk] = $id;
         $ret = $this->db->delete($this->_table_name, $cond);
         return $ret;
     }

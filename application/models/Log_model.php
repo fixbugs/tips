@@ -6,8 +6,15 @@
 class Log_model extends CI_Model {
     /**
      * table name
+     * @var string
      */
     protected $_table_name = 'log';
+
+    /**
+     * table private key
+     * @var string
+     */
+    protected $_pk = 'id';
 
     public function __construct()
     {
@@ -36,7 +43,7 @@ class Log_model extends CI_Model {
             $data['level'] = $level;
             $data['message'] = $message;
             $data['create_time'] = _NOW_;
-            $data['id'] = make_shard_id(CORE_VSID);
+            $data[$this->_pk] = make_shard_id(CORE_VSID);
             $ret = $this->db->insert($this->_table_name, $data);
             if(!$ret){
                 $error = 'log add fail! level:'.$level.', message:'.$message;
@@ -55,7 +62,7 @@ class Log_model extends CI_Model {
      * @return array
      */
     public function getById($id){
-        $cond['id'] = $id;
+        $cond[$this->_pk] = $id;
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
         if(!empty($result)){
@@ -83,7 +90,7 @@ class Log_model extends CI_Model {
      * @return bool
      */
     public function deleteById($id){
-        $cond['id'] = $id;
+        $cond[$this->_pk] = $id;
         $ret = $this->db->delete($this->_table_name, $cond);
         return $ret;
     }

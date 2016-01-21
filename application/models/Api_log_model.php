@@ -8,6 +8,8 @@ class Api_log_model extends CI_Model {
      */
     protected $_table_name = 'api_log';
 
+    protected $_pk = 'id';
+
     public function __construct()
     {
         $this->load->database();
@@ -37,7 +39,7 @@ class Api_log_model extends CI_Model {
             $data['message'] = $message;
             $data['error_num'] = $error_num;
             $data['create_time'] = _NOW_;
-            $data['id'] = make_shard_id(CORE_VSID);
+            $data[$this->_pk] = make_shard_id(CORE_VSID);
             $ret = $this->db->insert($this->_table_name, $data);
             if(!$ret){
                 $error = 'log add fail! level:'.$level.', message:'.$message;
@@ -56,7 +58,7 @@ class Api_log_model extends CI_Model {
      * @return array
      */
     public function getById($id){
-        $cond['id'] = $id;
+        $cond[$this->_pk] = $id;
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
         if(!empty($result)){
@@ -84,7 +86,7 @@ class Api_log_model extends CI_Model {
      * @return bool
      */
     public function deleteById($id){
-        $cond['id'] = $id;
+        $cond[$this->_pk] = $id;
         $ret = $this->db->delete($this->_table_name, $cond);
         return $ret;
     }
