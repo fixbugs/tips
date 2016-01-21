@@ -8,6 +8,10 @@ class Api_log_model extends CI_Model {
      */
     protected $_table_name = 'api_log';
 
+    /**
+     * table private key
+     * @var string
+     */
     protected $_pk = 'id';
 
     public function __construct()

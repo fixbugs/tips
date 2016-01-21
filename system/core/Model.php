@@ -53,6 +53,10 @@ class CI_Model {
      */
     protected $_error_message = '';
 
+    protected $_table_name = '';
+
+    protected $_pk = '';
+
 	/**
 	 * Class constructor
 	 *
