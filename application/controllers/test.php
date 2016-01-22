@@ -29,6 +29,12 @@ class test extends CI_Controller{
         //var_dump($ret);
     }
 
+    public function testmodel(){
+        $this->load->model('test_model');
+        $ret = $this->test_model->test();
+        var_dump($ret);
+    }
+
     public function testhooks(){
         $params = $this->input->post();
         $last_line = system('bash /var/www/tips/.git/hooks/post-receive', $retval);
