@@ -3,7 +3,7 @@
 /**
  * log表模型，记录用户操作记录
  */
-class Log_model extends CI_Model {
+class Log_model extends GT_Model {
     /**
      * table name
      * @var string
@@ -18,8 +18,7 @@ class Log_model extends CI_Model {
 
     public function __construct()
     {
-        $this->load->database();
-        //$this->db->from('user');
+        parent::__construct();
     }
 
     /**
@@ -57,21 +56,6 @@ class Log_model extends CI_Model {
     }
 
     /**
-     * 根据id获取日志表数据
-     * @param int $id
-     * @return array
-     */
-    public function getById($id){
-        $cond[$this->_pk] = $id;
-        $query = $this->db->get_where($this->_table_name, $cond);
-        $result = $query->row_array();
-        if(!empty($result)){
-            return $result;
-        }
-        return array();
-    }
-
-    /**
      * 返回所有用户数据
      * @return array
      */
@@ -83,16 +67,6 @@ class Log_model extends CI_Model {
         }else{
             return array();
         }
-    }
-
-    /**
-     * 通过id删除日志
-     * @return bool
-     */
-    public function deleteById($id){
-        $cond[$this->_pk] = $id;
-        $ret = $this->db->delete($this->_table_name, $cond);
-        return $ret;
     }
 
     /**

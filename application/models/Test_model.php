@@ -1,10 +1,10 @@
 <?php
 
-class Test extends CommonModel{
+class Test_model extends GT_model{
 
     protected $_table_name = 'user';
 
-    protected $_pk = '';
+    protected $_pk = 'user_id';
 
     public function __construct(){
         parent::__construct();

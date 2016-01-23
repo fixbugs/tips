@@ -1,9 +1,9 @@
 <?php
-class News_model extends CI_Model {
+class News_model extends GT_Model {
 
     public function __construct()
     {
-        $this->load->database();
+        parent::__construct();
     }
 
     public function get_news($slug = FALSE)

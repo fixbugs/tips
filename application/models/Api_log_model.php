@@ -2,7 +2,7 @@
 /**
  * api_log表模型，记录api获取相关log
  */
-class Api_log_model extends CI_Model {
+class Api_log_model extends GT_Model {
     /**
      * table name
      */
@@ -16,8 +16,7 @@ class Api_log_model extends CI_Model {
 
     public function __construct()
     {
-        $this->load->database();
-        //$this->db->from('user');
+        parent::__construct();
     }
 
     /**
@@ -56,20 +55,6 @@ class Api_log_model extends CI_Model {
         }
     }
 
-    /**
-     * 根据id获取日志表数据
-     * @param int $id
-     * @return array
-     */
-    public function getById($id){
-        $cond[$this->_pk] = $id;
-        $query = $this->db->get_where($this->_table_name, $cond);
-        $result = $query->row_array();
-        if(!empty($result)){
-            return $result;
-        }
-        return array();
-    }
 
     /**
      * 返回所有用户数据
@@ -83,16 +68,6 @@ class Api_log_model extends CI_Model {
         }else{
             return array();
         }
-    }
-
-    /**
-     * 通过id删除API日志
-     * @return bool
-     */
-    public function deleteById($id){
-        $cond[$this->_pk] = $id;
-        $ret = $this->db->delete($this->_table_name, $cond);
-        return $ret;
     }
 
     /**

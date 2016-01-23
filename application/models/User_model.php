@@ -1,5 +1,5 @@
 <?php
-class User_model extends CI_Model {
+class User_model extends GT_Model {
     /**
      * table name
      * @var string
@@ -18,19 +18,6 @@ class User_model extends CI_Model {
         //$this->db->from('user');
     }
 
-    /**
-     * 根据id获取用户信息
-     * @return array
-     */
-    public function getById($id){
-        $cond[$this->_pk] = $id;
-        $query = $this->db->get_where($this->_table_name, $cond);
-        $result = $query->row_array();
-        if(!empty($result)){
-            return $result;
-        }
-        return array();
-    }
 
     /**
      * 登录验证函数,true 通过，false失败
@@ -116,16 +103,6 @@ class User_model extends CI_Model {
         }else{
             return array();
         }
-    }
-
-    /**
-     * 通过id删除用户
-     * @return bool
-     */
-    public function deleteById($id){
-        $cond[$this->_pk] = $id;
-        $ret = $this->db->delete($this->_table_name, $cond);
-        return $ret;
     }
 
     /**
