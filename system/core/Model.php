@@ -98,6 +98,9 @@ class CI_Model {
 
 }
 
+/**
+ * abstract function as common function 
+ */
 abstract class GT_Model extends CI_Model{
 
     protected $_table_name = '';

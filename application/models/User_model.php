@@ -14,8 +14,7 @@ class User_model extends GT_Model {
 
     public function __construct()
     {
-        $this->load->database();
-        //$this->db->from('user');
+        parent::__construct();
     }
 
 
@@ -86,7 +85,7 @@ class User_model extends GT_Model {
      */
     public function findByUsername($username){
         $cond['username'] = $username;
-        $query = $this->db->get_where($this->_table_name,$cond);
+        $query = $this->db->get_where($this->_table_name, $cond);
         return $query->row_array();
     }
 
@@ -96,7 +95,7 @@ class User_model extends GT_Model {
      */
     public function findAll(){
         $cond['is_enabled'] = '1';
-        $query = $this->db->get_where($this->_table_name,$cond);
+        $query = $this->db->get_where($this->_table_name, $cond);
         $data = $query->result_array();
         if(!empty($data)){
             return $data;
