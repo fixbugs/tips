@@ -44,6 +44,36 @@ class Tips_model extends GT_Model{
         return $this->db->insert($this->_table_name, $data);
     }
 
-
+    public function deleteUser($ids){
+        if(!is_array($ids)){
+            $ids = (array)$ids;
+        }
+        $success_num = 0;
+        $total_num = count($ids);
+        foreach($ids as $id){
+            if($id <= 0){
+                $_error = 'undefined user id';
+                $this->setModelError($_error);
+            }else{
+                $message = $this->getById($id);
+                $ret = $this->deleteById($id);
+                $ret = (bool)$ret;
+                if($ret == false){
+                    $_error = 'delete fail';
+                    $this->setModelError($_error);
+                }else{
+                    $success_num ++;
+                    $this->_traceModel->addTrace('delete', 'delete user, id:'.$message['id']);
+                }
+            }
+        }
+        if($success_num == $total_num){
+            $this->setModelError('delete success');
+            return true;
+        }else{
+            $this->setModelError("delete data total num:$total_num, success num:$success_num");
+            return false;
+        }
+    }
 
 }

@@ -28,13 +28,13 @@ class Tips extends CI_Controller {
     public function add()
     {
         $params = $this->isPost()? $this->input->post():$this->input->get();
-        /*$ret = $this->user_model->addUser($params);
+        $ret = $this->tips_model->addTips($params);
         if($ret){
-            $result = array_for_result(true,$this->user_model->getModelError());
+            $result = array_for_result(true,$this->tips_model->getModelError());
         }else{
-            $result = array_for_result(flase,$this->user_model->getModelError());
+            $result = array_for_result(flase,$this->tips_model->getModelError());
         }
-        $this->renderJson($result);*/
+        $this->renderJson($result);
     }
 
     /**
@@ -42,9 +42,9 @@ class Tips extends CI_Controller {
      * @return json
      */
     public function listall(){
-        /*$data = $this->user_model->findAll();
+        $data = $this->tips_model->findAll();
         $result = array_for_list($data,array(),true,'success');
-        $this->renderJson($result);*/
+        $this->renderJson($result);
     }
 
 }

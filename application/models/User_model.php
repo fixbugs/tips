@@ -117,7 +117,7 @@ class User_model extends GT_Model {
         $total_num = count($ids);
         foreach($ids as $id){
             if($id <= 0){
-                $_error = 'undefined blank list id';
+                $_error = 'undefined user id';
                 $this->setModelError($_error);
             }else{
                 $message = $this->getById($id);
@@ -128,7 +128,7 @@ class User_model extends GT_Model {
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->_traceModel->addTrace('delete', 'delete ip blank list, id:'.$message['id']);
+                    $this->_traceModel->addTrace('delete', 'delete user, id:'.$message['id']);
                 }
             }
         }
