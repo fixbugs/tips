@@ -18,7 +18,18 @@ class Tips_model extends GT_Model{
         parent::__construct();
     }
 
-    public function findAll(){
+    public function findAll($cond){
+        $query = $this->db->get_where($this->_table_name, $cond);
+        $data = $query->result_array();
+        if(!empty($data)){
+            return $data;
+        }else{
+            return array();
+        }
+    }
+
+    public function getAllTips($user_id){
+        $cond['user_id'] = $user_id;
         $query = $this->db->get_where($this->_table_name, $cond);
         $data = $query->result_array();
         if(!empty($data)){
@@ -44,7 +55,7 @@ class Tips_model extends GT_Model{
         return $this->db->insert($this->_table_name, $data);
     }
 
-    public function deleteUser($ids){
+    public function deleteTips($ids){
         if(!is_array($ids)){
             $ids = (array)$ids;
         }
@@ -52,7 +63,7 @@ class Tips_model extends GT_Model{
         $total_num = count($ids);
         foreach($ids as $id){
             if($id <= 0){
-                $_error = 'undefined user id';
+                $_error = 'undefined tips id';
                 $this->setModelError($_error);
             }else{
                 $message = $this->getById($id);
@@ -63,7 +74,7 @@ class Tips_model extends GT_Model{
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->_traceModel->addTrace('delete', 'delete user, id:'.$message['id']);
+                    $this->_traceModel->addTrace('delete', 'delete tips, id:'.$message['id']);
                 }
             }
         }
