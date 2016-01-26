@@ -47,4 +47,9 @@ class Tips extends CI_Controller {
         $this->renderJson($result);
     }
 
+    public function test(){
+        $ret = $this->tips_model->getAllTips('6097389606834319388');
+        var_dump($ret);
+    }
+
 }

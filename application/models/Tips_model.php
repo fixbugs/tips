@@ -30,7 +30,11 @@ class Tips_model extends GT_Model{
 
     public function getAllTips($user_id){
         $cond['user_id'] = $user_id;
-        $query = $this->db->get_where($this->_table_name, $cond);
+        $this->db->set($cond);
+        $this->db->select('*');
+        $this->db->from($this->_table_name);
+        $this->db->group_by('parent_id');
+        $query = $this->db->get();
         $data = $query->result_array();
         if(!empty($data)){
             return $data;
