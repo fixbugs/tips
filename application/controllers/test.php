@@ -46,11 +46,21 @@ class test extends CI_Controller{
 
     public function testolcoding(){
         $params = $this->input->get();
+        if(!$params['code']){
+            $code = 'echo 1;';
+        }else{
+            $code = $params['code'];
+        }
         ob_start();
-        $res = eval( $params['code']);
+        $res = eval( $code);
         $output = trim(ob_get_clean());
-        var_dump('output'.$output);
-        var_dump('result'.$res);
+        $result = array(
+            'code' => $code,
+            'output' => $output,
+            'code_res' => $res,
+            'status' => true,
+            );
+        $this->renderJson($result);
     }
 }
 
