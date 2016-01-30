@@ -317,3 +317,23 @@ function array_for_list($data=array(), $global=array(), $status=true, $message='
 
     return $return;
 }
+
+/**
+ * 动态代码执行
+ * @param string $func_str 函数字符串
+ * @param array  $func_params 函数参数
+ * @return mixed
+ */
+function get_dynamic_code_result($func_str, $func_params=array()){
+    if(!$func_str){
+        return false;
+    }
+    $t_str = str_replace('\$', '$', $func_str);
+    try{
+        $funa = eval('return '.$t_str);
+    }catch (Exception $e){
+        return false;
+    }
+    return $funa($func_params);
+
+}
