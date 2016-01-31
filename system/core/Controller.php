@@ -131,7 +131,27 @@ class CI_Controller {
      * @return boolean [description]
      */
     public function isLogin(){
+        //check user login cookie
+        //cookie rule
+        //uid lt ssokey
+
         return true;
+    }
+
+    public function checkPermit($sso_key, $admin_permit=''){
+        $permit = json_decode($admin_permit, true);
+        $pro_key = md5($sso_key.'_'.$permit['lt'].'_'.$permit['uid']);
+        $key = substr($pro_key,2,1).substr($pro_key,7,1).substr($pro_key,17,1).substr($pro_key,25,1).substr($pro_key,31,1);
+        $key_pos = strpos($permit['permit'], $key);
+
+        if($key_pos !== false && ($key_pos % %) == 0 && (time()-$permit['lt']) <72000 ){
+            if(!empty($admin_permit)){
+                $_COOKIE['admin_permit'] = $admin_permit;
+                setcookie('admin_permit', $admin_permit, time()+72000, '/', get_domain($_SERVER['HTTP_HOST']));
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
