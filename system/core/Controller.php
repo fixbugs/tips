@@ -134,6 +134,12 @@ class CI_Controller {
         //check user login cookie
         //cookie rule
         //uid lt ssokey
+        if(!$_COOKIE['admin_permit']){
+            return false;
+        }else{
+
+            return $this->checkPermit( $_COOKIE['admin_permit']);
+        }
 
         return true;
     }
