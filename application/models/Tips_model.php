@@ -13,11 +13,15 @@ class Tips_model extends GT_Model{
      */
     protected $_pk = 'tips_id';
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
     }
 
+    /**
+     * 获取全部
+     * @param array $cond
+     * @return array
+     */
     public function findAll($cond){
         $query = $this->db->get_where($this->_table_name, $cond);
         $data = $query->result_array();
@@ -28,6 +32,11 @@ class Tips_model extends GT_Model{
         }
     }
 
+    /**
+     * 获取全部提示，多层级
+     * @param string $user_id 用户id
+     * @return array
+     */
     public function getAllTips($user_id){
         $cond['user_id'] = $user_id;
         $this->db->set($cond);
@@ -43,6 +52,11 @@ class Tips_model extends GT_Model{
         }
     }
 
+    /**
+     * 添加提示
+     * @param array $params 添加参数
+     * @return bool
+     */
     public function addTips($params){
         if( !isset($params['message']) || empty($params['message'])){
             $this->setModelError('tips messge needed');
@@ -59,6 +73,11 @@ class Tips_model extends GT_Model{
         return $this->db->insert($this->_table_name, $data);
     }
 
+    /**
+     * 删除提示
+     * @param array $ids id数组
+     * @return bool
+     */
     public function deleteTips($ids){
         if(!is_array($ids)){
             $ids = (array)$ids;
