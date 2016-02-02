@@ -45,11 +45,29 @@ class Tips_model extends GT_Model{
         $this->db->group_by('parent_id');
         $query = $this->db->get();
         $data = $query->result_array();
+        $data = $this->getTree($data, '0');
         if(!empty($data)){
             return $data;
         }else{
             return array();
         }
+    }
+
+    /**
+     * 获取无线分级树
+     * @param array $data 数据数组
+     * @param int   $parent_id 父id，获取父节点传入0
+     * @return array
+     */
+    public function getTree($data, $parent_id=0){
+        $tree = array();
+        foreach($data as $k=>$v){
+            if($v['parent_id'] == $parent_id){
+                $v['parent_id'] = $this->getTree($data, $v[$this->_pk]);
+                $tree[] = $v;
+            }
+        }
+        return $tree;
     }
 
     /**
