@@ -130,6 +130,13 @@ abstract class GT_Model extends CI_Model{
         return $ret;
     }
 
+    public function updateBypk($data, $id){
+        $this->_check_model_value();
+        $this->db->where($this->_pk, $id);
+        $ret = $this->db->update($this->_table_name, $data);
+        return $ret;
+    }
+
     private function _check_model_value(){
         if(!$this->_table_name){
             exit('table name needed');
