@@ -96,7 +96,12 @@ class Tips_model extends GT_Model{
             $this->setModelError('tips id needed');
             return false;
         }
-        
+        $ret = $this->updateBypk($params,$params[$this->_pk]);
+        if($ret === false ){
+            return false;
+        }else{
+            return true;
+        }
 
     }
 
