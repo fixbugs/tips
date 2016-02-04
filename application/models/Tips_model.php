@@ -91,6 +91,11 @@ class Tips_model extends GT_Model{
         return $this->db->insert($this->_table_name, $data);
     }
 
+    /**
+     * 编辑提示
+     * @param array $parmas
+     * @return bool
+     */
     public function editTips($params){
         if(!isset($params[$this->_pk]) || empty($params[$this->_pk])){
             $this->setModelError('tips id needed');

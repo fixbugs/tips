@@ -90,6 +90,29 @@ class User_model extends GT_Model {
     }
 
     /**
+     * 编辑用户相关信息
+     * @param array $params 参数
+     * @return bool
+     */
+    public function editUser($params){
+        if(!isset($params[$this->_pk]) || empty($params[$this->_pk])){
+            $this->setModelError('user id needed');
+            return false;
+        }
+        if($params['password']){
+            $params['password'] = $this->createPasswordString($params['password']);
+        }
+        $params['update_time'] = time();
+        $ret = $this->updateBypk($params, $params[$this->_pk]);
+        if($ret === false){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
+    /**
      * 返回所有用户数据
      * @return array
      */
