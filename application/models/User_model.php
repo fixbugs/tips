@@ -1,4 +1,5 @@
 <?php
+
 class User_model extends GT_Model {
     /**
      * table name

@@ -137,6 +137,33 @@ abstract class GT_Model extends CI_Model{
         return $ret;
     }
 
+    public function sum($table_col, $cond=array()){
+        $this->_check_model_value();
+        $this->db->select_sum($table_col);
+        if($cond){
+            $this->db->where($cond);
+        }
+        $query = $this->db->get($this->_table_name);
+        $result = $query->row_array();
+        if(!empty($result)){
+            return $result;
+        }
+        return array();
+    }
+
+    public function count($cond=array()){
+        $this->_check_model_value();
+        if($cond){
+            $this->db->where($cond);
+        }
+        $query = $this->db->count_all_results($this->_table_name, FALSE);
+        $result = $query;
+        if(!empty($result)){
+            return $result;
+        }
+        return 0;
+    }
+
     private function _check_model_value(){
         if(!$this->_table_name){
             exit('table name needed');
