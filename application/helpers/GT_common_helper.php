@@ -12,7 +12,7 @@ function pr($str){
  * @param int $mode
  * @return boolean
  */
-function mkDir($dir, $mode = 0755)
+function mk_dir($dir, $mode = 0755)
 {
     if (is_dir($dir) || @mkdir($dir,$mode))
     {

@@ -173,6 +173,10 @@ abstract class GT_Model extends CI_Model{
         }
     }
 
+    public function getLastSql(){
+        return $this->db->last_query();
+    }
+
     private function _check_model_value(){
         if(!$this->_table_name){
             exit('table name needed');

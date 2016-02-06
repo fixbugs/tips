@@ -50,8 +50,9 @@ class Tips extends CI_Controller {
     public function test(){
         // $ret = $this->tips_model->getAllTips('6097389606834319388');
         $params['tips_id'] = '6097389606834319388';
-        $params['tips_message'] = 'test edit';
-        $ret = $this->tips_model->count(array('parent_id'=>$params['tips_id']));
+        //$params['tips_message'] = 'test edit';
+        $ret = $this->tips_model->getTipsByParams(array(), 1, 10);
+        //$ret = $this->tips_model->count(array('parent_id'=>$params['tips_id']));
         //$ret = $this->tips_model->editTips($params);
         var_dump($ret);
     }

@@ -45,7 +45,7 @@ class Tips_model extends GT_Model{
         }
         $offset = ($page - 1) * $limit;
         $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
-        $result = $query->row_array();
+        $result = $query->result_array();
         if(!empty($result)){
             return $result;
         }
