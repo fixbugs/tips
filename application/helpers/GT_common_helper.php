@@ -12,7 +12,7 @@ function pr($str){
  * @param int $mode
  * @return boolean
  */
-function mk_dir($dir, $mode = 0755)
+function mkDir($dir, $mode = 0755)
 {
     if (is_dir($dir) || @mkdir($dir,$mode))
     {
@@ -338,7 +338,7 @@ function get_dynamic_code_result($func_str, $func_params=array()){
 
 }
 
-function get_domain($url){
+function getDomain($url){
     if(substr($url, 0, 4) == 'http') {
         $rs = parse_url($url);
         $host = $rs['host'];

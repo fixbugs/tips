@@ -164,6 +164,15 @@ abstract class GT_Model extends CI_Model{
         return 0;
     }
 
+    public function escapeCommonParams(&$params){
+        if(isset($params['debug'])){
+            unset($params['debug']);
+        }
+        if(isset($params['debgu'])){
+            unset($params['debgu']);
+        }
+    }
+
     private function _check_model_value(){
         if(!$this->_table_name){
             exit('table name needed');

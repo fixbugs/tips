@@ -153,7 +153,7 @@ class CI_Controller {
         if($key_pos !== false && ($key_pos % 5) == 0 && (time()-$permit['lt']) <72000 ){
             if(!empty($admin_permit)){
                 $_COOKIE['admin_permit'] = $admin_permit;
-                setcookie('admin_permit', $admin_permit, time()+72000, '/', get_domain($_SERVER['HTTP_HOST']));
+                setcookie('admin_permit', $admin_permit, time()+72000, '/', getDomain($_SERVER['HTTP_HOST']));
             }
             return true;
         }

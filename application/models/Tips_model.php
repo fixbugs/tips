@@ -32,6 +32,26 @@ class Tips_model extends GT_Model{
         }
     }
 
+    public function getTipsByParams($cond, $page=1, $limit=10){
+        if(!$page){
+            $page = 1;
+        }else{
+            $page = intval($page) ? intval($page):1;
+        }
+        if(!$limit){
+            $limit = 10;
+        }else{
+            $limit = intval($limit) ? intval($limit):1;
+        }
+        $offset = ($page - 1) * $limit;
+        $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
+        $result = $query->row_array();
+        if(!empty($result)){
+            return $result;
+        }
+        return array();
+    }
+
     /**
      * 获取全部提示，多层级
      * @param string $user_id 用户id
