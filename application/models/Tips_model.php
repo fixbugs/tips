@@ -47,7 +47,8 @@ class Tips_model extends GT_Model{
         $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
         $result = $query->result_array();
         if(!empty($result)){
-            return $result;
+            $data = $this->getTree($result,0);
+            return $data;
         }
         return array();
     }
