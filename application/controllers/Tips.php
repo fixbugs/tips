@@ -10,6 +10,10 @@ class Tips extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
+    /**
+     * 默认入口方法
+     * @return html
+     */
     public function index()
     {
         if($this->isPost()){
