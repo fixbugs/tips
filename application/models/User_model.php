@@ -80,7 +80,7 @@ class User_model extends GT_Model {
     }
 
     /**
-     * 根据用户账号查找用户是否存在，
+     * 根据用户账号查找用户是否存在
      * @param  string $username 用户名
      * @return array
      */
@@ -88,6 +88,36 @@ class User_model extends GT_Model {
         $cond['username'] = $username;
         $query = $this->db->get_where($this->_table_name, $cond);
         return $query->row_array();
+    }
+
+    /**
+     * 根据参数获取用户表信息,不能根据用户密码获取
+     * @param array $cond 搜索参数
+     * @param int $page 获取的页数
+     * @param int $limit 条目数
+     * @return array
+     */
+    public function getUserByParams($cond, $page=1, $limit=10){
+        if(isset($params['password'])){
+            unset($params['password']);
+        }
+        if(!$page){
+            $page = 1;
+        }else{
+            $page = intval($page) ? intval($page):1;
+        }
+        if(!$limit){
+            $limit = 10;
+        }else{
+            $limit = intval($limit) ? intval($limit):1;
+        }
+        $offset = ($page - 1) * $limit;
+        $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
+        $result = $query->result_array();
+        if(!empty($result)){
+            return $data;
+        }
+        return array();
     }
 
     /**

@@ -35,9 +35,9 @@ class Tips_model extends GT_Model{
     /**
      * 根据参数获取提示
      * @param array $cond 获取参数
-     * @param int   $page 页数
-     * @param int   $limit 条目数
-     * @return array 
+     * @param int $page 页数
+     * @param int $limit 条目数
+     * @return array
      */
     public function getTipsByParams($cond, $page=1, $limit=10){
         if(!$page){
