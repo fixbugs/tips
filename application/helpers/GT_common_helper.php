@@ -1,10 +1,25 @@
 <?php
 
+/**
+ * 打印debug信息
+ * @param mixed $str 需要打印的字符串或数组
+ * @return void
+ */
 function pr($str){
     print_r("---------");
     print_r($str);
     print_r("---------");
 }
+
+/**
+ * 将时间戳转换成中文时间输出格式
+ * @param int $timestamp 时间戳
+ * @return string
+ */
+function convert_time_to_zh($timestamp = 0){
+    return date('Y-m-d H:i:s', $timestamp);
+}
+
 /**
  * 循环创建目录
  *

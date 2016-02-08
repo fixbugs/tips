@@ -19,3 +19,8 @@ define('_NOW_', time());
 define('CORE_VSID', 300);
 
 define('VSID',CORE_VSID);
+
+/**
+ *定义系统设置
+ */
+date_default_timezone_set('PRC');

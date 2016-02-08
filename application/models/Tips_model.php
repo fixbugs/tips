@@ -22,7 +22,7 @@ class Tips_model extends GT_Model{
      * @param array $cond
      * @return array
      */
-    public function findAll($cond){
+    public function findAll($cond=array()){
         $query = $this->db->get_where($this->_table_name, $cond);
         $data = $query->result_array();
         if(!empty($data)){

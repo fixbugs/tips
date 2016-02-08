@@ -21,7 +21,11 @@ class Tips extends CI_Controller {
             var_dump($params);
         }else{
             $params = $this->input->get();
-            var_dump($params);
+            $data['title'] = 'Tips Index';
+            $data['tips'] = $this->tips_model->findAll();
+            $this->load->view('templates/header', $data);
+            $this->load->view('tips/index', $data);
+            $this->load->view('templates/footer', $data);
         }
      }
 
