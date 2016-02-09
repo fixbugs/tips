@@ -145,6 +145,12 @@ class CI_Controller {
         return true;
     }
 
+    /**
+     * check user permit by ssokey and cookie
+     * @param string $sso_key 统一分配的ssokey
+     * @param string $admin_permit 权限cookie值
+     * @return bool
+     */
     public function checkPermit($sso_key, $admin_permit=''){
         $permit = json_decode($admin_permit, true);
         $pro_key = md5($sso_key.'_'.$permit['lt'].'_'.$permit['uid']);

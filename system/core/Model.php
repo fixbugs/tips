@@ -99,7 +99,7 @@ class CI_Model {
 }
 
 /**
- * abstract function as common function 
+ * abstract function as common function, rewrite CI_Model for easy use
  */
 abstract class GT_Model extends CI_Model{
 
@@ -112,6 +112,11 @@ abstract class GT_Model extends CI_Model{
         $this->load->database();
     }
 
+    /**
+     * 根据id获取对应model表的信息
+     * @param int $id 64位唯一ID
+     * @return array 
+     */
     public function getById($id){
         $this->_check_model_value();
         $cond[$this->_pk] = $id;
@@ -123,6 +128,11 @@ abstract class GT_Model extends CI_Model{
         return array();
     }
 
+    /**
+     * 根据ID删除model表的对应信息
+     * @param int $id 64位唯一ID
+     * @return bool
+     */
     public function deleteById($id){
         $this->_check_model_value();
         $cond[$this->_pk] = $id;
@@ -130,6 +140,12 @@ abstract class GT_Model extends CI_Model{
         return $ret;
     }
 
+    /**
+     * 根据主键值更新数据
+     * @param array $data 需要更新的数据值
+     * @param int $id 64位唯一ID
+     * @return bool
+     */
     public function updateBypk($data, $id){
         $this->_check_model_value();
         $this->db->where($this->_pk, $id);
@@ -137,6 +153,12 @@ abstract class GT_Model extends CI_Model{
         return $ret;
     }
 
+    /**
+     * 根据参数获取对应字段的和值
+     * @param string $table_col 表字段名
+     * @param array $cond 统计的条件数组
+     * @return array
+     */
     public function sum($table_col, $cond=array()){
         $this->_check_model_value();
         $this->db->select_sum($table_col);
@@ -151,6 +173,11 @@ abstract class GT_Model extends CI_Model{
         return array();
     }
 
+    /**
+     * 根据参数获取对应字段个数
+     * @param array $cond 统计的条件数组
+     * @return array
+     */
     public function count($cond=array()){
         $this->_check_model_value();
         if($cond){
@@ -164,6 +191,11 @@ abstract class GT_Model extends CI_Model{
         return 0;
     }
 
+    /**
+     * 去除掉公共的不需要的参数
+     * @param array $params 参数数组
+     * @return void
+     */
     public function escapeCommonParams(&$params){
         if(isset($params['debug'])){
             unset($params['debug']);
@@ -173,10 +205,18 @@ abstract class GT_Model extends CI_Model{
         }
     }
 
+    /**
+     * 获取最后一次执行的sql
+     * @return string
+     */
     public function getLastSql(){
         return $this->db->last_query();
     }
 
+    /**
+     * 校验model层的数据完整性，公共校验
+     * @return void error info
+     */
     private function _check_model_value(){
         if(!$this->_table_name){
             exit('table name needed');
