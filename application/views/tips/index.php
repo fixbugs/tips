@@ -1,3 +1,4 @@
+
 <?php foreach($tips as $tip){ ?>
 <ul>
 <li><?php echo $tip['tips_id'];?></li>

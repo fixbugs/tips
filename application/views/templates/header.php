@@ -5,6 +5,7 @@
     <?php }else {?>
         <title>CodeIgniter Tutorial</title>
     <?php }?>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
     </head>
     <body>
 
