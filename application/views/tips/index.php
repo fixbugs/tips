@@ -1,4 +1,4 @@
-
+<div>
 <?php foreach($tips as $tip){ ?>
 <ul>
 <li><?php echo $tip['tips_id'];?></li>
@@ -10,3 +10,8 @@
 <li><?php echo $tip['status'];?></li>
 </ul>
 <?php } ?>
+</div>
+<div>
+<a href = '/index.php/tips/add'>添加</a>
+<a href = ''>删除</a>
+</div>

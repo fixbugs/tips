@@ -35,14 +35,23 @@ class Tips extends CI_Controller {
      */
     public function add()
     {
-        $params = $this->isPost()? $this->input->post():$this->input->get();
-        $ret = $this->tips_model->addTips($params);
-        if($ret){
-            $result = array_for_result(true,$this->tips_model->getModelError());
+        if($this->isPost()){
+            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $ret = $this->tips_model->addTips($params);
+            if($ret){
+                $result = array_for_result(true,$this->tips_model->getModelError());
+            }else{
+                $result = array_for_result(flase,$this->tips_model->getModelError());
+            }
+            $this->renderJson($result);
         }else{
-            $result = array_for_result(flase,$this->tips_model->getModelError());
+            $params = $this->input->get();
+            $data['title'] = 'Tips Add';
+            $this->load->view('templates/header', $data);
+            $this->load->view('tips/edit', $data);
+            $this->load->view('templates/footer', $data);
         }
-        $this->renderJson($result);
+        //$params = $this->isPost()? $this->input->post():$this->input->get();
     }
 
     /**
