@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * 任务模型，处理任务相关内容
+ */
 class Tips_model extends GT_Model{
     /**
      * table name

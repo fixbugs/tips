@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * 用户模块，处理用户相关内容
+ */
 class User_model extends GT_Model {
     /**
      * table name
@@ -131,7 +134,13 @@ class User_model extends GT_Model {
             return false;
         }
         if($params['password']){
-            $params['password'] = $this->createPasswordString($params['password']);
+            if(!isset['re_password'] || ($params['password'] != $params['re_password']) ){
+                $this->setModelError('please set common password for password repeat');
+                return false;
+            }else{
+                $params['password'] = $this->createPasswordString($params['password']);
+                unset($params['re_password']);
+            }
         }
         $params['update_time'] = time();
         $ret = $this->updateBypk($params, $params[$this->_pk]);
