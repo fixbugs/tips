@@ -25,14 +25,13 @@ class Tips_model extends GT_Model{
      * @param array $cond
      * @return array
      */
-    public function findAll($cond=array()){
+    public function findAll( $cond=array()){
         $query = $this->db->get_where($this->_table_name, $cond);
         $data = $query->result_array();
         if(!empty($data)){
             return $data;
-        }else{
-            return array();
         }
+        return array();
     }
 
     /**
@@ -79,9 +78,8 @@ class Tips_model extends GT_Model{
         $data = $this->getTree($data, '0');
         if(!empty($data)){
             return $data;
-        }else{
-            return array();
         }
+        return array();
     }
 
     /**
@@ -128,12 +126,12 @@ class Tips_model extends GT_Model{
      * @return bool
      */
     public function editTips($params){
-        if(!isset($params[$this->_pk]) || empty($params[$this->_pk])){
+        if( !isset($params[$this->_pk]) || empty($params[$this->_pk]) ){
             $this->setModelError('tips id needed');
             return false;
         }
-        $ret = $this->updateBypk($params,$params[$this->_pk]);
-        if($ret === false ){
+        $ret = $this->updateBypk($params, $params[$this->_pk]);
+        if($ret === false){
             return false;
         }else{
             return true;

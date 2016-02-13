@@ -47,6 +47,7 @@ class Tips extends CI_Controller {
         }else{
             $params = $this->input->get();
             $data['title'] = 'Tips Add';
+            $data['action'] = 'add';
             $this->load->view('templates/header', $data);
             $this->load->view('tips/edit', $data);
             $this->load->view('templates/footer', $data);
