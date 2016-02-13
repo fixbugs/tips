@@ -132,8 +132,10 @@ class Tips_model extends GT_Model{
         }
         $ret = $this->updateBypk($params, $params[$this->_pk]);
         if($ret === false){
+            $this->setModelError('tips edit flased with sql return false!');
             return false;
         }else{
+            $this->setModelError('tips edit success');
             return true;
         }
 

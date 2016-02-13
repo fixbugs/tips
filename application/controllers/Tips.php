@@ -31,7 +31,7 @@ class Tips extends CI_Controller {
 
     /**
      * 添加提醒方法
-     * @return json
+     * @return mixed
      */
     public function add()
     {
@@ -53,6 +53,38 @@ class Tips extends CI_Controller {
             $this->load->view('templates/footer', $data);
         }
         //$params = $this->isPost()? $this->input->post():$this->input->get();
+    }
+
+    /**
+     * 编辑提醒方法
+     * @return mixed
+     */
+    public function edit(){
+        if($this->isPost()){
+            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $ret = $this->tips_model->editTips($params);
+            if($ret){
+                $result = array_for_result(true,$this->tips_model->getModelError());
+            }else{
+                $result = array_for_result(flase,$this->tips_model->getModelError());
+            }
+            $this->renderJson($result);
+        }else{
+            $params = $this->input->get();
+            if(!$params['id']){
+                exit('id needed');
+            }
+            $tips_data = $this->tips_model->getById($params['id']);
+            if(!$tips_data){
+                exit("id error");
+            }
+            $data['data'] = $tips_data;
+            $data['title'] = 'Tips Edit';
+            $data['action'] = 'edit';
+            $this->load->view('templates/header', $data);
+            $this->load->view('tips/edit', $data);
+            $this->load->view('templates/footer', $data);
+        }
     }
 
     /**
