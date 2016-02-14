@@ -27,14 +27,51 @@ class User extends CI_Controller {
      */
     public function add()
     {
-        $params = $this->isPost()? $this->input->post():$this->input->get();
-        $ret = $this->user_model->addUser($params);
-        if($ret){
-            $result = array_for_result(true,$this->user_model->getModelError());
+        if($this->isPost()){
+            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $ret = $this->user_model->addUser($params);
+            if($ret){
+                $result = array_for_result(true,$this->user_model->getModelError());
+            }else{
+                $result = array_for_result(flase,$this->user_model->getModelError());
+            }
+            $this->renderJson($result);
         }else{
-            $result = array_for_result(flase,$this->user_model->getModelError());
+            $params = $this->input->get();
+            $data['title'] = 'User Add';
+            $data['action'] = 'add';
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/edit', $data);
+            $this->load->view('templates/footer', $data);
         }
-        $this->renderJson($result);
+    }
+
+    public function edit(){
+        if($this->isPost()){
+            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $ret = $this->tips_model->editUser($params);
+            if($ret){
+                $result = array_for_result(true,$this->user_model->getModelError());
+            }else{
+                $result = array_for_result(flase,$this->user_model->getModelError());
+            }
+            $this->renderJson($result);
+        }else{
+            $params = $this->input->get();
+            if(!$params['id']){
+                exit('id needed');
+            }
+            $user_data = $this->user_model->getById($params['id']);
+            if(!$user_data){
+                exit("id error");
+            }
+            $data['data'] = $user_data;
+            $data['title'] = 'User Edit';
+            $data['action'] = 'edit';
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/edit', $data);
+            $this->load->view('templates/footer', $data);
+        }
     }
 
     /**

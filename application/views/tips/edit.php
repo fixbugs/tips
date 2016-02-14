@@ -1,6 +1,6 @@
 <form action='<?php if($action == "edit"){ echo '/index.php/tips/edit';}else{ echo '/index.php/tips/add';} ?>' method='post'>
 <?php if($data['tips_id']){ ?>
-<input type='hiddena' name='tips_id' value='<?php if($data["tips_id"]){ echo $data["tips_id"];}?>'>
+<input type='hidden' name='tips_id' value='<?php if($data["tips_id"]){ echo $data["tips_id"];}?>'>
 <?php } ?>
 <ul>
      <li><input type='text' name='message' value='<?php if($data["tips_message"]){ echo $data["tips_message"];}?>'></li>

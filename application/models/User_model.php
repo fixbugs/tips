@@ -138,7 +138,11 @@ class User_model extends GT_Model {
                 $this->setModelError('please set common password for password repeat');
                 return false;
             }else{
-                $params['password'] = $this->createPasswordString($params['password']);
+                if(empty($params['password'])){
+                    unset($params['password']);
+                }else{
+                    $params['password'] = $this->createPasswordString($params['password']);
+                }
                 unset($params['re_password']);
             }
         }
