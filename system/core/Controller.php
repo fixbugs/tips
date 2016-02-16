@@ -223,6 +223,37 @@ class CI_Controller {
     }
 
     /**
+     * 渲染jsonp和json数据
+     * @param  array $result  需要返回的数据结果数组
+     * @param  array $params  用户传入的参数数组
+     * @param  string $options json_encode的参数,详细参见json_encode参数
+     * @return finally          
+     */
+    public function renderJsonp($result, $params, $options=JSON_UNESCAPED_UNICODE){
+        $this->getViewer()->needLayout(false);
+        ob_clean();
+        $content = json_encode($result, $options);
+        if(!empty($params['jsonpcallback'])){
+            $jsonpcallback = isset($params['jsonpcallback']) ? trim($params['jsonpcallback']) : '';
+            if(!empty($jsonpcallback)){
+                echo $jsonpcallback."(".$content.")";
+            }else{
+                echo $content;
+            }
+        }else if(!empty($params['callback'])){
+            $callback = isset($params['callback']) ? trim($params['callback']) : '';
+            if(!empty($callback)){
+                echo $callback."(".$content.")";
+            }else{
+                echo $content;
+            }
+        }else{
+            echo $content;
+        }
+        exit(0);
+    }
+
+    /**
      * 返回是否为ajax请求
      * @return boolean
      */

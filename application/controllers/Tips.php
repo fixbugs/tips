@@ -52,7 +52,6 @@ class Tips extends CI_Controller {
             $this->load->view('tips/edit', $data);
             $this->load->view('templates/footer', $data);
         }
-        //$params = $this->isPost()? $this->input->post():$this->input->get();
     }
 
     /**
