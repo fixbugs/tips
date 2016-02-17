@@ -374,3 +374,27 @@ function getDomain($url){
     }
     return $domain;
 }
+
+function curl_get_ml($urls){
+    $mh = curl_multi_init();
+    foreach ($url_arr as $i => $url) {
+        $conn[$i]=curl_init($url);
+        curl_setopt($conn[$i],CURLOPT_RETURNTRANSFER,1);
+        curl_multi_add_handle ($mh,$conn[$i]);
+    }
+    do {
+        $mrc = curl_multi_exec($mh,$active);
+    } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+    while ($active and $mrc == CURLM_OK) {
+        if (curl_multi_select($mh) != -1) {
+            do {
+                $mrc = curl_multi_exec($mh, $active);
+            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        }
+    }
+    foreach ($url_arr as $i => $url) {
+        $res[$i]=curl_multi_getcontent($conn[$i]);
+        curl_close($conn[$i]);
+    }
+    return $res;
+}
