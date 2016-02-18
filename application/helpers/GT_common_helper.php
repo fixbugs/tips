@@ -375,7 +375,7 @@ function getDomain($url){
     return $domain;
 }
 
-function curl_get_ml($urls){
+function curl_get_ml($url_arr){
     $mh = curl_multi_init();
     foreach ($url_arr as $i => $url) {
         $conn[$i]=curl_init($url);

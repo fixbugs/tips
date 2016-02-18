@@ -62,5 +62,15 @@ class test extends CI_Controller{
             );
         $this->renderJson($result);
     }
+
+    public function testcurlml(){
+        $urls = array(
+            'http://stat.leju.com/api/data/getrankdatabyuids?app_key=aeaa676f40d5974c335323cafc52c7c8&unique_id=abcdefg,bbccdd',
+            'http://stat.leju.com/api/data/getrank?app_key=aeaa676f40d5974c335323cafc52c7c8&plat_key=pc',
+            'http://stat.leju.com/api/data/getrankrecord?app_key=aeaa676f40d5974c335323cafc52c7c8&unique_id=abcdefg&plat_key=pc',
+            );
+        $result = curl_get_ml($urls);
+        var_dump($result);
+    }
 }
 
