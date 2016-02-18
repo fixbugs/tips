@@ -353,6 +353,11 @@ function get_dynamic_code_result($func_str, $func_params=array()){
 
 }
 
+/**
+ * 获取域名
+ * @param  string $url 需要获取域名的url
+ * @return string
+ */
 function getDomain($url){
     if(substr($url, 0, 4) == 'http') {
         $rs = parse_url($url);
@@ -375,6 +380,16 @@ function getDomain($url){
     return $domain;
 }
 
+/**
+ * 多线程获取url返回结果，只支持get，
+ * example $urls = array(
+ *   'k1'=>'http://stat.leju.com/api/data/getrankdatabyuids?app_key=aeaa676f40d5974c335323cafc52c7c8&unique_id=abcdefg,bbccdd',
+ *  'key2'=>'http://stat.leju.com/api/data/getrank?app_key=aeaa676f40d5974c335323cafc52c7c8&plat_key=pc',
+ *  'kk3'=>'http://stat.leju.com/api/data/getrankrecord?app_key=aeaa676f40d5974c335323cafc52c7c8&unique_id=abcdefg&plat_key=pc',
+ *   );
+ * @param  array $url_arr url数组，可带索引
+ * @return array
+ */
 function curl_get_ml($url_arr){
     $mh = curl_multi_init();
     foreach ($url_arr as $i => $url) {
