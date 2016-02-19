@@ -36,12 +36,12 @@ class Tips extends CI_Controller {
     public function add()
     {
         if($this->isPost()){
-            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
             $ret = $this->tips_model->addTips($params);
             if($ret){
-                $result = array_for_result(true,$this->tips_model->getModelError());
+                $result = array_for_result(true, $this->tips_model->getModelError());
             }else{
-                $result = array_for_result(flase,$this->tips_model->getModelError());
+                $result = array_for_result(false, $this->tips_model->getModelError());
             }
             $this->renderJson($result);
         }else{
@@ -60,12 +60,12 @@ class Tips extends CI_Controller {
      */
     public function edit(){
         if($this->isPost()){
-            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
             $ret = $this->tips_model->editTips($params);
             if($ret){
-                $result = array_for_result(true,$this->tips_model->getModelError());
+                $result = array_for_result(true, $this->tips_model->getModelError());
             }else{
-                $result = array_for_result(flase,$this->tips_model->getModelError());
+                $result = array_for_result(false, $this->tips_model->getModelError());
             }
             $this->renderJson($result);
         }else{
@@ -92,8 +92,27 @@ class Tips extends CI_Controller {
      */
     public function listall(){
         $data = $this->tips_model->findAll();
-        $result = array_for_list($data,array(),true,'success');
+        $result = array_for_list($data, array(), true, 'success');
         $this->renderJson($result);
+    }
+
+    /**
+     * 删除提醒
+     * @return json
+     */
+    public function delete(){
+        $params = $this->isPost() ? $this->input->post():$this->input->get();
+        if(!$params['id']){
+            $result = array_for_result(false, 'id needed');
+        }else{
+            $ret = $this->tips_model->deleteTips($params['id']);
+            if($ret){
+                $result = array_for_result(true, $this->tips_model->getModelError());
+            }else{
+                $result = array_for_result(false, $this->tips_model->getModelError());
+            }
+        }
+        $this->renderJson();
     }
 
     public function test(){

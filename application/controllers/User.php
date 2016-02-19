@@ -28,12 +28,12 @@ class User extends CI_Controller {
     public function add()
     {
         if($this->isPost()){
-            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
             $ret = $this->user_model->addUser($params);
             if($ret){
-                $result = array_for_result(true,$this->user_model->getModelError());
+                $result = array_for_result(true, $this->user_model->getModelError());
             }else{
-                $result = array_for_result(flase,$this->user_model->getModelError());
+                $result = array_for_result(false, $this->user_model->getModelError());
             }
             $this->renderJson($result);
         }else{
@@ -48,12 +48,12 @@ class User extends CI_Controller {
 
     public function edit(){
         if($this->isPost()){
-            $params = $this->isPost()? $this->input->post():$this->input->get();
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
             $ret = $this->tips_model->editUser($params);
             if($ret){
-                $result = array_for_result(true,$this->user_model->getModelError());
+                $result = array_for_result(true, $this->user_model->getModelError());
             }else{
-                $result = array_for_result(flase,$this->user_model->getModelError());
+                $result = array_for_result(false, $this->user_model->getModelError());
             }
             $this->renderJson($result);
         }else{
@@ -80,7 +80,7 @@ class User extends CI_Controller {
      */
     public function listall(){
         $data = $this->user_model->findAll();
-        $result = array_for_list($data,array(),true,'success');
+        $result = array_for_list($data, array(), true, 'success');
         $this->renderJson($result);
     }
 
