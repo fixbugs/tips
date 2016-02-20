@@ -1,12 +1,12 @@
 <?php
 /**
- * api_log表模型，记录api获取相关log
+ * trace_model表模型，记录api获取相关log
  */
-class Api_log_model extends GT_Model {
+class Trace_model extends GT_Model {
     /**
      * table name
      */
-    protected $_table_name = 'api_log';
+    protected $_table_name = 'trace';
 
     /**
      * table private key
@@ -17,39 +17,45 @@ class Api_log_model extends GT_Model {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('trace_model');
     }
 
     /**
-     * 添加apilog
+     * 添加trace
      * @param string $level
      * @param string $message
-     * @param string $error_num
+     * @param string $obj_id
+     * @param string $obj_type
      * @param array $params
      * @return array
      */
-    public function addLog($level='', $message='', $error_num='', $params=array()){
+    public function addTrace($level='', $message='', $obj_id='', $obj_type='',$params=array()){
         $data = array();
         $return = false;
         $allow_level = array('warning', 'notice', 'error', 'add', 'edit', 'update', 'delete');
+        $obj_allow_level = array('user','tips');
+        if(!in_array($obj_type, $obj_allow_level)){
+            $error = '"'.$obj_type.'" type is not allow by trace object type';
+            return array_for_result(false, $error);
+        }
 
         if(is_array($allow_level) && !in_array($level, $allow_level)){
-            $error = '"'.$level.'" level is not allow by log';
+            $error = '"'.$level.'" level is not allow by trace';
             $return = array_for_result(false, $error);
         }else{
             //need to do
             $data['user_id'] = USER_ID;
             $data['level'] = $level;
             $data['message'] = $message;
-            $data['error_num'] = $error_num;
+            $data['obj_id'] = $obj_id;
+            $data['obj_type'] = $obj_type;
             $data['create_time'] = _NOW_;
             $data[$this->_pk] = make_shard_id(CORE_VSID);
             $ret = $this->db->insert($this->_table_name, $data);
             if(!$ret){
-                $error = 'log add fail! level:'.$level.', message:'.$message;
+                $error = 'trace add fail! level:'.$level.', message:'.$message;
                 $return = array_for_result(false, $error);
             }else{
-                $msg = 'log add success, level:'.$level.', message:'.$message;
+                $msg = 'trace add success, level:'.$level.', message:'.$message;
                 $return = array_for_result(true, $msg);
             }
             return $return;
@@ -58,7 +64,7 @@ class Api_log_model extends GT_Model {
 
 
     /**
-     * 返回所有api log data
+     * 返回所有操作记录
      * @return array
      */
     public function findAll(){
@@ -72,11 +78,11 @@ class Api_log_model extends GT_Model {
     }
 
     /**
-     * 根据用id或id数组删除API日志
+     * 根据用id或id数组删除trace
      * @param  array $ids
      * @return bool
      */
-    public function deleteLogs($ids){
+    public function deleteTaces($ids){
         if(!is_array($ids)){
             $ids = (array)$ids;
         }
@@ -84,7 +90,7 @@ class Api_log_model extends GT_Model {
         $total_num = count($ids);
         foreach($ids as $id){
             if($id <= 0){
-                $_error = 'undefined api log id';
+                $_error = 'undefined trace id';
                 $this->setModelError($_error);
             }else{
                 $message = $this->getById($id);
@@ -95,7 +101,6 @@ class Api_log_model extends GT_Model {
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->Trace_model->addTrace('delete', 'delete api log, id:'.$message['id']);
                 }
             }
         }

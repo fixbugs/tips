@@ -56,7 +56,7 @@ class Log_model extends GT_Model {
     }
 
     /**
-     * 返回所有用户数据
+     * 返回所有log
      * @return array
      */
     public function findAll(){
@@ -82,7 +82,7 @@ class Log_model extends GT_Model {
         $total_num = count($ids);
         foreach($ids as $id){
             if($id <= 0){
-                $_error = 'undefined blank list id';
+                $_error = 'undefined log id';
                 $this->setModelError($_error);
             }else{
                 $message = $this->getById($id);
@@ -93,7 +93,7 @@ class Log_model extends GT_Model {
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->_traceModel->addTrace('delete', 'delete ip blank list, id:'.$message['id']);
+                    $this->trace_model->addTrace('delete', 'delete log, id:'.$message['id']);
                 }
             }
         }
