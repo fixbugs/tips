@@ -95,7 +95,7 @@ class Api_log_model extends GT_Model {
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->Trace_model->addTrace('delete', 'delete api log, id:'.$message['id']);
+                    $this->trace_model->addTrace('delete', 'delete api log, id:'.$message['id']);
                 }
             }
         }

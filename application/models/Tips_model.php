@@ -18,6 +18,7 @@ class Tips_model extends GT_Model{
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('trace_model');
     }
 
     /**
@@ -165,7 +166,7 @@ class Tips_model extends GT_Model{
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->_traceModel->addTrace('delete', 'delete tips, id:'.$message['id']);
+                    $this->trace_model->addTrace('delete', 'delete tips, id:'.$message['id']);
                 }
             }
         }
