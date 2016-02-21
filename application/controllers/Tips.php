@@ -8,6 +8,7 @@ class Tips extends CI_Controller {
         parent::__construct();
         $this->load->model('tips_model');
         $this->load->helper('url_helper');
+        $this->load->library('theme');
     }
 
     /**
@@ -23,9 +24,7 @@ class Tips extends CI_Controller {
             $params = $this->input->get();
             $data['title'] = 'Tips Index';
             $data['tips'] = $this->tips_model->findAll();
-            $this->load->view('templates/header', $data);
-            $this->load->view('tips/index', $data);
-            $this->load->view('templates/footer', $data);
+            $this->theme->render('tips/index', $data);
         }
      }
 
