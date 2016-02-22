@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class News extends CI_Controller {
+class News extends GT_Controller {
 
     public function __construct()
     {

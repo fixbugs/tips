@@ -1,7 +1,7 @@
 <?PHP
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class test extends CI_Controller{
+class test extends GT_Controller{
     //contronller name cannot same as app name
     //public function test($params='home'){
     //  $data['title'] = 'hello';

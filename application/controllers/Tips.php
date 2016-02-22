@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tips extends CI_Controller {
+class Tips extends GT_Controller {
 
     public function __construct()
     {
