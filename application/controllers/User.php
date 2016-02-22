@@ -46,6 +46,10 @@ class User extends CI_Controller {
         }
     }
 
+    /**
+     * 用户编辑方法
+     * @return json or html
+     */
     public function edit(){
         if($this->isPost()){
             $params = $this->isPost() ? $this->input->post():$this->input->get();
