@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 公共处理Controller
  */
-class GT_Contorller extends CI_Controller{
+class GT_Controller extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
