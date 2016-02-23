@@ -413,3 +413,236 @@ function curl_get_ml($url_arr){
     }
     return $res;
 }
+
+/**
+ * 提交GET请求，curl方法
+ * @param string  $url       请求url地址
+ * @param mixed   $data      GET数据,数组或类似id=1&k1=v1
+ * @param array   $header    头信息 注：若要绑定host,需设置$header['host']="要绑定的域名或ip"
+ * @param int     $timeout   超时时间
+ * @param int     $port      端口号
+ * @return array             请求结果,
+ *                            如果出错,返回结果为array('error'=>'','result'=>''),
+ *                            未出错，返回结果为array('result'=>''),
+ */
+function curl_get($url, $data = array(), $header = array(), $timeout = 3, $port = 80)
+{
+    $start_time = time();
+    $req_data = $data;
+    $ch = curl_init();
+    if (!empty($data)) {
+        $data = is_array($data) ? http_build_query($data) : $data;
+        $url .= (strpos($url, '?') ? '&' : "?") . $data;
+    }
+    $setheader = array();
+    if(isset($header['host'])){  //绑定host
+        //如果host是ip
+        if(preg_match('/^[0-9]{1,3}(\.[0-9]{1,3}){3}$/', $header['host'])){
+            $ip = $header['host'];
+            $host = get_url_domain($url);
+            if($host){
+                $setheader = array("Host:".$host);
+                $url = preg_replace("/{$host}/", $ip, $url, 1);
+            }
+        }else{
+            $setheader = array("Host:".$header['host']);
+        }
+        unset($header['host']);
+    }
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_POST, 0);
+    //curl_setopt($ch, CURLOPT_HEADER, true);          //显示文件头信息
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  //设定不跟随header发送的location
+    //curl_setopt($ch, CURLOPT_PORT, $port);
+    !empty($setheader) && curl_setopt($ch, CURLOPT_HTTPHEADER, $setheader);
+
+    $data = array();
+    $result = array();
+    $result['result'] = curl_exec($ch);
+    curl_close($ch);
+     if (0 != curl_errno($ch)) {
+        $result['error']  = "Error:\n" . curl_error($ch);
+    }elseif(empty($result['result'])){
+        $result['error']  = "Error:Empty return";
+    }
+    return $result;
+}
+
+/**
+ * 提交POST请求，curl方法
+ * @param string  $url       请求url地址
+ * @param mixed   $data      POST数据,数组或类似id=1&k1=v1
+ * @param array   $header    头信息 注：若要绑定host,需设置$header['host']="要绑定的域名或ip"
+ * @param int     $timeout   超时时间
+ * @param int     $port      端口号
+ * @return string            请求结果,
+ *                            如果出错,返回结果为array('error'=>'','result'=>''),
+ *                            未出错，返回结果为array('result'=>''),
+ */
+function curl_post($url, $data = array(), $header = array(), $timeout = 3, $port = 80)
+{
+    $start_time = time();
+    $req_data = $data;
+    if(isset($header['host'])){  //绑定host
+        //如果host是ip
+        if(preg_match('/^[0-9]{1,3}(\.[0-9]{1,3}){3}$/', $header['host'])){
+            $ip = $header['host'];
+            $host = get_url_domain($url);
+            if($host){
+                $header[] = "Host:".$host;
+                $url = preg_replace("/{$host}/", $ip, $url,1);
+            }
+        }else{
+            $header[] = "Host:".$header['host'];
+        }
+        unset($header['host']);
+    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    //curl_setopt($ch, CURLOPT_HEADER, true);          //显示文件头信息
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  //设定不跟随header发送的location
+    //curl_setopt($ch, CURLOPT_PORT, $port);
+    !empty ($header) && curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $result = array();
+
+    $result['result'] = curl_exec($ch);
+    if (0 != curl_errno($ch)) {
+        $result['error']  = "Error:\n" . curl_error($ch);
+    }elseif(empty($result['result'])){
+        $result['error']  = "Error:Empty return";
+    }
+    return $result;
+}
+
+/**
+ * 对数组进行编码转换
+ *
+ * @param strint       $in_charset   输入编码
+ * @param string       $out_charset  输出编码
+ * @param string|array  $arr         输入数据
+ * @return array                     返回数组
+ */
+function iconv_mixed($in_charset, $out_charset, $arr)
+{
+    if (strtolower($in_charset) == "utf8" || strtolower($in_charset) == 'utf-8') {
+        $in_charset = "UTF-8";
+    }
+
+    if (is_array($arr)) {
+        foreach ($arr as $key => $value) {
+            $arr[$key] = iconv_mixed($in_charset, $out_charset . "//IGNORE", $value);
+        }
+    } else {
+        if (!is_numeric($arr)) {
+            $arr = iconv($in_charset, $out_charset . "//IGNORE", $arr);
+        }
+    }
+    return $arr;
+}
+
+/**
+ * 按UNICODE编码截取字符串前$length个字符
+ * @param string $str
+ * @param int $length
+ */
+function cn_substr($string, $length)
+{
+    if ($length == 0) {
+        return '';
+    }
+
+    $newlength = 0;
+    if (strlen($string) > $length) {
+        for($i=0; $i < $length; $i++)
+        {
+            if(!isset($string{$newlength})) break;
+            $a = base_convert(ord($string{$newlength}), 10, 2);
+            $newlength++;
+            $a = substr('00000000'.$a, -8);
+
+            if (substr($a, 0, 1) == 0) {
+                continue;
+            } elseif (substr($a, 0, 3) == 110) {
+                $newlength ++;
+            } elseif (substr($a, 0, 4) == 1110) {
+                $newlength += 2;
+            } elseif (substr($a, 0, 5) == 11110) {
+                $newlength += 3;
+            } elseif (substr($a, 0, 6) == 111110) {
+                $newlength += 4;
+            } elseif (substr($a, 0, 7) == 1111110) {
+                $newlength += 5;
+            } else {
+                $newlength ++;
+            }
+            $i++;
+        }
+
+        return substr($string, 0, $newlength);
+    } else {
+        return $string;
+    }
+}
+
+/**
+ * xml串转成数组
+ * @param string $xml_string xml串
+ * @return array $data       失败返回空数组
+ */
+function xml_array($xml_string)
+{
+    $xml_string = preg_replace('/(<\?xml\s+version=(\'|\")1.0(\'|\")\s+encoding=)([\"\'a-z-0-9]+)(\s*\?>)/i',
+        '$1"utf-8"$5', $xml_string);
+
+    $xml_string = str_replace('<![CDATA[', '', $xml_string);
+    $xml_string = str_replace(']]>', '', $xml_string);
+    $xml = @simplexml_load_string( $xml_string );
+    if (false === $xml) {
+        return array();
+    }
+    $data = array();
+    simple_xml_array($xml, $data);
+    return $data;
+}
+
+/**
+ * simplexml对象转成数组
+ * @param object $simple_xml
+ * @param array $data
+ */
+function simple_xml_array($simple_xml, &$data)
+{
+    $simple_xml = (array) $simple_xml;//var_dump($simple_xml);exit;
+    foreach ($simple_xml as $k => $v){
+        if ($k === '@attributes')
+        {
+            continue;
+        }
+        $v = (array)$v;
+        foreach ($v as $k1 => $v1){
+            if ($k1 !== '@attributes') {
+                if (is_array($v1)) {
+                    $data[$k][$k1] = array();
+                    simple_xml_array($v1,  $data[$k][$k1]);
+                } elseif ($v1 instanceof SimpleXMLElement ) {
+                    $k2 = $v1->getName();
+                    if($k2 === $k){
+                        $data[$k][$k1] = array();
+                        simple_xml_array($v1, $data[$k][$k1]);
+                    }else{
+                        $data[$k][$k2] = array();
+                        simple_xml_array($v1, $data[$k][$k2]);
+                    }
+                } else {
+                    $data[$k][$k1] = $v1;
+                }
+            }
+        }
+    }
+}
