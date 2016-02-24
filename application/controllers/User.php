@@ -44,9 +44,7 @@ class User extends GT_Controller {
             $params = $this->input->get();
             $data['title'] = 'User Add';
             $data['action'] = 'add';
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/edit', $data);
-            $this->load->view('templates/footer', $data);
+            $this->render('user/edit', $data);
         }
     }
 
@@ -76,9 +74,7 @@ class User extends GT_Controller {
             $data['data'] = $user_data;
             $data['title'] = 'User Edit';
             $data['action'] = 'edit';
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/edit', $data);
-            $this->load->view('templates/footer', $data);
+            $this->render('user/edit', $data);
         }
     }
 
