@@ -20,6 +20,7 @@ class Welcome extends GT_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+        $this->setLayout(false);
+		$this->render('welcome_message');
 	}
 }

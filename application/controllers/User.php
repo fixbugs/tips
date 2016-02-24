@@ -10,6 +10,10 @@ class User extends GT_Controller {
         $this->load->helper('url_helper');
     }
 
+    /**
+     * 默认方法
+     * @return mixed
+     */
     public function index()
     {
         if($this->isPost()){
@@ -23,7 +27,7 @@ class User extends GT_Controller {
 
     /**
      * 添加用户方法
-     * @return json
+     * @return mixed
      */
     public function add()
     {

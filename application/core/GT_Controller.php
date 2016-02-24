@@ -10,6 +10,7 @@ class GT_Controller extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->_initContorller();
+        $this->load->library('theme');
     }
 
     /**
@@ -42,6 +43,18 @@ class GT_Controller extends CI_Controller{
             $this->load->model('user_model');
             $this->_user = $this->user_model->findByUsername('admin');
         }
+    }
+
+    /**
+     * template show
+     * @return void
+     */
+    public function render($template, $data=array()){
+        $this->theme->render($template, $data);
+    }
+
+    public function setLayout($need=true){
+        $this->theme->setLayout($need);
     }
 
     /**

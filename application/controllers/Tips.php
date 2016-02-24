@@ -8,7 +8,6 @@ class Tips extends GT_Controller {
         parent::__construct();
         $this->load->model('tips_model');
         $this->load->helper('url_helper');
-        $this->load->library('theme');
     }
 
     /**
@@ -24,7 +23,7 @@ class Tips extends GT_Controller {
             $params = $this->input->get();
             $data['title'] = 'Tips Index';
             $data['tips'] = $this->tips_model->findAll();
-            $this->theme->render('tips/index', $data);
+            $this->render('tips/index', $data);
         }
      }
 
@@ -47,9 +46,7 @@ class Tips extends GT_Controller {
             $params = $this->input->get();
             $data['title'] = 'Tips Add';
             $data['action'] = 'add';
-            $this->load->view('templates/header', $data);
-            $this->load->view('tips/edit', $data);
-            $this->load->view('templates/footer', $data);
+            $this->render('tips/edit', $data);
         }
     }
 
@@ -79,9 +76,7 @@ class Tips extends GT_Controller {
             $data['data'] = $tips_data;
             $data['title'] = 'Tips Edit';
             $data['action'] = 'edit';
-            $this->load->view('templates/header', $data);
-            $this->load->view('tips/edit', $data);
-            $this->load->view('templates/footer', $data);
+            $this->render('tips/edit', $data);
         }
     }
 
