@@ -46,7 +46,7 @@ class Tips extends GT_Controller {
             $params = $this->input->get();
             $data['title'] = 'Tips Add';
             $data['action'] = 'add';
-            $this->render('tips/edit', $data);
+            $this->render('tips/add', $data);
         }
     }
 
