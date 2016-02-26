@@ -21,7 +21,9 @@ class User extends GT_Controller {
             var_dump($params);
         }else{
             $params = $this->input->get();
-            var_dump($params);
+            $data['users'] = $this->user_model->findAll();
+            $data['title'] = 'User Index';
+            $this->render('user/index', $data);
         }
      }
 
