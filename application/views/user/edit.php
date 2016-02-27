@@ -7,7 +7,7 @@
      <li><input type='password' name='password' value='<?php if(isset($data) ){ echo $data["password"];} ?>'></li>
      <li><input type='password' name='re_password' value=''></li>
      <li><input type='text' name='truename' value='<?php if(isset($data) ){ echo $data["truename"];} ?>'></li>
-     <li><input type='password' name='email' value='<?php if(isset($data) ){ echo $data["email"];} ?>'></li>
+     <li><input type='text' name='email' value='<?php if(isset($data) ){ echo $data["email"];} ?>'></li>
      <li><button type='submit' value='Submit'>Submit</button></li>
      <li><button type='reset' value='Reset'>Reset</button></li>
 </ul>
