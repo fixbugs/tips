@@ -63,8 +63,7 @@ class CI_Controller {
 	 *
 	 * @return	void
 	 */
-	public function __construct()
-	{
+	public function __construct(){
 		self::$instance =& $this;
 
 		// Assign all the class objects that were instantiated by the
@@ -88,8 +87,7 @@ class CI_Controller {
 	 * @static
 	 * @return	object
 	 */
-	public static function &get_instance()
-	{
+	public static function &get_instance(){
 		return self::$instance;
 	}
 
@@ -98,8 +96,7 @@ class CI_Controller {
      * @param array $data
      * @param array $options  json_encode的参数,详细参见json_encode参数
      */
-    public function renderJson($data=array(), $options=JSON_UNESCAPED_UNICODE)
-    {
+    public function renderJson($data=array(), $options=JSON_UNESCAPED_UNICODE){
         ob_clean();
         $content = json_encode($data, $options);
         //gzip压缩
@@ -125,7 +122,6 @@ class CI_Controller {
      * @return finally          
      */
     public function renderJsonp($result, $params, $options=JSON_UNESCAPED_UNICODE){
-        $this->getViewer()->needLayout(false);
         ob_clean();
         $content = json_encode($result, $options);
         if(!empty($params['jsonpcallback'])){
@@ -149,11 +145,64 @@ class CI_Controller {
     }
 
     /**
+     * 渲染字符串方法
+     * @param string $str
+     */
+    public function renderText($str=''){
+        ob_clean();
+        header('Content-type: text/plain');
+        echo $str;
+        exit(0);
+    }
+
+    /**
+     * 渲染Xml数据
+     * @param mix $data
+     */
+    public function renderXml($data){
+        ob_clean();
+        header("Content-Type: text/xml");
+        echo $this->toXml($data);
+        exit(0);
+    }
+
+    /**
+     * 输出Xml
+     * @return string
+     */
+    public function toXml($data, $dom=null, $item=null){
+        !$dom && $dom = new DOMDocument("1.0", "utf-8");
+
+        if(!$item)
+        {
+            $item = $dom->createElement("root");
+            $dom->appendChild($item);
+        }
+
+        !$data && $data = array();
+        foreach($data as $key=>$val)
+        {
+            $itemx = $dom->createElement(is_string($key)?$key:'item');
+            $item->appendChild($itemx);
+            if(!is_array($val))
+            {
+                $text = $dom->createTextNode($val);
+                $itemx->appendChild($text);
+            }
+            else
+            {
+                $this->toXml($data[$key], $dom, $itemx);
+            }
+        }
+
+        return $dom->saveXML();
+    }
+
+    /**
      * 返回是否为ajax请求
      * @return boolean
      */
-    public function isAjax()
-    {
+    public function isAjax(){
         return array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER);
     }
 
@@ -161,8 +210,7 @@ class CI_Controller {
      * 返回是否为post表单
      * @return boolean
      */
-    public function isPost()
-    {
+    public function isPost(){
         return 'POST' == $_SERVER['REQUEST_METHOD'];
     }
 
