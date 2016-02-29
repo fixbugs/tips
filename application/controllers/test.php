@@ -72,5 +72,6 @@ class test extends GT_Controller{
         $result = curl_get_ml($urls);
         var_dump($result);
     }
+    
 }
 

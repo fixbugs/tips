@@ -46,7 +46,7 @@ class User extends GT_Controller {
             $params = $this->input->get();
             $data['title'] = 'User Add';
             $data['action'] = 'add';
-            $this->render('user/edit', $data);
+            $this->render('user/add', $data);
         }
     }
 
