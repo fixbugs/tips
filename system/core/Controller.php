@@ -119,7 +119,7 @@ class CI_Controller {
      * @param  array $result  需要返回的数据结果数组
      * @param  array $params  用户传入的参数数组
      * @param  string $options json_encode的参数,详细参见json_encode参数
-     * @return finally          
+     * @return finally
      */
     public function renderJsonp($result, $params, $options=JSON_UNESCAPED_UNICODE){
         ob_clean();

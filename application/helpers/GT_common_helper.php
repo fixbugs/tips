@@ -646,3 +646,14 @@ function simple_xml_array($simple_xml, &$data)
         }
     }
 }
+
+/**
+* 过滤调字符串中的所有空格
+* @param string $str
+* @return string 
+*/
+function trimall($str){
+    $qian = array(" ", "　", "\t", "\n", "\r");
+    $hou = array("", "", "", "", "");
+    return str_replace($qian, $hou, $str);
+}
