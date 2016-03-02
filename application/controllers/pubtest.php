@@ -5,8 +5,8 @@ class pubtest extends GT_Controller{
 
     public function test(){
         pr("pubtest test action");
-        $st = ' fdf fff';
-        pr(trimall($st));
+        $st = ' fdf fff ';
+        var_dump(trimall($st));
     }
 
 }

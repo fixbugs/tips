@@ -653,7 +653,7 @@ function simple_xml_array($simple_xml, &$data)
 * @return string 
 */
 function trimall($str){
-    $qian = array(" ", "　", "\t", "\n", "\r");
-    $hou = array("", "", "", "", "");
-    return str_replace($qian, $hou, $str);
+    $repleace_arr = array(" ", "　", "\t", "\n", "\r");
+    $repleace_value = array("", "", "", "", "");
+    return str_replace($repleace_arr, $repleace_value, $str);
 }
