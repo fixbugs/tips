@@ -657,3 +657,36 @@ function trimall($str){
     $repleace_value = array("", "", "", "", "");
     return str_replace($repleace_arr, $repleace_value, $str);
 }
+
+/**
+ * 取得当前时间的微秒数
+ */
+function getFloatMicroTime(){
+    list($usec, $sec) = explode(' ', microtime());
+    return ((float)$usec + (float)$sec);
+
+}
+
+/**
+ * 计算字符数(不是字节数)
+ * @param	  string   $str 字符串
+ * @return	  int　　	字符数
+ */
+function countStr($str){
+    $i = 0;
+    $count = 0;
+    $len = strlen ($str);
+    while ($i < $len) {
+        $chr = ord ($str[$i]);
+        $count++;
+        $i++;
+        if($i >= $len) break;
+        if($chr & 0x80) {
+            $chr <<= 1;
+            while ($chr & 0x80) {
+                $i++;
+                $chr <<= 1;
+            }
+        }
+    }
+    return $count;
