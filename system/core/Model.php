@@ -113,6 +113,19 @@ abstract class GT_Model extends CI_Model{
     }
 
     /**
+     * model增加方法
+     * @param array $data 需要插入数据库的数据
+     * @return $bool
+     */
+    public function add($data){
+        $this->_check_model_value();
+        if(!$data[$this->_pk]){
+            $data[$this->_pk] = make_shard_id(VSID);
+        }
+        return $this->db->insert($this->_table_name, $data);
+    }
+
+    /**
      * 根据id获取对应model表的信息
      * @param int $id 64位唯一ID
      * @return array 

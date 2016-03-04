@@ -690,3 +690,8 @@ function countStr($str){
         }
     }
     return $count;
+}
+
+function setCountInfo(){
+
+}

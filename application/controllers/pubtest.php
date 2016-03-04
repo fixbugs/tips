@@ -9,4 +9,10 @@ class pubtest extends GT_Controller{
         var_dump(trimall($st));
     }
 
+    public function count(){
+        pr('count test');
+        setCountInfo();
+        pr('count end');
+    }
+
 }
