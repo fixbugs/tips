@@ -182,6 +182,22 @@ abstract class GT_Model extends CI_Model{
     }
 
     /**
+     * 根据键名和条件批量更新数据
+     * @param array $data 需要更新的数据集，二维数组
+     * @param string $key_name 需要更新的数据库列名
+     * @return bool
+     */
+    public function updateAll($data,$key_name){
+        $this->_check_model_value();
+        foreach($data as $k=>$v){
+            if(!$data[$k][$key_name]){
+                return false;
+            }
+        }
+        return $this->db->update_batch($this->_table_name, $data, $key_name);
+    }
+
+    /**
      * 根据参数获取对应字段的和值
      * @param string $table_col 表字段名
      * @param array $cond 统计的条件数组
