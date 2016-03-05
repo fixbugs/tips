@@ -169,6 +169,16 @@ abstract class GT_Model extends CI_Model{
     }
 
     /**
+     * 根据条件删除数据
+     * @param array $cond 删除条件
+     * @return bool
+     */
+    public function deleteAll($cond){
+        $this->_check_model_value();
+        return $this->db->delete($thi->_table_name, $cond);
+    }
+
+    /**
      * 根据主键值更新数据
      * @param array $data 需要更新的数据值
      * @param int $id 64位唯一ID
