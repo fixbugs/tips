@@ -115,14 +115,29 @@ abstract class GT_Model extends CI_Model{
     /**
      * model增加方法
      * @param array $data 需要插入数据库的数据
-     * @return $bool
+     * @return bool
      */
-    public function add($data){
+    public function insert($data){
         $this->_check_model_value();
         if(!$data[$this->_pk]){
             $data[$this->_pk] = make_shard_id(VSID);
         }
         return $this->db->insert($this->_table_name, $data);
+    }
+
+    /**
+     * model 批量插入数据库方法
+     * @param array $data 二位数组
+     * @return bool
+     */
+    public function insertAll($data){
+        $this->_check_model_value();
+        foreach($data as $k=>$v){
+            if(!$data[$k][$this->_pk]){
+                $data[$k][$this->_pk] = make_shard_id(VSID);
+            }
+        }
+        return $this->db->insert_batch($this->_table_name, $data);
     }
 
     /**
