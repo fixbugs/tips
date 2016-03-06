@@ -319,4 +319,12 @@ abstract class GT_Model extends CI_Model{
         }
     }
 
+    /**
+     * 清楚查询条件
+     * @return void
+     */
+    public function clearCondition(){
+        $this->_field = '*';
+    }
+
 }
