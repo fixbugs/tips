@@ -107,10 +107,44 @@ abstract class GT_Model extends CI_Model{
 
     protected $_pk = '';
 
+    protected $_field= '*';
+
     public function __construct(){
         parent::__construct();
         $this->load->database();
     }
+
+    /**
+     * 设置需要查询的字段，以逗号分隔
+     * @param string $field  EM:id,url,cteatetime
+     * @return void
+     */
+    public function select($field){
+        if(!$field){
+            $this->_field = $field;
+        }else{
+            $this->_field = '*';
+        }
+    }
+
+    /**
+     * 根据条件获取所有数据
+     * @param array $cond 条件数组
+     * @param string $field 搜索的字段，默认为全部
+     * @return array();
+     */
+    public function findAllByAttr($cond, $field='*'){
+        $this->_check_model_value();
+        $this->db->where($cond);
+        if($this->_field){
+            $this->db->select($this->_field);
+        }else{
+            $this->db->select($field);
+        }
+        $query = $this->db->get($this->_table_name);
+        return $query->result();
+    }
+
 
     /**
      * model增加方法
@@ -243,6 +277,11 @@ abstract class GT_Model extends CI_Model{
             return $result;
         }
         return 0;
+    }
+
+    public function countTotal(){
+        $this->_check_model_value();
+        return $this->db->count_all($this->_table_name);
     }
 
     /**
