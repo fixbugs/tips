@@ -128,6 +128,21 @@ abstract class GT_Model extends CI_Model{
     }
 
     /**
+     * 根据条件获取单条数据
+     * @param array $cond 条件数组
+     * @return array
+     */
+    public function findByAttr($cond){
+        $this->_check_model_value();
+        $query = $this->db->get_where($this->_table_name, $cond);
+        $result = $query->row_array();
+        if(!empty($result)){
+            return $result;
+        }
+        return array();
+    }
+
+    /**
      * 根据条件获取所有数据
      * @param array $cond 条件数组
      * @param string $field 搜索的字段，默认为全部
