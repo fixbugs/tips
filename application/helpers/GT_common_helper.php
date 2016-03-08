@@ -692,6 +692,9 @@ function countStr($str){
     return $count;
 }
 
+/**
+* 根据HTTP包，记录更新统计信息
+*/
 function setCountInfo(){
 
 }

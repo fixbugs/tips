@@ -70,3 +70,15 @@ KEY `tips_user_status` (`tips_id`,`user_id`,`status`),
 KEY `create_time` (`create_time`),
 KEY `edit_time` (`edit_time`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='提示任务表';
+
+CREATE TABLE if not exists `system_count`(
+`id` BIGINT(20) NOT NULL,
+`url` CHAR(100) NOT NULL COMMENT '请求的url',
+`refer` CHAR(100) NOT NULL COMMENT '来源url',
+`user_agent` CHAR(200) NOT NULL DEFAULT '' COMMENT '用户ua',
+`user_ip` CHAR(30) NOT NULL DEFAULT '' COMMENT '用户请求IP',
+`http_info` TEXT COMMENT 'HTTP包信息',
+`create_time` INT(11) NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`),
+KEY `create_time` (`create_time`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='系统统计信息表';
