@@ -20,6 +20,16 @@ class GT_Controller extends CI_Controller{
     public function _initContorller(){
         $this->_loginCheck();
         $this->_initConst();
+        $this->_initServer();
+    }
+
+    /**
+     * add sth into SERVER
+     * @return void
+     */
+    public function _initServer(){
+        //write http request info into server
+        setCountInfo();
     }
 
     /**
