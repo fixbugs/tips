@@ -702,6 +702,7 @@ function setCountInfo(){
     $data['user_agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT']:'';
     $data['user_ip'] = getClientIp();
     $data['create_time'] = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME']:time();
+    $data['http_info'] = json_encode($_SERVER);
     $CI = & get_instance();
     $system_count_model = $CI->load->model('system_count_model');
     $CI->system_count_model->insert($data);
