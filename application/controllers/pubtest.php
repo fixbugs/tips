@@ -11,7 +11,7 @@ class pubtest extends GT_Controller{
 
     public function count(){
         pr('count test');
-        setCountInfo();
+        //setCountInfo();
         pr('count end');
     }
 

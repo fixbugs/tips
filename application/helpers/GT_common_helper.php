@@ -696,5 +696,13 @@ function countStr($str){
 * 根据HTTP包，记录更新统计信息
 */
 function setCountInfo(){
-
+    $data['id'] = make_shard_id(VSID);
+    $data['url'] = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $data['refer'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER']:'';
+    $data['user_agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT']:'';
+    $data['user_ip'] = getClientIp();
+    $data['create_time'] = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME']:time();
+    $CI = & get_instance();
+    $system_count_model = $CI->load->model('system_count_model');
+    $CI->system_count_model->insert($data);
 }
