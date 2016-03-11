@@ -696,6 +696,8 @@ function countStr($str){
 * 根据HTTP包，记录更新统计信息
 */
 function setCountInfo(){
+var_dump($_SERVER);
+var_dump($_COOKIE);
     $data['id'] = make_shard_id(VSID);
     $data['url'] = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $data['refer'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER']:'';
@@ -709,7 +711,8 @@ $other_data['now_page'] = $data['url'];
 $other_data['domain'] = getDomain($data['url']);
 $other_data['city'] = '';
 $other_data['equipment'] = '';//ipad iphone
-$other_data['equipment_type'] = '';//pc mobile ipad iphone 
+$other_data['equipment_type'] = '';//pc mobile ipad iphone
+$other_data['cookie'] = isset($_COOKIE) ? $_COOKIE:'';
 var_dump($other_data);
 die("ddd");
     $CI = & get_instance();
