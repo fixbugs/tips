@@ -354,7 +354,7 @@ function get_dynamic_code_result($func_str, $func_params=array()){
 }
 
 /**
- * 获取域名
+ * 获取根域名
  * @param  string $url 需要获取域名的url
  * @return string
  */
@@ -462,11 +462,11 @@ function curl_get($url, $data = array(), $header = array(), $timeout = 3, $port 
     $result = array();
     $result['result'] = curl_exec($ch);
     curl_close($ch);
-     if (0 != curl_errno($ch)) {
-        $result['error']  = "Error:\n" . curl_error($ch);
-    }elseif(empty($result['result'])){
-        $result['error']  = "Error:Empty return";
-    }
+    // if (0 != curl_errno($ch)) {
+    //     $result['error']  = "Error:\n" . curl_error($ch);
+    // }elseif(empty($result['result'])){
+    //     $result['error']  = "Error:Empty return";
+    // }
     return $result;
 }
 
@@ -696,8 +696,7 @@ function countStr($str){
 * 根据HTTP包，记录更新统计信息
 */
 function setCountInfo(){
-var_dump($_SERVER);
-var_dump($_COOKIE);
+
     $data['id'] = make_shard_id(VSID);
     $data['url'] = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $data['refer'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER']:'';
@@ -706,18 +705,58 @@ var_dump($_COOKIE);
     $data['create_time'] = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME']:time();
     $data['http_info'] = json_encode($_SERVER);
 
+    $ip_info = getCityInfoByIp($data['user_ip']);
+
+//根据ua的md5值判断是否是同一个用户，根据上一次这个ua的访问判断是否增加uv，pv直接按照访问总量统计，uv按照当前计数统计
 $other_data['pre_page'] = $data['refer'];
 $other_data['now_page'] = $data['url'];
-$other_data['domain'] = getDomain($data['url']);
-$other_data['city'] = '';
+$other_data['domain'] = getUrlDomain($data['url']);
+$other_data['city'] = $ip_info['city'];
 $other_data['equipment'] = '';//ipad iphone
 $other_data['equipment_type'] = '';//pc mobile ipad iphone
+$other_data['user_system'] = '';//windows mac macos iphoneos or other
 $other_data['cookie'] = isset($_COOKIE) ? $_COOKIE:'';
+$other_data['ua_md5'] = $data['user_agent'] ? md5($data['user_agent']):'';
 var_dump($other_data);
-die("ddd");
+die("dd");
+
     $CI = & get_instance();
     $system_count_model = $CI->load->model('system_count_model');
     $CI->system_count_model->insert($data);
+}
+
+/**
+* 根据ip获取ip的相关信息,需要加入本地ip库相关处理
+* @param string $ip
+* @return array
+*/
+function getCityInfoByIp($ip){
+    $url = 'http://ip.taobao.com/service/getIpInfo.php?ip='.$ip;
+    $res = curl_get($url);
+    if($res['result']){
+        $result = json_decode($res['result'], true);
+    }else{
+        return array(
+            'country' => '未知ip',
+            'country' => '0',
+            'area' => '',
+            'area_id' => '',
+            'region' => '',
+            'region_id' => '',
+            'city' => '',
+            'city_id'  => '',
+            'county' => '',
+            'county_id' => '',
+            'isp' => '',
+            'isp_id' => '',
+            'ip' => $ip,
+        );
+    }
+    return $result['data'];
+}
+
+function getRequestInfo(){
+    $_SERVER['ALL_HTTP'] = isset( $_SERVER['ALL_HTTP'] ) ? $_SERVER['ALL_HTTP'] : '';
 }
 
 /**
