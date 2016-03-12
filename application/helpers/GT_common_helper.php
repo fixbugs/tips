@@ -733,24 +733,28 @@ die("dd");
 function getCityInfoByIp($ip){
     $url = 'http://ip.taobao.com/service/getIpInfo.php?ip='.$ip;
     $res = curl_get($url);
+    $default_result = array(
+        'country' => '未知ip',
+        'country' => '0',
+        'area' => '',
+        'area_id' => '',
+        'region' => '',
+        'region_id' => '',
+        'city' => '',
+        'city_id'  => '',
+        'county' => '',
+        'county_id' => '',
+        'isp' => '',
+        'isp_id' => '',
+        'ip' => $ip,
+    );
     if($res['result']){
         $result = json_decode($res['result'], true);
     }else{
-        return array(
-            'country' => '未知ip',
-            'country' => '0',
-            'area' => '',
-            'area_id' => '',
-            'region' => '',
-            'region_id' => '',
-            'city' => '',
-            'city_id'  => '',
-            'county' => '',
-            'county_id' => '',
-            'isp' => '',
-            'isp_id' => '',
-            'ip' => $ip,
-        );
+        return $default_result;
+    }
+    if(!$result['data']){
+        return $default_result;
     }
     return $result['data'];
 }
