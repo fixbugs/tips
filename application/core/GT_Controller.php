@@ -11,6 +11,7 @@ class GT_Controller extends CI_Controller{
         parent::__construct();
         $this->_initContorller();
         $this->load->library('theme');
+        $this->load->library('stringtopy');
     }
 
     /**
