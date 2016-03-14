@@ -712,8 +712,8 @@ function setCountInfo(){
 
 
 //根据ua的md5值判断是否是同一个用户，根据上一次这个ua的访问判断是否增加uv，pv直接按照访问总量统计，uv按照当前计数统计
-$other_data['pre_page'] = $data['refer'];
-$other_data['now_page'] = $data['url'];
+$other_data['pre_page_url'] = $data['refer'];
+$other_data['now_page_url'] = $data['url'];
 $other_data['domain'] = getUrlDomain($data['url']);
 $other_data['city'] = $ip_info['city'] ? $CI->stringtopy->encode($ip_info['city']):'';
 $other_data['equipment'] = '';//ipad iphone
