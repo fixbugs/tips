@@ -715,14 +715,18 @@ function setCountInfo(){
 $other_data['pre_page_url'] = $data['refer'];
 $other_data['now_page_url'] = $data['url'];
 $other_data['domain'] = getUrlDomain($data['url']);
+$other_data['domain_md5'] = md5( $other_data['domain']);
 $other_data['city'] = $ip_info['city'] ? $CI->stringtopy->encode($ip_info['city']):'';
 $other_data['equipment'] = '';//ipad iphone
 $other_data['equipment_type'] = '';//pc mobile ipad iphone
 $other_data['user_system'] = '';//windows mac macos iphoneos or other
 $other_data['cookie'] = isset($_COOKIE) ? $_COOKIE:'';
 $other_data['ua_md5'] = $data['user_agent'] ? md5($data['user_agent']):'';
-var_dump($other_data);
-die("dd");
+$other_data['now_url_md5'] = md5( $data['url']);
+$other_data['pre_url_md5'] = $data['refer'] ? md5( $data['refer']):'';
+
+//var_dump($other_data);
+//die("dd");
 
     $system_count_model = $CI->load->model('system_count_model');
     $CI->system_count_model->insert($data);
