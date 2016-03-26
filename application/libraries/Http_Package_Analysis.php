@@ -9,6 +9,8 @@
  */
 class Http_Package_Analysis{
 
+    protected $CI;
+
     /**
      * HTTP server info.
      */
@@ -24,6 +26,7 @@ class Http_Package_Analysis{
      */
     public function __construct(array $server=null){
         $this->setHttpServer($server);
+        $this->CI = & get_instance();
     }
 
     /**
@@ -54,6 +57,9 @@ class Http_Package_Analysis{
      * @return array
      */
     public function analysisResult(){
+        if(!$this->httpServers){
+            $this->setHttpServer();
+        }
         $this->_urlInfoAnalysis();
         $this->_iPInfoAnalysis();
         $this->_timeInfoAnalysis();
