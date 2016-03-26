@@ -693,13 +693,22 @@ function countStr($str){
 }
 
 /**
+* 获取用户HTTP请求的分析结果，依赖于第三方库Http_Package_Analysis
+* @return array
+*/
+function getUserHttpPackageAnaResult(){
+    $CI = & get_instance();
+    $CI->load->library('Http_Package_Analysis.php');
+    return $CI->http_package_analysis->analysisResult();
+}
+
+/**
 * 根据HTTP包，记录更新统计信息
 */
 function setCountInfo(){
 
     $CI = & get_instance();
-    $CI->load->library('Http_Package_Analysis.php');
-    $packageAnalysisResult = $CI->http_package_analysis->analysisResult();
+    $packageAnalysisResult = getUserHttpPackageAnaResult();
 
     $data['id'] = make_shard_id(VSID);
     $data['url'] = $packageAnalysisResult['url'];
