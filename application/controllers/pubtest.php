@@ -16,9 +16,9 @@ class pubtest extends GT_Controller{
     }
 
     public function pc(){
-        $this->load->library('mobile_detect');
-        $detect = $this->mobile_detect->getTabletDevices();
-        var_dump($detect);
+        //$this->load->library('mobile_detect');
+        //$detect = $this->mobile_detect->getTabletDevices();
+        //var_dump($detect);
     }
 
 }

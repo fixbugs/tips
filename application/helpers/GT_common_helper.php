@@ -696,20 +696,22 @@ function countStr($str){
 * 根据HTTP包，记录更新统计信息
 */
 function setCountInfo(){
+
     $CI = & get_instance();
+    $CI->load->library('Http_Package_Analysis.php');
+    $packageAnalysisResult = $CI->http_package_analysis->analysisResult();
+
     $data['id'] = make_shard_id(VSID);
-    $data['url'] = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-    $data['refer'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER']:'';
-    $data['user_agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT']:'';
-    $data['user_ip'] = getClientIp();
-    $data['create_time'] = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME']:time();
+    $data['url'] = $packageAnalysisResult['url'];
+    $data['refer'] = $packageAnalysisResult['refer'];
+    $data['user_agent'] = $packageAnalysisResult['user_agent'];
+    $data['user_ip'] = $packageAnalysisResult['user_ip'];
+    $data['create_time'] = $packageAnalysisResult['create_time'];
     $data['http_info'] = json_encode($_SERVER);
 
     $ip_info = getCityInfoByIp($data['user_ip']);
 
     $CI->load->library('stringtopy');
-
-
 
 //根据ua的md5值判断是否是同一个用户，根据上一次这个ua的访问判断是否增加uv，pv直接按照访问总量统计，uv按照当前计数统计
 $other_data['pre_page_url'] = $data['refer'];
