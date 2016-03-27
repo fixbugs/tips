@@ -709,6 +709,7 @@ function setCountInfo(){
 
     $CI = & get_instance();
     $packageAnalysisResult = getUserHttpPackageAnaResult();
+pr($packageAnalysisResult);
 
     $data['id'] = make_shard_id(VSID);
     $data['url'] = $packageAnalysisResult['url'];
@@ -723,18 +724,18 @@ function setCountInfo(){
     $CI->load->library('stringtopy');
 
 //根据ua的md5值判断是否是同一个用户，根据上一次这个ua的访问判断是否增加uv，pv直接按照访问总量统计，uv按照当前计数统计
-$other_data['pre_page_url'] = $data['refer'];
-$other_data['now_page_url'] = $data['url'];
-$other_data['domain'] = getUrlDomain($data['url']);
+$other_data['pre_page_url'] = $packageAnalysisResult['pre_page_url'];
+$other_data['now_page_url'] = $packageAnalysisResult['now_page_url'];
+$other_data['domain'] = $packageAnalysisResult['domain'];
 $other_data['domain_md5'] = md5( $other_data['domain']);
-$other_data['city'] = $ip_info['city'] ? $CI->stringtopy->encode($ip_info['city']):'';
-$other_data['equipment'] = '';//ipad iphone
-$other_data['equipment_type'] = '';//pc mobile ipad iphone
-$other_data['user_system'] = '';//windows mac macos iphoneos or other
+$other_data['city'] = $packageAnalysisResult['city'];
+$other_data['equipment'] = $packageAnalysisResult['equipment'];//ipad iphone
+$other_data['equipment_type'] = $packageAnalysisResult['equipment_type'];//pc mobile ipad iphone
+$other_data['user_system'] = $packageAnalysisResult['platform'];//windows mac macos iphoneos or other
 $other_data['cookie'] = isset($_COOKIE) ? $_COOKIE:'';
-$other_data['ua_md5'] = $data['user_agent'] ? md5($data['user_agent']):'';
-$other_data['now_url_md5'] = md5( $data['url']);
-$other_data['pre_url_md5'] = $data['refer'] ? md5( $data['refer']):'';
+$other_data['ua_md5'] = $packageAnalysisResult['user_agent_md5'];
+$other_data['now_url_md5'] = $packageAnalysisResult['now_url_md5'];
+$other_data['pre_url_md5'] = $packageAnalysisResult['pre_url_md5'];
 
 //var_dump($other_data);
 //die("dd");
