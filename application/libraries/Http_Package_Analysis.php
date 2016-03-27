@@ -108,6 +108,7 @@ class Http_Package_Analysis{
         $this->result['ip_md5'] = md5($ip);
         $city_info = self::getCityInfoByIp($ip);
         $this->result = array_merge($this->result, $city_info);
+        $this->result['ip_info'] = $city_info;
     }
 
     /**

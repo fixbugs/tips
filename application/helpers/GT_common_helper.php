@@ -718,7 +718,7 @@ function setCountInfo(){
     $data['create_time'] = $packageAnalysisResult['create_time'];
     $data['http_info'] = json_encode($_SERVER);
 
-    $ip_info = getCityInfoByIp($data['user_ip']);
+    $ip_info = $packageAnalysisResult['ip_info'];
 
     $CI->load->library('stringtopy');
 
@@ -726,7 +726,7 @@ function setCountInfo(){
 $other_data['pre_page_url'] = $packageAnalysisResult['pre_page_url'];
 $other_data['now_page_url'] = $packageAnalysisResult['now_page_url'];
 $other_data['domain'] = $packageAnalysisResult['domain'];
-$other_data['domain_md5'] = md5( $other_data['domain']);
+$other_data['domain_md5'] = $packageAnalysisResult['domain_md5'];
 $other_data['city'] = $packageAnalysisResult['city'];
 $other_data['equipment'] = $packageAnalysisResult['equipment'];
 $other_data['equipment_type'] = $packageAnalysisResult['equipment_type'];
