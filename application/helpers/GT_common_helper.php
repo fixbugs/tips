@@ -709,7 +709,6 @@ function setCountInfo(){
 
     $CI = & get_instance();
     $packageAnalysisResult = getUserHttpPackageAnaResult();
-pr($packageAnalysisResult);
 
     $data['id'] = make_shard_id(VSID);
     $data['url'] = $packageAnalysisResult['url'];
@@ -736,9 +735,6 @@ $other_data['cookie'] = isset($_COOKIE) ? $_COOKIE:'';
 $other_data['ua_md5'] = $packageAnalysisResult['user_agent_md5'];
 $other_data['now_url_md5'] = $packageAnalysisResult['now_url_md5'];
 $other_data['pre_url_md5'] = $packageAnalysisResult['pre_url_md5'];
-
-//var_dump($other_data);
-//die("dd");
 
     $system_count_model = $CI->load->model('system_count_model');
     $CI->system_count_model->insert($data);
