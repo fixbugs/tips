@@ -64,10 +64,21 @@ class GT_Controller extends CI_Controller{
         $this->theme->render($template, $data);
     }
 
+    /**
+     * h5 template show
+     * @return void
+     */
     public function h5render($template, $data=array()){
+        if($data && !isset($data['asserts_url'])){
+            $data['asserts_url'] = '';
+        }
         $this->theme->h5render($template, $data);
     }
 
+    /**
+     * set layout show,default set true for show layout
+     * @return void
+     */
     public function setLayout($need=true){
         $this->theme->setLayout($need);
     }

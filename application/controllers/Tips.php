@@ -27,6 +27,10 @@ class Tips extends GT_Controller {
         }
      }
 
+    /**
+     * h5 页面展示入口
+     * @return html
+     */
     public function h5index(){
         $params = $this->input->get();
         $data['asserts_url'] = '';
