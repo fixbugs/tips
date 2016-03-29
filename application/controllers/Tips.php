@@ -29,7 +29,8 @@ class Tips extends GT_Controller {
 
     public function h5index(){
         $params = $this->input->get();
-        $data['assetrs_url'] = '';
+        $data['asserts_url'] = '';
+        $this->h5render('tips/index', $data);
     }
 
     /**

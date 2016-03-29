@@ -64,6 +64,10 @@ class GT_Controller extends CI_Controller{
         $this->theme->render($template, $data);
     }
 
+    public function h5render($template, $data=array()){
+        $this->theme->h5render($template, $data);
+    }
+
     public function setLayout($need=true){
         $this->theme->setLayout($need);
     }

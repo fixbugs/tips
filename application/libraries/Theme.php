@@ -25,6 +25,20 @@ class Theme{
     }
 
     /**
+     * 渲染模板方法
+     * @return void
+     */
+    public function h5render($template, $data){
+        if($this->_needLayout){
+            $this->CI->load->view('h5/header', $data);
+            $this->CI->load->view('h5/'.$template, $data);
+            $this->CI->load->view('h5/footer', $data);
+        }else{
+            $this->CI->load->view($template,$data);
+        }
+    }
+
+    /**
      * 设置是否展示公共框架
      * @return void
      */
