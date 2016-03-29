@@ -27,6 +27,11 @@ class Tips extends GT_Controller {
         }
      }
 
+    public function h5index(){
+        $params = $this->input->get();
+        $data['assetrs_url'] = '';
+    }
+
     /**
      * 添加提醒方法
      * @return mixed
