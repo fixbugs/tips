@@ -6,7 +6,7 @@
                    test1
               </div>-->
               <div class="y_section">
-                    test2
+                    <h1>提醒列表</h1>
               </div>
                <!-- end y_section -->
 <?php foreach($tips as $tip){?>
@@ -15,7 +15,7 @@
                         <i class="m01 mps"></i>
                         <i class="m02">
                            <h1>
-                              <?php echo date('Y-m-d H:i:s',$tip['create_time']);?>
+添加时间:<?php echo date('Y年m月d日 H:i:s',$tip['create_time']);?>
                            </h1>
                         </i>
                       <div class="y_tit01">
