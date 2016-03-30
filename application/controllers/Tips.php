@@ -34,6 +34,7 @@ class Tips extends GT_Controller {
     public function h5index(){
         $params = $this->input->get();
         $data['asserts_url'] = '';
+        $data['tips'] = $this->tips_model->findAll();
         $this->h5render('tips/index', $data);
     }
 
