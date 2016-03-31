@@ -193,9 +193,9 @@ class Tips_model extends GT_Model{
         }
         $lastStatus = $set_status ? $set_status:$tipsData['status'];
         $nextStatus = self::getNextStatus($set_status);
-        pr($nextStatus);
-        pr($tipsData);
-        die("end");
+        $data['status'] = $nextStatus;
+        $data[$this->_pk] = $tips_id;
+        return $this->editTips($data);
     }
 
     /**
