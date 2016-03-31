@@ -24,7 +24,7 @@
                       <!-- <div class="y_con001">
                              test4
                       </div> -->
-                      <div class="y_con01" style="<?php if($tip['status']=='nonstart'){ echo 'color:green';}elseif($tip['status'] =='start'){echo 'color:gray';} ?>">
+                      <div class="y_con01" style="color:<?php if($tip['status']=='nonstart'){ echo 'green';}elseif($tip['status'] =='start'){echo 'gray';} ?>">
                            <?php echo $tip['status'];?>
                       </div>
                       <!--

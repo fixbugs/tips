@@ -33,8 +33,10 @@ class Tips extends GT_Controller {
      */
     public function h5index(){
         $params = $this->input->get();
+        $this->load->library('Plugin_Array');
         $data['asserts_url'] = '';
-        $data['tips'] = $this->tips_model->findAll();
+        $datas = $this->tips_model->findAll();
+        $data['tips'] = $this->plugin_array->sortByCol($datas, 'create_time', SORT_DESC);
         $this->h5render('tips/index', $data);
     }
 
