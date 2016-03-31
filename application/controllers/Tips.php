@@ -122,6 +122,25 @@ class Tips extends GT_Controller {
         $this->renderJson();
     }
 
+    /**
+     * 更改提示状态
+     * @return json
+     */
+    public function changestatus(){
+        $params = $this->isPost() ? $this->input->post():$this->input->get();
+        if(!$params['tips_id']){
+            $result = array_for_result(false, 'id needed');
+        }else{
+            $ret = $this->tips_model->changeStatus($params['tips_id'], $params['status']);
+            if($ret){
+                $result = array_for_result(true, $this->tips_model->getModelError());
+            }else{
+                $result = array_for_result(false, $this->tips_model->getModelError());
+            }
+        }
+        $this->renderJson();
+    }
+
     public function test(){
         // $ret = $this->tips_model->getAllTips('6097389606834319388');
         $params['tips_id'] = '6097389606834319388';

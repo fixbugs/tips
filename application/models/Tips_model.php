@@ -179,4 +179,42 @@ class Tips_model extends GT_Model{
         }
     }
 
+    /**
+     * 更改提示任务状态
+     * @param int $tips_id
+     * @param string $set_status
+     * @return bool
+     */
+    public function changeStatus($tips_id, $set_status=''){
+        $tipsData = $this->getById($tips_id);
+        if(!$tipsData){
+            $this->setModelError("tips id error for,please use anbled tips id");
+            return false;
+        }
+        $lastStatus = $set_status ? $set_status:$tipsData['status'];
+        $nextStatus = self::getNextStatus($set_status);
+        pr($nextStatus);
+        pr($tipsData);
+        die("end");
+    }
+
+    /**
+     * 获取下一个提示状态
+     * @param string $status
+     * @return string
+     */
+    public function getNextStatus($status="nonstart"){
+        $result = '';
+        switch($status){
+        case 'end': $result='over';break;
+        case 'continue': $result='completed';break;
+        case 'hold': $result='continue';break;
+        case 'handle': $result='hold';break;
+        case 'start'; $result='handle';break;
+        case 'nonstart': $result='start';break;
+        default:$result='start';
+        }
+        return $result;
+    }
+
 }

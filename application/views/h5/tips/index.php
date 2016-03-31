@@ -24,13 +24,13 @@
                       <!-- <div class="y_con001">
                              test4
                       </div> -->
-                      <div class="y_con01" style="color:<?php if($tip['status']=='nonstart'){ echo 'green';}elseif($tip['status'] =='start'){echo 'gray';} ?>">
+                      <div class="y_con01" style="color:<?php if($tip['status']=='nonstart'){ echo 'green';}elseif($tip['status'] =='start'){echo 'gray';}elseif($tip['status']=='end'){echo 'dark';} ?>">
                            <?php echo $tip['status'];?>
                       </div>
-                      <!--
                       <div class="y_Xg">
-                            test6
+                            <a href='/index.php/tips/changestatus?tips_id=<?php echo $tip['tips_id'];?>'>change status</a>
                       </div>
+                             <!--
                       <ul class="y_list_news">
                           <li>
                               <div class="m1">test7</div>
