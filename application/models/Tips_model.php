@@ -185,16 +185,16 @@ class Tips_model extends GT_Model{
      * @param string $set_status
      * @return bool
      */
-    public function changeStatus($tips_id, $set_status=''){
-        $tipsData = $this->getById($tips_id);
+    public function changeStatus($tipsId, $setStatus=''){
+        $tipsData = $this->getById($tipsId);
         if(!$tipsData){
             $this->setModelError("tips id error for,please use anbled tips id");
             return false;
         }
-        $lastStatus = $set_status ? $set_status:$tipsData['status'];
-        $nextStatus = self::getNextStatus($set_status);
+        $lastStatus = $set_status ? $setStatus:$tipsData['status'];
+        $nextStatus = self::getNextStatus($lastStatus);
         $data['status'] = $nextStatus;
-        $data[$this->_pk] = $tips_id;
+        $data[$this->_pk] = $tipsId;
         return $this->editTips($data);
     }
 
@@ -212,7 +212,7 @@ class Tips_model extends GT_Model{
         case 'handle': $result='hold';break;
         case 'start'; $result='handle';break;
         case 'nonstart': $result='start';break;
-        default:$result='start';
+        default:$result='start';break;
         }
         return $result;
     }
