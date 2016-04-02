@@ -119,7 +119,7 @@ class Tips extends GT_Controller {
                 $result = array_for_result(false, $this->tips_model->getModelError());
             }
         }
-        $this->renderJson();
+        $this->renderJson($result);
     }
 
     /**
@@ -138,7 +138,7 @@ class Tips extends GT_Controller {
                 $result = array_for_result(false, $this->tips_model->getModelError());
             }
         }
-        $this->renderJson();
+        $this->renderJson($result);
     }
 
     public function test(){

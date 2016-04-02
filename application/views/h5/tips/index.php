@@ -30,7 +30,7 @@
                       <div class="y_Xg">
                             <a href='/index.php/tips/changestatus?tips_id=<?php echo $tip['tips_id'];?>'>change status</a>
                       </div>
-                             <!--
+                      <!--
                       <ul class="y_list_news">
                           <li>
                               <div class="m1">test7</div>
