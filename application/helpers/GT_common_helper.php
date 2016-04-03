@@ -830,3 +830,26 @@ function isMobile ()
         return false;
     }
 }
+
+/**
+ * 安全过滤函数
+ *
+ * @param $string
+ * @return string
+ */
+function safe_replace($string) {
+    $string = str_replace('%20','',$string);//空格
+    $string = str_replace('%2b','',$string);//加号+
+    $string = str_replace('%27','',$string);//单引号'
+    $string = str_replace('%2527','',$string);
+    $string = str_replace('*','',$string);
+    $string = str_replace('"','&quot;',$string);//双引号
+    $string = str_replace("'",'',$string);
+    $string = str_replace('"','',$string);
+    $string = str_replace(';','',$string);
+    $string = str_replace('<','&lt;',$string);
+    $string = str_replace('>','&gt;',$string);
+    $string = str_replace("{",'',$string);
+    $string = str_replace('}','',$string);
+    return $string;
+}
