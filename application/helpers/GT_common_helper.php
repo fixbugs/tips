@@ -860,6 +860,6 @@ function safe_replace($string) {
  */
 function getCharArr(){
     $rand_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~@#()_=!`$%^&*{}|?';
-    $rand_array = str_split($rand_str);
-    return $rand_array;
+    $char_array = str_split($rand_str);
+    return $char_array;
 }
