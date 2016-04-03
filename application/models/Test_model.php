@@ -15,8 +15,7 @@ class Test_model extends GT_model{
         // $ret = $this->getById($id);
         // var_dump($ret);
         $num = 21;
-        $rand_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~@#()_=!`$%^&*{}|?';
-        $rand_array = str_split($rand_str);
+        $rand_array = getCharArr();
         $res = '';
         for($i=0;$i<=$num;$i++){
             foreach($rand_array as $str){
