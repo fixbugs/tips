@@ -42,7 +42,6 @@ class Test_model extends GT_model{
         }
         var_dump($res);
         die("ddd");
-        $data['username'] = "%2b(select(0)from(select(sleep((mid(user(),1,1)=='g')*4)))v)%2b";
         $data['username'] = safe_replace($data['username']);
         #$data['password'] = "bsed";
         $result = $this->findByAttr($data);
