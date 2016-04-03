@@ -853,3 +853,13 @@ function safe_replace($string) {
     $string = str_replace('}','',$string);
     return $string;
 }
+
+/**
+ * 返回所有字符的数组
+ * @return array
+ */
+function getCharArr(){
+    $rand_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~@#()_=!`$%^&*{}|?';
+    $rand_array = str_split($rand_str);
+    return $rand_array;
+}
