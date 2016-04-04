@@ -40,12 +40,7 @@ class Test_model extends GT_model{
             }
         }
         var_dump($res);
-        die("ddd");
-        $data['username'] = safe_replace($data['username']);
-        #$data['password'] = "bsed";
-        $result = $this->findByAttr($data);
-        var_dump($this->getLastSql());
-        var_dump($result);
+        die("test end");
     }
 
 }
