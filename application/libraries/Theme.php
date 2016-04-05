@@ -4,8 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *主题系统
  */
 class Theme{
+    /**
+     * set is need layout show, default true
+     */
     private $_needLayout = true;
+
+    /**
+     * used CI instance function to get CI handle
+     */
     protected $CI;
+
+    /**
+     * init theme for theme for CI
+     */
     public function __construct(){
         $this->CI =& get_instance();
     }
