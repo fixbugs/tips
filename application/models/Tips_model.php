@@ -118,7 +118,7 @@ class Tips_model extends GT_Model{
         $data['create_time'] = time();
         $data['user_id'] = USER_ID;
         $data['status'] = 'nonstart';
-        return $this->db->insert($this->_table_name, $data);
+        return $this->insert($data);
     }
 
     /**
