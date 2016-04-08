@@ -82,3 +82,14 @@ CREATE TABLE if not exists `system_count`(
 PRIMARY KEY (`id`),
 KEY `create_time` (`create_time`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='系统统计信息表';
+
+CREATE TABLE if not exists `tags`(
+`tag_id` BIGINT(20) NOT NULL,
+`tag_name` CHAR(50) NOT NULL COMMENT '标签中文名',
+`tag_type` CHAR(50) NOT NULL COMMENT '标签类型',
+`user_id` CHAR(200) NOT NULL COMMENT '用户id',
+`create_time` INT(11) NOT NULL DEFAULT '0',
+PRIMARY KEY (`tag_id`),
+KEY `create_time` (`create_time`),
+KEY `name_type` (`tag_type`,`tag_name`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='标签表';
