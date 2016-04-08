@@ -32,4 +32,61 @@ class Tags_model extends GT_model{
         return $this->insert($data);
     }
 
+    /**
+     * edit tags
+     * @param array $params
+     * @return bool
+     */
+    public function editTags($params){
+        if( !isset($params[$this->_pk]) || empty($params[$this->_pk]) ){
+            $this->setModelError('tags id needed');
+            return false;
+        }
+        $ret = $this->updateBypk($params, $params[$this->_pk]);
+        if($ret === false){
+            $this->setModelError('tags edit flased with sql return false!');
+            return false;
+        }else{
+            $this->setModelError('tags edit success');
+            return true;
+        }
+    }
+
+    /**
+     * 删除标签
+     * @param array $ids id数组
+     * @return bool
+     */
+    public function deleteTags($ids){
+        if(!is_array($ids)){
+            $ids = (array)$ids;
+        }
+        $success_num = 0;
+        $total_num = count($ids);
+        foreach($ids as $id){
+            if($id <= 0){
+                $_error = 'undefined tags id';
+                $this->setModelError($_error);
+            }else{
+                $message = $this->getById($id);
+                $ret = $this->deleteById($id);
+                $ret = (bool)$ret;
+                if($ret == false){
+                    $_error = 'delete fail';
+                    $this->setModelError($_error);
+                }else{
+                    $success_num ++;
+                    $this->trace_model->addTrace('delete', 'delete tags, tag name:'.$message['tag_name']);
+                }
+            }
+        }
+        if($success_num == $total_num){
+            $this->setModelError('delete success');
+            return true;
+        }else{
+            $this->setModelError("delete data total num:$total_num, success num:$success_num");
+            return false;
+        }
+    }
+
 }
