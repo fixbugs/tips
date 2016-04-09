@@ -72,6 +72,14 @@ class test extends GT_Controller{
         $result = curl_get_ml($urls);
         var_dump($result);
     }
-    
+
+    public function testtags(){
+        $this->load->model('tags_model');
+        $params['page'] = 1;
+        $params['limit'] =1;
+        $data = $this->tags_model->getAllTags($params);
+        var_dump($this->tags_model->getLastSql());
+        var_dump($data);
+    }
 }
 

@@ -89,4 +89,12 @@ class Tags_model extends GT_model{
         }
     }
 
+    public function getAllTags($params){
+        if(!$params){
+            return $this->findAllByAttr(array());
+        }else{
+            return $this->findAllByAttr($params);
+        }
+    }
+
 }

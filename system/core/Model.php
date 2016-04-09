@@ -150,13 +150,33 @@ abstract class GT_Model extends CI_Model{
      */
     public function findAllByAttr($cond, $field='*'){
         $this->_check_model_value();
-        $this->db->where($cond);
+        if(isset($cond['page'])){
+            if(!isset($cond['limit'])){
+                $cond['limit'] = 10;
+            }
+            $page = $cond['page'] ? $cond['page']:1;
+            unset($cond['page']);
+        }
+        if(isset($cond['limit'])){
+            $limit = $cond['limit'] ? $cond['limit']:10;
+            unset($cond['limit']);
+        }
+        if(!empty($cond)){
+            $this->db->where($cond);
+        }
         if($this->_field){
             $this->db->select($this->_field);
         }else{
             $this->db->select($field);
         }
-        $query = $this->db->get($this->_table_name);
+        if(isset($page) && $page){
+            $offset = ($page - 1) * $limit;
+            $query = $this->db->get($this->_table_name, $limit, $offset);
+        }elseif(isset($limit) && $limit){
+            $query = $this->db->get($this->_table_name, $limit);
+        }else{
+            $query = $this->db->get($this->_table_name);
+        }
         return $query->result();
     }
 
