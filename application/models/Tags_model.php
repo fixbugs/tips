@@ -89,11 +89,23 @@ class Tags_model extends GT_model{
         }
     }
 
+    /**
+     * get all tags by params
+     * @param array $params
+     * @return array
+     */
     public function getAllTags($params){
-        if(!$params){
+        $cond = array();
+        if(isset($params['page'])){
+            $cond['page'] = $params['page'] ? $params['page']:1;
+        }
+        if(isset($params['limit'])){
+            $cond['limit'] = $params['limit'] ? $params['limit']:10;
+        }
+        if(!$cond){
             return $this->findAllByAttr(array());
         }else{
-            return $this->findAllByAttr($params);
+            return $this->findAllByAttr($cond);
         }
     }
 
