@@ -180,7 +180,6 @@ abstract class GT_Model extends CI_Model{
         return $query->result();
     }
 
-
     /**
      * model增加方法
      * @param array $data 需要插入数据库的数据
@@ -314,6 +313,10 @@ abstract class GT_Model extends CI_Model{
         return 0;
     }
 
+    /**
+     * 获取数据库中表名的总条数
+     * @return int
+     */
     public function countTotal(){
         $this->_check_model_value();
         return $this->db->count_all($this->_table_name);
