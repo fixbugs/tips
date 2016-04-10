@@ -12,8 +12,11 @@ class Test_model extends GT_model{
 
     public function test(){
         // $id = '6094091879463563272';
-        // $ret = $this->getById($id);
+        // $this->setOrderBy('username','desc');
+        // $ret = $this->findByAttr(array('user_id'=>$id));
+        // var_dump($this->getLastSql());
         // var_dump($ret);
+        // die("test");
         $num = 21;
         $rand_array = getCharArr();
         $res = '';

@@ -107,7 +107,9 @@ abstract class GT_Model extends CI_Model{
 
     protected $_pk = '';
 
-    protected $_field= '*';
+    protected $_field = '*';
+
+    protected $_order = array();
 
     public function __construct(){
         parent::__construct();
@@ -134,6 +136,11 @@ abstract class GT_Model extends CI_Model{
      */
     public function findByAttr($cond){
         $this->_check_model_value();
+        if($this->_order){
+            foreach($this->_order as $order_arr){
+                $this->db->order_by($order_arr['order_field'], $order_arr['direction']);
+            }
+        }
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
         if(!empty($result)){
@@ -168,6 +175,11 @@ abstract class GT_Model extends CI_Model{
             $this->db->select($this->_field);
         }else{
             $this->db->select($field);
+        }
+        if($this->_order){
+            foreach($this->_order as $order_arr){
+                $this->db->order_by($order_arr['order_field'], $order_arr['direction']);
+            }
         }
         if(isset($page) && $page){
             $offset = ($page - 1) * $limit;
@@ -216,6 +228,11 @@ abstract class GT_Model extends CI_Model{
     public function getById($id){
         $this->_check_model_value();
         $cond[$this->_pk] = $id;
+        if($this->_order){
+            foreach($this->_order as $order_arr){
+                $this->db->order_by($order_arr['order_field'], $order_arr['direction']);
+            }
+        }
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
         if(!empty($result)){
@@ -363,6 +380,19 @@ abstract class GT_Model extends CI_Model{
      */
     public function clearCondition(){
         $this->_field = '*';
+    }
+
+    /**
+     * 设置model排序顺序
+     * @param string $order
+     * @param string $direction ASC or DESC
+     * @return true
+     */
+    public function setOrderBy($order, $direction='ASC'){
+        $tmp['order_field'] = $order;
+        $tmp['direction'] = strtoupper($direction);
+        $this->_order[] = $tmp;
+        return true;
     }
 
 }
