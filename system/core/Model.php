@@ -103,14 +103,29 @@ class CI_Model {
  */
 abstract class GT_Model extends CI_Model{
 
+    /**
+     * 连接的数据库表名
+     */
     protected $_table_name = '';
 
+    /**
+     * 和数据库表名一致的表主键
+     */
     protected $_pk = '';
 
+    /**
+     * 查询数据库时获取的字段名
+     */
     protected $_field = '*';
 
+    /**
+     * 查询数据库时的排序数组，允许多个字段排序
+     */
     protected $_order = array();
 
+    /**
+     * 初始化方法
+     */
     public function __construct(){
         parent::__construct();
         $this->load->database();
@@ -223,7 +238,7 @@ abstract class GT_Model extends CI_Model{
     /**
      * 根据id获取对应model表的信息
      * @param int $id 64位唯一ID
-     * @return array 
+     * @return array
      */
     public function getById($id){
         $this->_check_model_value();
