@@ -145,6 +145,20 @@ abstract class GT_Model extends CI_Model{
     }
 
     /**
+     * 设置表名
+     */
+    public function setTableName($table_name){
+        $this->_table_name = $table_name;
+    }
+
+    /**
+     * 设置表主键
+     */
+    public function setTablePk($pk){
+        $this->_pk = $pk;
+    }
+
+    /**
      * 根据条件获取单条数据
      * @param array $cond 条件数组
      * @return array
