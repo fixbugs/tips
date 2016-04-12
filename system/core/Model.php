@@ -424,6 +424,10 @@ abstract class GT_Model extends CI_Model{
         return true;
     }
 
+    /**
+     * 获取表设计字段
+     * @return array
+     */
     public function getTableDesign(){
         $this->_check_model_value();
         //$dc = $this->config->load('database');
