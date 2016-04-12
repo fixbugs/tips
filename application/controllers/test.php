@@ -31,7 +31,7 @@ class test extends GT_Controller{
 
     public function testmodel(){
         $this->load->model('test_model');
-        $ret = $this->test_model->test();
+        $ret = $this->test_model->getTableDesign();
         var_dump($ret);
     }
 

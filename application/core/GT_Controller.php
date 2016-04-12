@@ -95,7 +95,6 @@ class GT_Controller extends CI_Controller{
         if(!$_COOKIE['admin_permit']){
             return false;
         }else{
-
             return $this->checkPermit( $_COOKIE['admin_permit']);
         }
 

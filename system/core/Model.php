@@ -424,4 +424,21 @@ abstract class GT_Model extends CI_Model{
         return true;
     }
 
+    public function getTableDesign(){
+        $this->_check_model_value();
+        //$dc = $this->config->load('database');
+        //pr($dc);
+        //die("Ddd");
+        $db = 'tips';
+        $sql = 'select COLUMN_NAME as a from information_schema.COLUMNS where table_name ="'. $this->_table_name.'" and table_schema = "'.$db.'";';
+        $data = $this->db->query($sql);
+        $data = $data->result_array();
+        if($data){
+            foreach($data as $k=>$v){
+                $result[] = $v['a'];
+            }
+            return $result;
+        }
+    }
+
 }
