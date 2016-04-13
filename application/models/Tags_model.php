@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * 标签管理模块
+ */
 class Tags_model extends GT_model{
 
     protected $_table_name = 'tags';
