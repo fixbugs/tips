@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * 提醒控制器
+ */
 class Tips extends GT_Controller {
 
     public function __construct()

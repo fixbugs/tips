@@ -863,3 +863,15 @@ function getCharArr(){
     $char_array = str_split($rand_str);
     return $char_array;
 }
+
+/**
+ * 获取特定长度的随机字符串
+ */
+function getRandomStr($length){
+    $char_array = getCharArr();
+    $result_str = '';
+    for($i=0; $i<$length; $i++){
+        $result_str .= $char_array[array_rand($char_array,1)];
+    }
+    return $result_str;
+}

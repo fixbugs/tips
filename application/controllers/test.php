@@ -17,6 +17,11 @@ class test extends GT_Controller{
         $this->load->view('templates/footer', $data);
     }
 
+    public function testfunc(){
+        $res = getRandomStr(2);
+        var_dump($res);
+    }
+
     public function testuser(){
         $id = make_shard_id(VSID);
         echo $id;
