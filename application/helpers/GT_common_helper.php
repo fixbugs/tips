@@ -868,10 +868,11 @@ function getCharArr(){
  * 获取特定长度的随机字符串
  */
 function getRandomStr($length){
-    $char_array = getCharArr();
+    $rand_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~@#()_=!`$%^&*{}|?';
+    $max = strlen($rand_str) -1;
     $result_str = '';
     for($i=0; $i<$length; $i++){
-        $result_str .= $char_array[array_rand($char_array,1)];
+        $result_str .= $rand_str[rand(0,$max)];
     }
     return $result_str;
 }
