@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * 用户model
+ */
 class User extends GT_Controller {
 
     public function __construct()
