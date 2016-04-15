@@ -12,7 +12,7 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->selectSort($data, count($data));
+        $new_data = $this->insertSort($data, count($data));
         pr($new_data);
         return $new_data;
     }
@@ -47,7 +47,7 @@ class Sort_model extends GT_model{
         for($i=0; $i<$len; $i++){
             $flag = false;
             for($j=$len-1; $j>$i; $j--){
-                if($data_arr[$j] > $data_arr[$j-1]){
+                if($data_arr[$j] < $data_arr[$j-1]){
                     $temp = $data_arr[$j];
                     $data_arr[$j] = $data_arr[$j-1];
                     $data_arr[$j-1] = $temp;
@@ -59,6 +59,27 @@ class Sort_model extends GT_model{
             }
         }
         return $data_arr ? $data_arr:array();
+    }
+
+    /**
+     * 插入排序
+     */
+    public function insertSort($data_arr, $len){
+        for($i=1; $i<=$len-1; $i++){
+            $j = $i-1;
+            $temp = $data_arr[$i];
+            while($j >= 1 ){
+                if($data_arr[$j] > $temp){
+                    $data_arr[$j+1] = $data_arr[$j];
+                    $j--;
+                }else{
+                    break;
+                }
+            }
+            $data_arr[$j+1] = $temp;
+            pr($data_arr);
+        }
+        return $data_arr;
     }
 
 }
