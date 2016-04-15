@@ -77,7 +77,6 @@ class Sort_model extends GT_model{
                 }
             }
             $data_arr[$j+1] = $temp;
-            pr($data_arr);
         }
         return $data_arr;
     }
