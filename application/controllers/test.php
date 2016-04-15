@@ -86,5 +86,14 @@ class test extends GT_Controller{
         var_dump($this->tags_model->getLastSql());
         var_dump($data);
     }
+
+    public function testsort(){
+        $this->load->model('sort_model');
+        $start_time = time();
+        $data = array(2, 77 , 88, 55, 33, 2, 5, 6);
+        $af_data = $this->sort_model->test($data);
+        $used_time = time()- $start_time;
+        var_dump($used_time.'s');
+    }
 }
 
