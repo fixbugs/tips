@@ -12,7 +12,7 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->insertSort($data, count($data));
+        $new_data = $this->shellSort($data, count($data));
         pr($new_data);
         return $new_data;
     }
@@ -77,6 +77,28 @@ class Sort_model extends GT_model{
                 }
             }
             $data_arr[$j+1] = $temp;
+        }
+        return $data_arr;
+    }
+
+    /**
+     * 希尔排序
+     */
+    public function shellSort($data_arr, $len){
+        for($gap=5; $gap>0; $gap-=2){
+            for($i = $gap+1; $i< $len; $i++){
+                $j = $i - $gap;
+                $temp = $data_arr[$i];
+                while($j >= 1){
+                    if($data_arr[$j]> $temp){
+                        $data_arr[$j + $gap] = $data_arr[$j];
+                        $j -= $gap;
+                    }else{
+                        break;
+                    }
+                }
+                $data_arr[$j+$gap] = $temp;
+            }
         }
         return $data_arr;
     }
