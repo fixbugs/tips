@@ -12,7 +12,7 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->shellSort($data, count($data));
+        $new_data = $this->mergeSort($data, 0,count($data)-1);
         pr($new_data);
         return $new_data;
     }
@@ -102,5 +102,45 @@ class Sort_model extends GT_model{
         }
         return $data_arr;
     }
+
+    /**
+     * 合并排序
+     */
+    public function mergeSort(&$data_arr, $low, $high){
+        if($low<$high){
+            $mid = $low + ($high - $low)/2;
+            $this->mergeSort($data_arr, $low, $mid);
+            $this->mergeSort($data_arr, $mid+1, $high);
+            $this->merge($data_arr, $low, $mid, $high);
+        }
+    }
+
+    /**
+     * 合并排序合并数组
+     */
+    public function merge(&$data_arr, $low, $mid, $high){
+        $i = $low;
+        $j = $mid+1;
+        $k = $i;
+        while($i <= $mid && $j <= $high){
+            if($data_arr[$i] <= $data_arr[$j]){
+                $b[$k++] = $data_arr[$i];
+            }else{
+                $b[$k++] = $data_arr[$j];
+                $j++;
+            }
+        }
+        while( $i<=$mid){
+            $b[$k++] = $data_arr[$i++];
+        }
+        while( $j<= $high){
+            $b[$k++] = $data_arr[$j++];
+        }
+        for($x=0,$i=$low; $x < $high-$low+1; $x++, $i++){
+            $data_arr[$i] = $b[$i];
+        }
+
+    }
+
 
 }
