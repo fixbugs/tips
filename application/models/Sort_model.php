@@ -12,7 +12,7 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->mergeSort($data, 0,count($data)-1);
+        $new_data = $this->shellSort($data,count($data));
         pr($new_data);
         return $new_data;
     }
