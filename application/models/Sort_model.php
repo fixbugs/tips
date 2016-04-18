@@ -12,7 +12,8 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->shellSort($data,count($data));
+        $new_data = $this->quickSort($data, 0, count($data)-1 );
+        pr($data);
         pr($new_data);
         return $new_data;
     }
@@ -142,5 +143,31 @@ class Sort_model extends GT_model{
 
     }
 
+    /**
+     * 快排
+     * @param array &$data_arr
+     * @param int $p 数组序号，最小
+     * @param int $r 数组序号，最大
+     * @return void
+     */
+    public function quickSort(&$data_arr, $p, $r){
+        if($p < $r){
+            $x = $data_arr[$r];
+            $i = $p -1;
+            for($j = $p; $j < $r; $j++){
+                if($data_arr[$j] < $x){
+                    $i++;
+                    $temp = $data_arr[$j];
+                    $data_arr[$j] = $data_arr[$i];
+                    $data_arr[$i] = $temp;
+                }
+            }
+            $temp = $data_arr[$i+1];
+            $data_arr[$i+1] = $data_arr[$r];
+            $data_arr[$r] = $temp;
+            $this->quickSort($data_arr, $p, $i);
+            $this->quickSort($data_arr, $i+2, $r);
+        }
+    }
 
 }
