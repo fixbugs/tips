@@ -12,7 +12,7 @@ class Sort_model extends GT_model{
 
     public function test($data){
         pr($data);
-        $new_data = $this->quickSort($data, 0, count($data)-1 );
+        $new_data = $this->heapSort($data, count($data)-1 );
         pr($data);
         pr($new_data);
         return $new_data;
@@ -167,6 +167,39 @@ class Sort_model extends GT_model{
             $data_arr[$r] = $temp;
             $this->quickSort($data_arr, $p, $i);
             $this->quickSort($data_arr, $i+2, $r);
+        }
+    }
+
+    public function heapSort($data_arr, $n){
+        for($i = $n/2; $i>0; $i--){
+            $this->maxHeapify($data_arr, $i, $n);
+        }
+        while($n > 0){
+            $temp = $data_arr[$n];
+            $data_arr[$n] = $data_arr[0];
+            $data_arr[0] = $temp;
+
+            --$n;
+            $this->maxHeapify($data_arr, 0, $n);
+        }
+        return $data_arr;
+    }
+
+    public function maxHeapify(&$data_arr, $p, $n){
+        $left = 2*$p;
+        $right = 2*$p + 1;
+        $large = $p;
+        if($left <= $n && $data_arr[$left] > $data_arr[$p] ){
+            $large = $left;
+        }
+        if($right <= $n && $data_arr[$right] > $data_arr[$large] ){
+            $large = $right;
+        }
+        if($large != $p){
+            $temp = $data_arr[$p];
+            $data_arr[$p] = $data_arr[$large];
+            $data_arr[$large] = $temp;
+            $this->maxHeapify($data_arr, $large, $n);
         }
     }
 
