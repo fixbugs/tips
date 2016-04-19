@@ -170,6 +170,12 @@ class Sort_model extends GT_model{
         }
     }
 
+    /**
+     * 堆排序
+     * @param array $data_arr
+     * @param int $n 数组最大索引
+     * @return array
+     */
     public function heapSort($data_arr, $n){
         for($i = $n/2; $i>0; $i--){
             $this->maxHeapify($data_arr, $i, $n);
@@ -185,6 +191,13 @@ class Sort_model extends GT_model{
         return $data_arr;
     }
 
+    /**
+     * 最大堆排序
+     * @param array $data_arr 需要排序的数组，引用方式
+     * @param int $p 最小的数组索引
+     * @param int $n 最大的数组索引
+     * @return void
+     */
     public function maxHeapify(&$data_arr, $p, $n){
         $left = 2*$p;
         $right = 2*$p + 1;
