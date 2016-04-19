@@ -20,8 +20,8 @@ class Sort_model extends GT_model{
 
     /**
      * 基础排序
-     * @param array $data_arr
-     * @param int $len
+     * @param array $data_arr 需要排序的数组
+     * @param int $len 数组最大索引
      * @param array
      */
     public function selectSort($data_arr, $len){
@@ -43,6 +43,9 @@ class Sort_model extends GT_model{
 
     /**
      * 冒泡排序
+     * @param array $data_arr 需要排序的数组
+     * @param int $len 数组的最大索引
+     * @return array
      */
     public function bubbleSort($data_arr, $len){
         for($i=0; $i<$len; $i++){
@@ -64,6 +67,9 @@ class Sort_model extends GT_model{
 
     /**
      * 插入排序
+     * @param array $data_arr 需要排序的数组
+     * @param int $len 数组的最大索引
+     * @return array
      */
     public function insertSort($data_arr, $len){
         for($i=1; $i<=$len-1; $i++){
@@ -84,6 +90,9 @@ class Sort_model extends GT_model{
 
     /**
      * 希尔排序
+     * @param array $data_arr 需要排序的数组
+     * @param int $len 数组的最大长度
+     * @return array
      */
     public function shellSort($data_arr, $len){
         for($gap=5; $gap>0; $gap-=2){
