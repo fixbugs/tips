@@ -95,5 +95,35 @@ class test extends GT_Controller{
         $used_time = time()- $start_time;
         var_dump($used_time.'s');
     }
+
+    public function testphpfunc(){
+        $a = array('a', 'b');
+        $b = array('c', 'd');
+        $c = $a + $b;
+        var_dump($c);
+        var_dump(array_merge($a, $b));
+        var_dump("-----------1-----------");
+
+        $a = array(0=>'a', 1=>'b');
+        $b = array(0=>'c', 1=>'b');
+        $c = $a + $b;
+        var_dump($c);
+        var_dump(array_merge($a, $b));
+        var_dump("-----------2-----------");
+
+        $a = array('a', 'b');
+        $b = array(0=>'c', 1=>'b');
+        $c = $a + $b;
+        var_dump($c);
+        var_dump(array_merge($a, $b));
+        var_dump("-----------3-----------");
+
+        $a = array(0=>'a', 1=>'b');
+        $b = array('0'=>'c', '1'=>'b');
+        $c = $a + $b;
+        var_dump($c);
+        var_dump(array_merge($a, $b));
+        var_dump("-----------4-----------");
+    }
 }
 
