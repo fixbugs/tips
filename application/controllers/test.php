@@ -125,5 +125,20 @@ class test extends GT_Controller{
         var_dump(array_merge($a, $b));
         var_dump("-----------4-----------");
     }
+
+    public function testphpcode(){
+        $str = "abcdefg";
+        echo $this->strrevv($str);
+    }
+
+    public function strrevv($str){
+        $len = strlen($str);
+        $newstr = '';
+        for( $i = $len -1; $i>=0; $i-- ){
+            $newstr .= $str[$i];
+        }
+        return $newstr;
+    }
+
 }
 
