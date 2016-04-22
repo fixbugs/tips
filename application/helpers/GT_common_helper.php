@@ -876,3 +876,16 @@ function getRandomStr($length){
     }
     return $result_str;
 }
+
+/**
+ * 字符反转
+ * @return string
+ */
+function strrevv($str){
+    $len = strlen($str);
+    $newstr = '';
+    for( $i = $len -1; $i>=0; $i-- ){
+        $newstr .= $str[$i];
+    }
+    return $newstr;
+}
