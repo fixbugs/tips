@@ -126,6 +126,17 @@ class test extends GT_Controller{
         var_dump("-----------4-----------");
     }
 
+    public function testspec(){
+        echo '1'.print(2)+3;//511 + > print > string
+
+        $a = 0x01;
+        $b = 0x02;
+        echo $a===$b>>$a; //1 >> > ===
+
+        print (196*100) !== (double)1960;//1
+
+    }
+
     public function testphpcode(){
         $str = "abcdefg";
         echo strrevv($str);
