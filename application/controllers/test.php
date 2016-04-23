@@ -135,11 +135,28 @@ class test extends GT_Controller{
 
         print (196*100) !== (double)1960;//1
 
+        echo 0500;//320
+
     }
 
     public function testphpcode(){
         $str = "abcdefg";
         echo strrevv($str);
+    }
+
+    public function testgx(){
+        $shm_key = ftok(__FILE__, 't');
+        $shm_id = shmop_open($shm_key, "c", 0644, 1024);
+        $size = shmop_write($shm_id, 'songjiankang', 0);
+        echo "write inot {$size}";
+
+        $data = shmop_read($shm_id, 0, 100);
+        var_dump($data);
+
+        shmop_delete($shm_id);
+
+        shmop_close($shm_id);
+
     }
 
 }
