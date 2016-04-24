@@ -924,3 +924,31 @@ function clean_xss(&$string, $low = False)
 
     }
 }
+
+/**
+ * 输入过滤
+ */
+function inputCheck($params) {
+    if(!get_magic_quotes_gpc()) {
+        $post = addslashes($params);
+    }
+    $params = str_replace("_", "\_", $params);
+    $params = str_replace("%", "\%", $params);
+    $params = nl2br($params);
+    $params = htmlspecialchars($params);
+
+    return $params;
+}
+
+/**
+ * 注入字符串判断
+ * @param string $sql_str
+ * @return bool or string
+ */
+function injectCheck($sql_str){
+    $check = preg_match('/select|insert|update|delete|sleep|\'|\\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/i', $sql_str);
+    if($check){
+        return false;
+    }
+    return $sql_str;
+}
