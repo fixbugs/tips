@@ -952,3 +952,33 @@ function injectCheck($sql_str){
     }
     return $sql_str;
 }
+
+function bigDataAdd($a, $b){
+    $m = strlen($a);
+    $n = strlen($b);
+    $a_arr = str_split($a);
+    $a_arr = array_reverse($a_arr);
+    $b_arr = str_split($b);
+    $b_arr = array_reverse($b_arr);
+    $num = $m>$n?$m:$n;
+    $result_arr = array_fill(0, $num+1, 0);
+    $result = '';
+    $flag = 0;
+    for($i=0; $i<$num; $i++){
+        $tmp_a = isset($a_arr[$i]) ? $a_arr[$i]:0;
+        $tmp_b = isset($b_arr[$i]) ? $b_arr[$i]:0;
+        $tmp_sum = $tmp_a + $tmp_b+ $flag;
+        if($tmp_sum > 9){
+            $flag = 1;
+        }else{
+            $flag = 0 ;
+        }
+        $result[$i] = $tmp_sum%10;
+        $result[$i+1] = intval($tmp_sum/10);
+    }
+    $result = array_reverse($result);
+    if(!$result[0]){
+        unset($result[0]);
+    }
+    return implode('', $result);
+}
