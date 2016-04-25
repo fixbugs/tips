@@ -953,6 +953,13 @@ function injectCheck($sql_str){
     return $sql_str;
 }
 
+
+/**
+ * 大位数加法实现
+ * @param int $a
+ * @param int $b
+ * @return string
+ */
 function bigDataAdd($a, $b){
     $m = strlen($a);
     $n = strlen($b);
