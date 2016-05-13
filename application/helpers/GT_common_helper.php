@@ -990,7 +990,13 @@ function bigDataAdd($a, $b){
     return implode('', $result);
 }
 
-
+/**
+ * 加密解密函数
+ * @param string $string
+ * @param string $operation 'E' or 'D'
+ * @param string $key 'unknown sec key'
+ * @return string
+ */
 function encrypt($string, $operation, $key=''){
     $key = md5($key);
     $key_length = strlen($key);
