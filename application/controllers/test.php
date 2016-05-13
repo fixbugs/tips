@@ -159,5 +159,13 @@ class test extends GT_Controller{
 
     }
 
+    public function testenc(){
+        $str = 'abc';
+        $key = 'www.helloweba.com';
+        $token = encrypt($str, 'E', $key);
+        echo '加密:'.encrypt($str, 'E', $key);
+        echo '解密：'.encrypt($token, 'D', $key);
+    }
+
 }
 
