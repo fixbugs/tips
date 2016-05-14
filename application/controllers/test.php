@@ -174,5 +174,10 @@ class test extends GT_Controller{
         var_dump($percent);
     }
 
+    public function testtrunc(){
+        $ts = 'abcdefghijklmnopqrstuvwxyz';
+        var_dump( stringTruncate($ts, 10, '') );
+    }
+
 }
 
