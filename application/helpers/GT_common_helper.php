@@ -1032,3 +1032,15 @@ function encrypt($string, $operation, $key=''){
         return str_replace('=', '', base64_encode($result));
     }
 }
+
+function stringTruncate($string, $limit, $break='.', $pad='...'){
+    if(strlen($string) <= $limit){
+        return $string;
+    }
+    if(false !== ($breakpoint = strpos($string, $break, $limit)) ){
+        if($breakpoint < strlen($string) - 1){
+            $string = substr($string, 0, $breakpoint) . $pad;
+        }
+    }
+    return $string;
+}
