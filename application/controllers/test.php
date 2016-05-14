@@ -167,5 +167,12 @@ class test extends GT_Controller{
         echo '解密：'.encrypt($token, 'D', $key);
     }
 
+    public function testsim(){
+        $percent = 0;
+        $sim_count = similar_text('Hello fuxin', 'Hello fuxin', $percent);
+        var_dump($sim_count);
+        var_dump($percent);
+    }
+
 }
 
