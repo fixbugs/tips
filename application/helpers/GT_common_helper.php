@@ -967,21 +967,21 @@ function bigDataAdd($a, $b){
     $a_arr = array_reverse($a_arr);
     $b_arr = str_split($b);
     $b_arr = array_reverse($b_arr);
-    $num = $m>$n?$m:$n;
-    $result_arr = array_fill(0, $num+1, 0);
+    $num = $m>$n ? $m:$n;
+    $result_arr = array_fill(0, $num + 1, 0);
     $result = '';
     $flag = 0;
     for($i=0; $i<$num; $i++){
         $tmp_a = isset($a_arr[$i]) ? $a_arr[$i]:0;
         $tmp_b = isset($b_arr[$i]) ? $b_arr[$i]:0;
-        $tmp_sum = $tmp_a + $tmp_b+ $flag;
+        $tmp_sum = $tmp_a + $tmp_b + $flag;
         if($tmp_sum > 9){
             $flag = 1;
         }else{
             $flag = 0 ;
         }
-        $result[$i] = $tmp_sum%10;
-        $result[$i+1] = intval($tmp_sum/10);
+        $result[$i] = $tmp_sum % 10;
+        $result[$i + 1] = intval($tmp_sum / 10);
     }
     $result = array_reverse($result);
     if(!$result[0]){
