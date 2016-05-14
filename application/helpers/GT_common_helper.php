@@ -1036,7 +1036,7 @@ function encrypt($string, $operation, $key=''){
 /**
  * 字段断行处理函数，用于断字处截取字符串
  */
-function stringTruncate($string, $limit, $break='.', $pad='...'){
+function lineWordTruncate($string, $limit, $break='.', $pad='...'){
     if(strlen($string) <= $limit){
         return $string;
     }
