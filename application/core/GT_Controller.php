@@ -149,7 +149,7 @@ class GT_Controller extends CI_Controller{
      */
     public function _gotoLogin($return_url=''){
         $total_login_url = 'http://'.$_SERVER['HTTP_HOST'].'/index.php/login/index';
-        $return_url = $return_url==''? urlencode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) : urlencode($return_url);
+        $return_url = $return_url=='' ? urlencode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) : urlencode($return_url);
         header("Location:" . $total_login_url . "?returnurl=" . $return_url);
         exit();
     }
