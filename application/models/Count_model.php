@@ -10,7 +10,6 @@ class Count_model extends GT_model{
         parent::__construct();
     }
 
-    
 
     public function test(){
         $id = '6094091879463563272';

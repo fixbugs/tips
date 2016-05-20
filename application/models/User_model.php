@@ -119,7 +119,7 @@ class User_model extends GT_Model {
         $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
         $result = $query->result_array();
         if(!empty($result)){
-            return $data;
+            return $result;
         }
         return array();
     }
