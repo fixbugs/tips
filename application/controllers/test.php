@@ -179,5 +179,13 @@ class test extends GT_Controller{
         var_dump( stringTruncate($ts, 10, '') );
     }
 
+    public function testsystemcount(){
+        $this->load->model('system_count_model');
+        $data = $this->system_count_model->getDataByIp('127.0.0.1');
+        foreach($data as $d){
+            var_dump($d);
+        }
+    }
+
 }
 

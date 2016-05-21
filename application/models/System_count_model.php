@@ -39,6 +39,27 @@ class System_count_model extends GT_Model {
         return array();
     }
 
-    //public function 
+    /**
+     * 根据用户ip获取访问数据
+     * @param string $ip IP
+     * @param int $page 1
+     * @param int $limit 10
+     * @return array
+     */
+    public function getDataByIp($ip, $page=1, $limit=10){
+        if(ip2long($ip)=='-1'){
+            return array();
+        }
+        $cond['user_ip'] = $ip;
+        $cond['limit'] = $limit;
+        $cond['page'] = $page;
+        $this->setOrderBy('create_time', 'DESC');
+        $data = $this->findAllByAttr($cond);
+        if($data){
+            return $data;
+        }
+        return array();
+    }
+
 
 }

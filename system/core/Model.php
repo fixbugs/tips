@@ -218,7 +218,7 @@ abstract class GT_Model extends CI_Model{
         }else{
             $query = $this->db->get($this->_table_name);
         }
-        return $query->result();
+        return $query->result_array();
     }
 
     /**
@@ -421,6 +421,7 @@ abstract class GT_Model extends CI_Model{
         $tmp['order_field'] = $order;
         $tmp['direction'] = strtoupper($direction);
         $this->_order[] = $tmp;
+        unset($tmp);
         return true;
     }
 
