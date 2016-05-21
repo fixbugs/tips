@@ -311,7 +311,7 @@ abstract class GT_Model extends CI_Model{
      * @param string $key_name 需要更新的数据库列名
      * @return bool
      */
-    public function updateAll($data,$key_name){
+    public function updateAll($data, $key_name){
         $this->_check_model_value();
         foreach($data as $k=>$v){
             if(!$data[$k][$key_name]){
@@ -432,7 +432,7 @@ abstract class GT_Model extends CI_Model{
     public function getTableDesign(){
         $this->_check_model_value();
         $db = 'tips';
-        $sql = 'select COLUMN_NAME as a from information_schema.COLUMNS where table_name ="'. $this->_table_name.'" and table_schema = "'.$db.'";';
+        $sql = 'select COLUMN_NAME as a from information_schema.COLUMNS where table_name ="'. $this->_table_name.'" and table_schema = "'. $db .'";';
         $data = $this->db->query($sql);
         $data = $data->result_array();
         if($data){
