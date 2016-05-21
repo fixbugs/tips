@@ -441,6 +441,7 @@ abstract class GT_Model extends CI_Model{
             }
             return $result;
         }
+        return array();
     }
 
 }
