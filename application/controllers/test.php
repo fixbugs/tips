@@ -187,5 +187,9 @@ class test extends GT_Controller{
         }
     }
 
+    public function testconfig(){
+        $this->config->load('database');
+    }
+
 }
 

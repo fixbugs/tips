@@ -431,7 +431,7 @@ abstract class GT_Model extends CI_Model{
      */
     public function getTableDesign(){
         $this->_check_model_value();
-        $db = 'tips';
+        $db = $this->db->database;
         $sql = 'select COLUMN_NAME as a from information_schema.COLUMNS where table_name ="'. $this->_table_name.'" and table_schema = "'. $db .'";';
         $data = $this->db->query($sql);
         $data = $data->result_array();
