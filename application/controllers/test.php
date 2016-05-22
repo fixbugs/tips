@@ -188,7 +188,7 @@ class test extends GT_Controller{
     }
 
     public function testconfig(){
-        $this->config->load('database');
+        var_dump(get_config('database') );
     }
 
 }
