@@ -1046,3 +1046,44 @@ function lineWordTruncate($string, $limit, $break='.', $pad='...'){
     }
     return $string;
 }
+
+
+function strip_whitespace($content) {
+    $remove_head = false;
+    $stripStr = '';
+    if(!startWith($content,'<?php')){
+        $content = '<?php '.$content;
+        $remove_head = true;
+    }
+    //分析php源码
+    $tokens =   token_get_all ($content);
+    $last_space = false;
+    for ($i = 0, $j = count ($tokens); $i < $j; $i++){
+        if (is_string ($tokens[$i])){
+            $last_space = false;
+            $stripStr .= $tokens[$i];
+        }
+        else{
+            switch ($tokens[$i][0]){
+                //过滤各种PHP注释
+            case T_COMMENT:
+            case T_DOC_COMMENT:
+                break;
+                //过滤空格
+            case T_WHITESPACE:
+                if (!$last_space){
+                    $stripStr .= ' ';
+                    $last_space = true;
+                }
+                break;
+            default:
+                $last_space = false;
+                $stripStr .= $tokens[$i][1];
+            }
+        }
+    }
+    if($remove_head){
+        $stripStr = str_replace('<?php ','',$stripStr);
+    }
+    return $stripStr;
+}

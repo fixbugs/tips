@@ -18,8 +18,15 @@ class test extends GT_Controller{
     }
 
     public function testfunc(){
-        $res = getRandomStr(2);
+        $code = "//\$a='b';\n\$b='c';";
+        $res = strip_whitespace($code);
         var_dump($res);
+        // $t = <<<EOT
+// sfjsljflsj
+// asfljslf
+// sfljslj
+// EOT;
+//         var_dump($t);
     }
 
     public function testuser(){
