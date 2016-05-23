@@ -1048,6 +1048,11 @@ function lineWordTruncate($string, $limit, $break='.', $pad='...'){
 }
 
 
+/**
+ * 移除代码中的注释
+ * @param string $content 代码块
+ * @return string
+ */
 function strip_whitespace($content) {
     $remove_head = false;
     $stripStr = '';
