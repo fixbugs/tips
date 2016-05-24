@@ -1056,12 +1056,12 @@ function lineWordTruncate($string, $limit, $break='.', $pad='...'){
 function strip_whitespace($content) {
     $remove_head = false;
     $stripStr = '';
-    if(!startWith($content,'<?php')){
-        $content = '<?php '.$content;
+    if(!startWith($content, '<?php')){
+        $content = '<?php ' . $content;
         $remove_head = true;
     }
     //分析php源码
-    $tokens =   token_get_all ($content);
+    $tokens = token_get_all($content);
     $last_space = false;
     for ($i = 0, $j = count ($tokens); $i < $j; $i++){
         if (is_string ($tokens[$i])){
@@ -1088,7 +1088,7 @@ function strip_whitespace($content) {
         }
     }
     if($remove_head){
-        $stripStr = str_replace('<?php ','',$stripStr);
+        $stripStr = str_replace('<?php ', '', $stripStr);
     }
     return $stripStr;
 }
