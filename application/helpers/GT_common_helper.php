@@ -1075,12 +1075,12 @@ function strip_whitespace($content) {
             case T_DOC_COMMENT:
                 break;
                 //过滤空格
-            case T_WHITESPACE:
-                if (!$last_space){
-                    $stripStr .= ' ';
-                    $last_space = true;
-                }
-                break;
+            // case T_WHITESPACE:
+            //     if (!$last_space){
+            //         $stripStr .= ' ';
+            //         $last_space = true;
+            //     }
+            //     break;
             default:
                 $last_space = false;
                 $stripStr .= $tokens[$i][1];

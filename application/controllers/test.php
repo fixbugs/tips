@@ -20,7 +20,7 @@ class test extends GT_Controller{
     public function testfunc(){
         $start_time = microtime(true);
         $code = "//\$a='b';\n\$b='c';";
-        for($i=0; $i<10000;$i++){
+        for($i=0; $i<100;$i++){
             $code .= "//\$a='b';\n\$b='c';";
         }
         $start_time = microtime(true);
