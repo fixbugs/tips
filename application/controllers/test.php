@@ -20,19 +20,13 @@ class test extends GT_Controller{
     public function testfunc(){
         $start_time = microtime(true);
         $code = "//\$a='b';\n\$b='c';";
-        for($i=0; $i<100;$i++){
+        for($i=0; $i<10;$i++){
             $code .= "//\$a='b';\n\$b='c';";
         }
         $start_time = microtime(true);
         $res = strip_whitespace($code);
         var_dump($res);
         var_dump(microtime(true)-$start_time);
-        // $t = <<<EOT
-// sfjsljflsj
-// asfljslf
-// sfljslj
-// EOT;
-//         var_dump($t);
     }
 
     public function testuser(){
