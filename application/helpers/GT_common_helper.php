@@ -29,14 +29,14 @@ function convert_time_to_zh($timestamp = 0){
  */
 function mk_dir($dir, $mode = 0755)
 {
-    if (is_dir($dir) || @mkdir($dir,$mode))
+    if (is_dir($dir) || @mkdir($dir, $mode))
     {
         return true;
     }
-    if (!mk_dir(dirname($dir),$mode)) {
+    if (!mk_dir(dirname($dir), $mode)) {
         return false;
     }
-    return @mkdir($dir,$mode);
+    return @mkdir($dir, $mode);
 }
 
 /**
@@ -198,7 +198,7 @@ function get_gvar($key, $type=''){
  * @return mixed string/bool
  */
 function getUrlDomain($url){
-    if(preg_match('/^(https?:\/\/)?([a-z0-9.-]+)(\/.*)?$/i', $url,$matches)){
+    if(preg_match('/^(https?:\/\/)?([a-z0-9.-]+)(\/.*)?$/i', $url, $matches)){
         return $matches[2];
     }
     return false;
@@ -228,8 +228,8 @@ function spaceCheck($value){
  * @param $needle 前缀
  * @return bool
  */
-function startWith($str,$needle){
-    return strpos($str,$needle) === 0;
+function startWith($str, $needle){
+    return strpos($str, $needle) === 0;
 }
 
 /**
@@ -239,12 +239,12 @@ function startWith($str,$needle){
  * @param $needle 后缀
  * @return bool
  */
-function endWith($str,$needle){
+function endWith($str, $needle){
     $length = strlen($needle);
     if($length == 0){
         return true;
     }
-    return (substr($str,-$length) === $needle);
+    return (substr($str, -$length) === $needle);
 }
 
 /**
@@ -393,9 +393,9 @@ function getDomain($url){
 function curl_get_ml($url_arr){
     $mh = curl_multi_init();
     foreach ($url_arr as $i => $url) {
-        $conn[$i]=curl_init($url);
-        curl_setopt($conn[$i],CURLOPT_RETURNTRANSFER,1);
-        curl_multi_add_handle ($mh,$conn[$i]);
+        $conn[$i] = curl_init($url);
+        curl_setopt($conn[$i], CURLOPT_RETURNTRANSFER,1);
+        curl_multi_add_handle ($mh, $conn[$i]);
     }
     do {
         $mrc = curl_multi_exec($mh,$active);
@@ -408,7 +408,7 @@ function curl_get_ml($url_arr){
         }
     }
     foreach ($url_arr as $i => $url) {
-        $res[$i]=curl_multi_getcontent($conn[$i]);
+        $res[$i] = curl_multi_getcontent($conn[$i]);
         curl_close($conn[$i]);
     }
     return $res;
