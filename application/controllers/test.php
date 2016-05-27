@@ -195,6 +195,7 @@ class test extends GT_Controller{
     }
 
     public function testconfig(){
+        //todo need test it 
         var_dump('111');
         $ret = $this->config->load('database' );
         var_dump("222");

@@ -773,10 +773,6 @@ function getCityInfoByIp($ip){
     return $result['data'];
 }
 
-function getRequestInfo(){
-    $_SERVER['ALL_HTTP'] = isset( $_SERVER['ALL_HTTP'] ) ? $_SERVER['ALL_HTTP'] : '';
-}
-
 /**
 * @description 判断是否是移动设备访问
 * @return bool
@@ -837,19 +833,19 @@ function isMobile ()
  * @return string
  */
 function safe_replace($string) {
-    $string = str_replace('%20','',$string);//空格
-    $string = str_replace('%2b','',$string);//加号+
-    $string = str_replace('%27','',$string);//单引号'
-    $string = str_replace('%2527','',$string);
-    $string = str_replace('*','',$string);
-    $string = str_replace('"','&quot;',$string);//双引号
-    $string = str_replace("'",'',$string);
-    $string = str_replace('"','',$string);
-    $string = str_replace(';','',$string);
-    $string = str_replace('<','&lt;',$string);
-    $string = str_replace('>','&gt;',$string);
-    $string = str_replace("{",'',$string);
-    $string = str_replace('}','',$string);
+    $string = str_replace('%20', '', $string);//空格
+    $string = str_replace('%2b', '', $string);//加号+
+    $string = str_replace('%27', '', $string);//单引号'
+    $string = str_replace('%2527', '', $string);
+    $string = str_replace('*', '', $string);
+    $string = str_replace('"', '&quot;', $string);//双引号
+    $string = str_replace("'", '', $string);
+    $string = str_replace('"', '', $string);
+    $string = str_replace(';', '', $string);
+    $string = str_replace('<', '&lt;', $string);
+    $string = str_replace('>', '&gt;', $string);
+    $string = str_replace("{", '', $string);
+    $string = str_replace('}', '', $string);
     return $string;
 }
 
@@ -871,7 +867,7 @@ function getRandomStr($length){
     $max = strlen($rand_str) -1;
     $result_str = '';
     for($i=0; $i<$length; $i++){
-        $result_str .= $rand_str[rand(0,$max)];
+        $result_str .= $rand_str[rand(0, $max)];
     }
     return $result_str;
 }
@@ -1074,7 +1070,7 @@ function strip_whitespace($content) {
             case T_COMMENT:
             case T_DOC_COMMENT:
                 break;
-                //过滤空格
+            //过滤空格
             // case T_WHITESPACE:
             //     if (!$last_space){
             //         $stripStr .= ' ';
