@@ -14,7 +14,13 @@ class Login extends GT_Controller {
     public function index(){
         if($this->isPost()){
             $params = $this->input->post();
-            var_dump($params);
+            $ret = $this->user_model->checkLogin($params);
+            if($ret){
+                $result = array_for_result(true, 'login success');
+            }else{
+                $result = array_for_result(false, 'login failed');
+            }
+            $this->renderJsonp($result);
         }else{
             $params = $this->input->get();
             $data['title'] = 'Login Index';
