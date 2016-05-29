@@ -204,6 +204,30 @@ function getUrlDomain($url){
     return false;
 }
 
+//获取根域名
+function get_domain($url)
+{
+    if(substr($url, 0, 4) == 'http') {
+        $rs = parse_url($url);
+        $host = $rs['host'];
+    }elseif($index = strpos($url, '/')) {
+        $host = substr($url, 0, $index);
+    }else{
+        $host = $url;
+    }
+    $arr = explode('.', $host);
+    $last = array_pop($arr);
+    $map = array('com','net','org','gov','cc','biz','info');
+    $last2 = array_pop($arr);
+    if(in_array($last2, $map)) {
+        $last3 = array_pop($arr);
+        $domain = $last3.'.'.$last2.'.'.$last;
+    }else{
+        $domain = $last2.'.'.$last;
+    }
+    return $domain;
+}
+
 /**
  * 检出输入中是否有空格,有则返回true，无则返回false
  * @param  string $value [description]
