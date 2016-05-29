@@ -28,4 +28,10 @@ class Login extends GT_Controller {
         }
     }
 
+    public function quit(){
+        setcookie('admin_permit','',0,'/',get_domain($_SERVER['HTTP_HOST']));
+        $this->_gotoLogin();
+        //header("Location:".$logout_url."?returnurl=".$returnUrl);
+    }
+
 }
