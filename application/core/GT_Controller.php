@@ -95,10 +95,19 @@ class GT_Controller extends CI_Controller{
         if(!$_COOKIE['admin_permit']){
             return false;
         }else{
-            return $this->checkPermit( $_COOKIE['admin_permit']);
+            return $this->check_permit( $_COOKIE['admin_permit']);
         }
 
         return true;
+    }
+
+    public function check_permit($admin_permit=''){
+        $permit = json_decode($admin_permit, true);
+        if($permit['u_id'] && $permit['sso_key']){
+            
+        }else{
+            $this->_gotoLogin();
+        }
     }
 
     /**
@@ -148,6 +157,7 @@ class GT_Controller extends CI_Controller{
      * @return null redirect
      */
     public function _gotoLogin($return_url=''){
+        setcookie('admin_permit', '', 0, '/', get_domain($_SERVER['HTTP_HOST']));
         $total_login_url = 'http://'.$_SERVER['HTTP_HOST'].'/index.php/login/index';
         $return_url = $return_url=='' ? urlencode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) : urlencode($return_url);
         header("Location:" . $total_login_url . "?returnurl=" . $return_url);
