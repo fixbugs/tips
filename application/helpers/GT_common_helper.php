@@ -1112,3 +1112,33 @@ function strip_whitespace($content) {
     }
     return $stripStr;
 }
+
+/**
+ * 加密字符串
+ *
+ * 对传入的key进行加密,根据当前时间，有效时间1小时
+ * @param $key
+ * @return string
+ */
+function encrypt_string_by_time($key='tips.goitt.com'){
+    $now_time = time() + 60*60;
+    $main_str = (string)$now_time . $key;
+    return base64_encode(base64_encode($main_str));
+
+}
+
+/**
+ * 加密字符串
+ *
+ * 对传入的key进行解密,返回解密出来的时间
+ * @param $key
+ * @return string
+ */
+function decrypt_string_by_time($seckey,$key='tips.goitt.com'){
+    $dec_string = base64_decode(base64_decode($seckey));
+    if(! (substr($dec_string, 10) == $key) ){
+        return false;
+     }
+    return substr($dec_string,0,10);
+
+}
