@@ -105,9 +105,14 @@ class GT_Controller extends CI_Controller{
         $permit = json_decode($admin_permit, true);
         if($permit['u_id'] && $permit['sso_key']){
             //todo need add u_id and sso_key check
+            $dec_time = decrypt_string_by_time($permit['sso_key']);
+            if($dec_time - time() >= 0 ){
+                return true;
+            }
         }else{
             $this->_gotoLogin();
         }
+        $this->_gotoLogin();
     }
 
     /**
