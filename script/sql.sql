@@ -73,8 +73,8 @@ KEY `edit_time` (`edit_time`)
 
 CREATE TABLE if not exists `system_count`(
 `id` BIGINT(20) NOT NULL,
-`url` CHAR(100) NOT NULL COMMENT '请求的url',
-`refer` CHAR(100) NOT NULL COMMENT '来源url',
+`url` VARCHAR(1024) NOT NULL COMMENT '请求的url',
+`refer` VARCHAR(1024) NOT NULL COMMENT '来源url',
 `user_agent` CHAR(200) NOT NULL DEFAULT '' COMMENT '用户ua',
 `user_ip` CHAR(30) NOT NULL DEFAULT '' COMMENT '用户请求IP',
 `http_info` TEXT COMMENT 'HTTP包信息',
