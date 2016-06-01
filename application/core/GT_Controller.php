@@ -88,7 +88,11 @@ class GT_Controller extends CI_Controller{
      * @return boolean [description]
      */
     public function isLogin(){
-        return true;
+        if($_SERVER['REQUEST_URI'] == '/index.php/login/index'){
+            return true;
+        }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
+            return true;
+        }
         //check user login cookie
         //cookie rule
         //uid lt ssokey
