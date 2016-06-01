@@ -101,6 +101,11 @@ class GT_Controller extends CI_Controller{
         return true;
     }
 
+    /**
+     * check login cooike
+     * @param string $admin_permit COOKIE
+     * @return bool or exit
+     */
     public function check_permit($admin_permit=''){
         $permit = json_decode($admin_permit, true);
         if($permit['u_id'] && $permit['sso_key']){
