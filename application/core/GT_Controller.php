@@ -88,6 +88,9 @@ class GT_Controller extends CI_Controller{
      * @return boolean [description]
      */
     public function isLogin(){
+        if($_GET['returnurl']){
+            return true;
+        }
         if($_SERVER['REQUEST_URI'] == '/index.php/login/index'){
             return true;
         }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
