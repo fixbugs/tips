@@ -96,9 +96,6 @@ class GT_Controller extends CI_Controller{
         }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
             return true;
         }
-        //check user login cookie
-        //cookie rule
-        //uid lt ssokey
         if(!$_COOKIE['admin_permit']){
             return false;
         }else{
