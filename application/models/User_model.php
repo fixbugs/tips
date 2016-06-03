@@ -39,8 +39,7 @@ class User_model extends GT_Model {
         }
         $cond['username'] = $params['username'];
         $cond['password'] = $this->createPasswordString($params['password']);
-        $query = $this->db->get_where($this->_table_name,$cond);
-        $db_result = $query->result();
+        $db_result = $this->findAllByAttr($cond);
         if(!$db_result){
             $this->setModelError('username and password try logining failed');
             return false;
