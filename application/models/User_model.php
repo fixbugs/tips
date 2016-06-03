@@ -89,8 +89,7 @@ class User_model extends GT_Model {
      */
     public function findByUsername($username){
         $cond['username'] = $username;
-        $query = $this->db->get_where($this->_table_name, $cond);
-        return $query->row_array();
+        return $this->findAllByAttr($cond);
     }
 
     /**
@@ -104,19 +103,9 @@ class User_model extends GT_Model {
         if(isset($params['password'])){
             unset($params['password']);
         }
-        if(!$page){
-            $page = 1;
-        }else{
-            $page = intval($page) ? intval($page):1;
-        }
-        if(!$limit){
-            $limit = 10;
-        }else{
-            $limit = intval($limit) ? intval($limit):1;
-        }
-        $offset = ($page - 1) * $limit;
-        $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
-        $result = $query->result_array();
+        $cond['page'] = $page;
+        $cond['limit'] = $limit;
+        $result = $this->findAllByAttr($cond);
         if(!empty($result)){
             return $result;
         }
@@ -162,8 +151,7 @@ class User_model extends GT_Model {
      */
     public function findAll(){
         $cond['is_enabled'] = '1';
-        $query = $this->db->get_where($this->_table_name, $cond);
-        $data = $query->result_array();
+        $data = $this->findAllByAttr($cond);
         if(!empty($data)){
             return $data;
         }else{

@@ -68,8 +68,7 @@ class Trace_model extends GT_Model {
      * @return array
      */
     public function findAll(){
-        $query = $this->db->get_where($this->_table_name,array());
-        $data = $query->result_array();
+        $data =  $this->findAllByAttr(array());
         if(!empty($data)){
             return $data;
         }else{
