@@ -101,8 +101,13 @@ class Tips extends GT_Controller {
      * @return json
      */
     public function listall(){
-        $data = $this->tips_model->findAll();
-        $result = array_for_list($data, array(), true, 'success');
+        $cond = $this->isPost() ? $this->input->post():$this->input->get();
+        $data = $this->tips_model->findAll($cond);
+        if($data){
+            $result = array_for_list($data, array(), true, 'success');
+        }else{
+            $result = array_for_list($data, array(), false, 'success');
+        }
         $this->renderJson($result);
     }
 

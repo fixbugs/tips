@@ -27,8 +27,7 @@ class Tips_model extends GT_Model{
      * @return array
      */
     public function findAll( $cond=array()){
-        $query = $this->db->get_where($this->_table_name, $cond);
-        $data = $query->result_array();
+        $data = $this->findAllByAttr($cond);
         if(!empty($data)){
             return $data;
         }
