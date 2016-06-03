@@ -52,9 +52,9 @@ class Tips_model extends GT_Model{
         }else{
             $limit = intval($limit) ? intval($limit):1;
         }
-        $offset = ($page - 1) * $limit;
-        $query = $this->db->get_where($this->_table_name, $cond, $limit, $offset);
-        $result = $query->result_array();
+        $cond['page'] = $page;
+        $cond['limit'] = $limit;
+        $result = $this->findAllByAttr($cond);
         if(!empty($result)){
             $data = $this->getTree($result, 0);
             return $data;
