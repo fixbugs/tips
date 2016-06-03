@@ -190,11 +190,11 @@ abstract class GT_Model extends CI_Model{
             if(!isset($cond['limit'])){
                 $cond['limit'] = 10;
             }
-            $page = $cond['page'] ? $cond['page']:1;
+            $page = intval($cond['page']) ? intval($cond['page']):1;
             unset($cond['page']);
         }
         if(isset($cond['limit'])){
-            $limit = $cond['limit'] ? $cond['limit']:10;
+            $limit = intval($cond['limit']) ? intval($cond['limit']):10;
             unset($cond['limit']);
         }
         if(!empty($cond)){

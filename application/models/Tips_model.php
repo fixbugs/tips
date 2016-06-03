@@ -42,16 +42,6 @@ class Tips_model extends GT_Model{
      * @return array
      */
     public function getTipsByParams($cond, $page=1, $limit=10){
-        if(!$page){
-            $page = 1;
-        }else{
-            $page = intval($page) ? intval($page):1;
-        }
-        if(!$limit){
-            $limit = 10;
-        }else{
-            $limit = intval($limit) ? intval($limit):1;
-        }
         $cond['page'] = $page;
         $cond['limit'] = $limit;
         $result = $this->findAllByAttr($cond);
