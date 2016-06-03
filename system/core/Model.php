@@ -123,6 +123,8 @@ abstract class GT_Model extends CI_Model{
      */
     protected $_order = array();
 
+    protected $_group_by = '';
+
     /**
      * 初始化方法
      */
@@ -210,6 +212,9 @@ abstract class GT_Model extends CI_Model{
                 $this->db->order_by($order_arr['order_field'], $order_arr['direction']);
             }
         }
+        if($this->_group_by){
+            $this->db->group_by($group_by);
+        }
         if(isset($page) && $page){
             $offset = ($page - 1) * $limit;
             $query = $this->db->get($this->_table_name, $limit, $offset);
@@ -261,6 +266,9 @@ abstract class GT_Model extends CI_Model{
             foreach($this->_order as $order_arr){
                 $this->db->order_by($order_arr['order_field'], $order_arr['direction']);
             }
+        }
+        if($this->_group_by){
+            $this->db->group_by($group_by);
         }
         $query = $this->db->get_where($this->_table_name, $cond);
         $result = $query->row_array();
@@ -423,6 +431,18 @@ abstract class GT_Model extends CI_Model{
         $this->_order[] = $tmp;
         unset($tmp);
         return true;
+    }
+
+    /**
+     * 设置数据库分组
+     * @param string $group_by
+     * @return void
+     */
+    public function setGroupBy($group_by=''){
+        if($group_by){
+            $group_by = (string)$group_by;
+            $this->_group_by = $group_by;
+        }
     }
 
     /**
