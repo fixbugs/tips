@@ -78,8 +78,7 @@ class User_model extends GT_Model {
         $data['username'] = $params['username'];
         $data['password'] = $this->createPasswordString($params['password']);
         $data['create_time'] = time();
-        $data[$this->_pk] = make_shard_id(VSID);
-        return $this->db->insert($this->_table_name, $data);
+        return $this->insert($data);
     }
 
     /**

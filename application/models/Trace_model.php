@@ -49,8 +49,7 @@ class Trace_model extends GT_Model {
             $data['obj_id'] = $obj_id;
             $data['obj_type'] = $obj_type;
             $data['create_time'] = _NOW_;
-            $data[$this->_pk] = make_shard_id(CORE_VSID);
-            $ret = $this->db->insert($this->_table_name, $data);
+            $ret = $this->insert($data);
             if(!$ret){
                 $error = 'trace add fail! level:'.$level.', message:'.$message;
                 $return = array_for_result(false, $error);
