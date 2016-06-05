@@ -43,8 +43,7 @@ class Api_log_model extends GT_Model {
             $data['message'] = $message;
             $data['error_num'] = $error_num;
             $data['create_time'] = _NOW_;
-            $data[$this->_pk] = make_shard_id(CORE_VSID);
-            $ret = $this->db->insert($this->_table_name, $data);
+            $ret = $this->insert($data);
             if(!$ret){
                 $error = 'log add fail! level:'.$level.', message:'.$message;
                 $return = array_for_result(false, $error);
