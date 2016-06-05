@@ -106,11 +106,7 @@ class Tags_model extends GT_model{
             $cond['limit'] = $params['limit'] ? $params['limit']:10;
         }
         $this->setOrderBy($this->_pk, 'DESC');
-        if(!$cond){
-            return $this->findAllByAttr(array());
-        }else{
-            return $this->findAllByAttr($cond);
-        }
+        return $this->findAllByAttr($cond);
     }
 
 }
