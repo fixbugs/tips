@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * 用户model
+ * 用户登录model
  */
 class Login extends GT_Controller {
     public function __construct(){
