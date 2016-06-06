@@ -88,7 +88,7 @@ class User_model extends GT_Model {
      */
     public function findByUsername($username){
         $cond['username'] = $username;
-        return $this->findAllByAttr($cond);
+        return $this->findByAttr($cond);
     }
 
     /**
