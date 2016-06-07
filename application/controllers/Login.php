@@ -23,7 +23,7 @@ class Login extends GT_Controller {
             $this->renderJsonp($result);
         }else{
             $params = $this->input->get();
-            $data['title'] = 'Login Index';
+            $data['title'] = 'Login';
             $this->render('login/index', $data);
         }
     }

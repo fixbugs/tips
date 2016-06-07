@@ -1,10 +1,14 @@
-<div>
+
 <form action='/index.php/login/index' method='post'>
-<ul>
-     <li><span>用户名:</span><input type='text' name='username' value=''></li>
-     <li><span>密码:</span><input type='password' name='password' value=''></li>
-     <li><button type='submit' value='Submit'>Login</button></li>
-     <li><button type='reset' value='Reset'>Reset</button></li>
-</ul>
+    <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" class="form-control" id="username" placeholder="User Name" name='username'>
+    </div>
+    <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" class="form-control" id="password" placeholder="Pass Word" name='password'>
+    </div>
+            <button type="submit" class="btn btn-default">Sign in</button>
+            <button type="reset" class="btn btn-default">Reset</button>
 </form>
-</div>
+
