@@ -16,7 +16,11 @@ class Login extends GT_Controller {
             $params = $this->input->post();
             $ret = $this->user_model->checkLogin($params);
             if($ret){
-                $result = array_for_result(true, 'login success');
+                $result = array_for_result(true, 'login success', array(), '/index.php/tips/index');
+                $cookie_d['u_id'] = $ret;
+                $cookie_d['sso_key'] = encrypt_string_by_time();
+                $cookie_data = json_encode($cookie_d);
+                setcookie('admin_permit', $cookie_data, time()+3600, '/', getDomain($_SERVER['HTTP_HOST']));
             }else{
                 $result = array_for_result(false, 'login failed');
             }

@@ -45,7 +45,7 @@ class User_model extends GT_Model {
             return false;
         }
         $this->setModelError('login success');
-        return true;
+        return $db_result[0][$this->_pk];
     }
 
     /**
