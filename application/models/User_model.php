@@ -39,13 +39,13 @@ class User_model extends GT_Model {
         }
         $cond['username'] = $params['username'];
         $cond['password'] = $this->createPasswordString($params['password']);
-        $db_result = $this->findAllByAttr($cond);
+        $db_result = $this->findByAttr($cond);
         if(!$db_result){
             $this->setModelError('username and password try logining failed');
             return false;
         }
         $this->setModelError('login success');
-        return $db_result[0][$this->_pk];
+        return $db_result[$this->_pk];
     }
 
     /**
