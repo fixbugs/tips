@@ -38,6 +38,17 @@
 </tr>
 <?php } ?>
 </tbody>
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>父ID</th>
+        <th>提示内容</th>
+        <th>编辑者</th>
+        <th>创建时间</th>
+        <th>编辑时间</th>
+        <th>状态</th>
+    </tr>
+ </thead>
 </table>
 
 <div>
