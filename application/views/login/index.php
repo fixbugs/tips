@@ -6,7 +6,7 @@
     </div>
     <div class="form-group">
             <label for="password">密码：</label>
-            <input type="password" class="form-control" id="password" placeholder="Pass Word" name='password'>
+            <input type="password" class="form-control" id="password" placeholder="Password" name='password'>
     </div>
             <button type="submit" class="btn btn-default">Sign in</button>
             <button type="reset" class="btn btn-default">Reset</button>
