@@ -2,7 +2,7 @@
 <?php if($data['tips_id']){ ?>
 <input type='hidden' name='tips_id' value='<?php if($data["tips_id"]){ echo $data["tips_id"];}?>'>
 <?php } ?>
-           <div class="form-group">
+          <div class="form-group">
           <label for="message">提示内容：</label>
           <input type="text" class="form-control" id="message" placeholder="Message" name='message' value="<?php if($data["tips_message"]){ echo $data["tips_message"];}?>">
           </div>
