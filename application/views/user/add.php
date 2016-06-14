@@ -22,7 +22,7 @@
           <button type="submit" class="btn btn-default">Add User</button>
           <button type="reset" class="btn btn-default">Reset</button>
 </form>
-          <script>
+<script>
           $(document).ready(function(){
               console.log( $("form").serialize() );
           });
