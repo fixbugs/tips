@@ -1,11 +1,11 @@
 <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/user/edit';}else{ echo '/index.php/user/add';} ?>' method='post'>
-<div class="form-group">
+          <div class="form-group">
           <label for="username">用户名：</label>
-          <input type="text" class="form-control" id="username" placeholder="User Name" name='username' value="<?php if($data["username"]){ echo $data["username"];}?>">
+          <input type="text" class="form-control" id="username" placeholder="User Name" name='username' value="">
           </div>
           <div class="form-group">
           <label for="password">密码：</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" name='password' value="<?php if($data["password"]){ echo $data["password"];}?>">
+          <input type="password" class="form-control" id="password" placeholder="Password" name='password' value="">
           </div>
           <div class="form-group">
           <label for="re_password">密码重复：</label>
@@ -13,13 +13,13 @@
           </div>
           <div class="form-group">
           <label for="truename">真实姓名：</label>
-          <input type="text" class="form-control" id="truename" placeholder="True Name" name='truename' value="<?php if($data["truename"]){ echo $data["truename"];}?>">
+          <input type="text" class="form-control" id="truename" placeholder="True Name" name='truename' value="">
           </div>
           <div class="form-group">
           <label for="email">E-mail：</label>
-          <input type="text" class="form-control" id="email" placeholder="E-mail" name='email' value="<?php if($data["email"]){ echo $data["email"];}?>">
+          <input type="text" class="form-control" id="email" placeholder="E-mail" name='email' value="">
           </div>
-          <button type="submit" class="btn btn-default">Edit User</button>
+          <button type="submit" class="btn btn-default">Add User</button>
           <button type="reset" class="btn btn-default">Reset</button>
 </form>
           <script>
