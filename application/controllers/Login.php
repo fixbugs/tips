@@ -14,9 +14,15 @@ class Login extends GT_Controller {
     public function index(){
         if($this->isPost()){
             $params = $this->input->post();
+            $return_url = $params['return_url'];
+            unset($params['return_url']);
             $ret = $this->user_model->checkLogin($params);
             if($ret){
-                $result = array_for_result(true, 'login success', array(), '/index.php/tips/index');
+                if($return_url){
+                    $result = array_for_result(true, 'login success', array(), $return_url);
+                }else{
+                    $result = array_for_result(true, 'login success', array(), '/index.php/tips/index');
+                }
                 $cookie_d['u_id'] = $ret;
                 $cookie_d['sso_key'] = encrypt_string_by_time();
                 $cookie_data = json_encode($cookie_d);
@@ -27,7 +33,9 @@ class Login extends GT_Controller {
             $this->renderJsonp($result);
         }else{
             $params = $this->input->get();
+            $return_url = isset($params['returnurl']) ? $params['returnurl']:'';
             $data['title'] = 'Login';
+            $data['return_url'] = $return_url;
             $this->render('login/index', $data);
         }
     }

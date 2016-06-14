@@ -1,5 +1,5 @@
-
 <form name="post-form" action='/index.php/login/index' method='post'>
+<input type="hidden" name="return_url" value="<?php if(isset($return_url)){ echo $return_url;} ?>" >
     <div class="form-group">
             <label for="username">用户名：</label>
             <input type="text" class="form-control" id="username" placeholder="User Name" name='username'>
@@ -13,9 +13,9 @@
 </form>
 
 <script>
-          $(document).ready(function(){
-              console.log( $("form").serialize() );
-          });
+$(document).ready(function(){
+    console.log( $("form").serialize() );
+});
 $("button[type=submit]").click(function(e){
     if(e && e.preventDefault){
         e.preventDefault();
