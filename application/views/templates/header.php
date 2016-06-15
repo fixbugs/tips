@@ -16,7 +16,29 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
+<nav class="navbar navbar-fixed-top">
+              <div class="container">
+              <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              </button>
+              <a class="logo" href="/"></a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Home</a></li>
+              <li><a href="/features">Features</a></li>
+              <li><a class="loginbtn" href="/index.php/login/index">Log In</a></li>
+              <li><a class="loginbtn" href="/index.php/login/index" data-toggle="modal" data-target="#loginOut" >Log Out</a></li>
+              <!-- <li><a id="signup-header-btn" class="btn btn-warning signupbtn" href="#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Sign Up</a></li> -->
 
+              </ul>
+              </div>
+              </div>
+</nav>
 
 <div class="container">
               <h1><?php echo $title; ?></h1>
