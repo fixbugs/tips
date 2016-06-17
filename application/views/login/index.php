@@ -1,3 +1,4 @@
+<div class="container">
 <form name="post-form" action='/index.php/login/index' method='post'>
 <input type="hidden" name="return_url" value="<?php if(isset($return_url)){ echo $return_url;} ?>" >
     <div class="form-group">

@@ -1,3 +1,4 @@
+<div class="container">
 <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/user/edit';}else{ echo '/index.php/user/add';} ?>' method='post'>
           <div class="form-group">
           <label for="username">用户名：</label>

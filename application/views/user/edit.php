@@ -1,3 +1,4 @@
+<div class="container">
 <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/user/edit';}else{ echo '/index.php/user/add';} ?>' method='post'>
 <?php if(isset($data) ){ ?>
 <input type='hidden' name='user_id' value='<?php echo $data["user_id"]; ?>'>

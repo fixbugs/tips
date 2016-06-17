@@ -1,3 +1,4 @@
+<div class="container">
 <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/tips/edit';}else{ echo '/index.php/tips/add';} ?>' method='post'>
           <div class="form-group">
           <label for="message">提示内容：</label>
