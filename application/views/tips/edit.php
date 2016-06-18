@@ -11,7 +11,7 @@
           <label for="parent_id">父ID：</label>
           <input type="text" class="form-control" id="parent_id" placeholder="Parent ID" name='parent_id' value="<?php if($data["parent_id"]){ echo $data["parent_id"];}?>">
           </div>
-          <button type="submit" class="btn btn-default">Add Message</button>
+          <button type="submit" class="btn btn-default">Edit Tips</button>
           <button type="reset" class="btn btn-default">Reset</button>
 </form>
 <script>
@@ -50,3 +50,4 @@ $("button[type=submit]").click(function(e){
      });
 });
 </script>
+</div>

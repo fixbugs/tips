@@ -1,10 +1,12 @@
 <div class="container">
-<div class="row">
+    <div class="row">
           <div class="col-sm-9">
           <a class="btn btn-default" href="/index.php/tips/add" role="button">添加</a>
           <a class="btn btn-default" href="#" role="button">删除</a>
-          </div>
+     </div>
 </div>
+
+<div class="container">
 
 <table class="table table-striped">
 <thead>
@@ -57,3 +59,4 @@
     </tr>
  </thead>
 </table>
+</div>
