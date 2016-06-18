@@ -6,6 +6,8 @@
           </div>
 </div>
 
+<div class="container">
+
 <table class="table table-striped">
 <thead>
     <tr>
@@ -58,5 +60,4 @@ echo '';
     </tr>
  </thead>
 </table>
-
-
+</div>
