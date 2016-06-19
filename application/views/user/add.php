@@ -24,9 +24,6 @@
           <button type="reset" class="btn btn-default">Reset</button>
 </form>
 <script>
-$(document).ready(function(){
-    console.log( $("form").serialize() );
-});
 $("button[type=submit]").click(function(e){
     if(e && e.preventDefault){
         e.preventDefault();
