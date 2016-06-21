@@ -93,4 +93,23 @@ class User extends GT_Controller {
         $this->renderJson($result);
     }
 
+    /**
+     * 删除用户
+     * @return json
+     */
+    public function delete(){
+        if($this->isPost()){
+            $params = $this->input->post();
+        }else{
+            $params = $this->input->get();
+        }
+        if(!$params['id']){
+            $result = array_for_result(false, 'id needed', $params);
+        }else{
+            $ret = $this->user_model->deleteUser($params['id']);
+            $result = array_for_result($ret, $this->user_model->getModelError(), $params);
+        }
+        $this->renderJson($result);
+    }
+
 }
