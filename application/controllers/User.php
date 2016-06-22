@@ -34,8 +34,7 @@ class User extends GT_Controller {
      * 添加用户方法
      * @return mixed
      */
-    public function add()
-    {
+    public function add(){
         if($this->isPost()){
             $params = $this->isPost() ? $this->input->post():$this->input->get();
             $ret = $this->user_model->addUser($params);

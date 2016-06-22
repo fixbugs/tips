@@ -182,7 +182,7 @@ class User_model extends GT_Model {
                     $this->setModelError($_error);
                 }else{
                     $success_num ++;
-                    $this->trace_model->addTrace('delete', 'delete user, id:'.$message['id']);
+                    $this->trace_model->addTrace('delete', 'delete user, id:'.$message[$this->_pk]);
                 }
             }
         }
