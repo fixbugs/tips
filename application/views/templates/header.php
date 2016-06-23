@@ -30,7 +30,7 @@
               <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
               <li><a href="/">Home</a></li>
-              <li><a href="/features">Features</a></li>
+              <li><a href="/index.php/welcome/features">Features</a></li>
               <li><a class="loginbtn" href="/index.php/login/index">Log In</a></li>
               <li><a class="loginbtn" href="/index.php/login/index" data-toggle="modal" data-target="#loginOut" >Log Out</a></li>
               <!-- <li><a id="signup-header-btn" class="btn btn-warning signupbtn" href="#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Sign Up</a></li> -->

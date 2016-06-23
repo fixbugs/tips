@@ -23,4 +23,8 @@ class Welcome extends GT_Controller {
         $this->setLayout(false);
 		$this->render('welcome_message');
 	}
+
+    public function features(){
+        echo 'features';
+    }
 }
