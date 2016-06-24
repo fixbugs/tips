@@ -51,10 +51,13 @@ class GT_Controller extends CI_Controller{
      * @return null
      */
     public function _loginCheck(){
-        if(!$this->checkNeedLogin()){
-            return true;
-        }
+        //if(!$this->checkNeedLogin()){
+        //    return true;
+        //}
         if(!$this->isLogin()){
+            if(!$this->checkNeedLogin()){
+                return true;
+            }
             $this->_gotoLogin();
         }else{
             //get user info
@@ -63,6 +66,11 @@ class GT_Controller extends CI_Controller{
         }
     }
 
+    /**
+     * check need login urls return ture if need check else return false
+     * check by SERVER REQUEST_URI
+     * @return bool
+     */
     public function checkNeedLogin(){
         $requestUri = $_SERVER['REQUEST_URI'];
         $urlArr = explode('?', $requestUri);
@@ -118,7 +126,7 @@ class GT_Controller extends CI_Controller{
         }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
             return true;
         }
-        if(!$_COOKIE['admin_permit']){
+        if(!isset($_COOKIE['admin_permit']) || !$_COOKIE['admin_permit']){
             return false;
         }else{
             return $this->check_permit( $_COOKIE['admin_permit']);
