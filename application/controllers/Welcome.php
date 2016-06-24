@@ -25,6 +25,7 @@ class Welcome extends GT_Controller {
 	}
 
     public function features(){
-        echo 'features';
+        $data['title'] = 'Features';
+        $this->render('features', $data);
     }
 }

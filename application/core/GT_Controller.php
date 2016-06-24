@@ -47,6 +47,9 @@ class GT_Controller extends CI_Controller{
      * @return null
      */
     public function _loginCheck(){
+        if(!$this->checkNeedLogin()){
+            return true;
+        }
         if(!$this->isLogin()){
             $this->_gotoLogin();
         }else{
@@ -54,6 +57,21 @@ class GT_Controller extends CI_Controller{
             $this->load->model('user_model');
             $this->_user = $this->user_model->findByUsername('admin');
         }
+    }
+
+    public function checkNeedLogin(){
+        $requestUri = $_SERVER['REQUEST_URI'];
+        $urlArr = explode('?', $requestUri);
+        $url = isset($urlArr[0]) ? $urlArr[0]:'';
+        if(!$url){
+            return true;
+        }
+        $noNeedLoginUrls[] = '/features';
+        $noNeedLoginUrls[] = '/features/';
+        if(in_array($url, $noNeedLoginUrls) ){
+            return false;
+        }
+        return true;
     }
 
     /**
