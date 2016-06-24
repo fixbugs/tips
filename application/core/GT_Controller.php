@@ -38,6 +38,10 @@ class GT_Controller extends CI_Controller{
      * @return null
      */
     public function _initConst(){
+        if(!isset($this->_user)){
+            $this->_user['user_id'] = '';
+            $this->_user['username'] = '';
+        }
         define('USER_ID', $this->_user['user_id']);
         define('USER_NAME', $this->_user['username']);
     }
