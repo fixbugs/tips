@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php if($title){ ?>
+    <?php if( isset($title) ){ ?>
          <title><?php echo $title;?></title>
     <?php }else {?>
         <title>CodeIgniter Tutorial</title>
@@ -42,5 +42,7 @@
 
 <div style="margin-top:50px">
 <div class="container">
-              <h1><?php echo $title; ?></h1>
+              <? if(isset($title)){ ?>
+                   <h1><?php if(isset($title)){ echo $title;} ?></h1>
+              <? } ?>
 </div>
