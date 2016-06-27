@@ -7,7 +7,7 @@
     <?php if( isset($title) ){ ?>
          <title><?php echo $title;?></title>
     <?php }else {?>
-        <title>CodeIgniter Tutorial</title>
+        <title>Goitt Tips</title>
     <?php }?>
     <!-- <link rel="stylesheet" type="text/css" href="/static/css/base.css" /> -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
@@ -30,6 +30,8 @@
               <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
               <li><a href="/">Home</a></li>
+              <li><a href="/index.php/tips/index">Tips</a></li>
+              <li><a href="/index.php/user/index">User List</a></li>
               <li><a href="/index.php/welcome/features">Features</a></li>
               <li><a class="loginbtn" href="/index.php/login/index">Log In</a></li>
               <li><a class="loginbtn" href="/index.php/login/index" data-toggle="modal" data-target="#loginOut" >Log Out</a></li>
