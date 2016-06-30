@@ -486,11 +486,6 @@ function curl_get($url, $data = array(), $header = array(), $timeout = 3, $port 
     $result = array();
     $result['result'] = curl_exec($ch);
     curl_close($ch);
-    // if (0 != curl_errno($ch)) {
-    //     $result['error']  = "Error:\n" . curl_error($ch);
-    // }elseif(empty($result['result'])){
-    //     $result['error']  = "Error:Empty return";
-    // }
     return $result;
 }
 
@@ -640,9 +635,8 @@ function xml_array($xml_string)
  * @param object $simple_xml
  * @param array $data
  */
-function simple_xml_array($simple_xml, &$data)
-{
-    $simple_xml = (array) $simple_xml;//var_dump($simple_xml);exit;
+function simple_xml_array($simple_xml, &$data){
+    $simple_xml = (array) $simple_xml;
     foreach ($simple_xml as $k => $v){
         if ($k === '@attributes')
         {
@@ -1054,6 +1048,11 @@ function encrypt($string, $operation, $key=''){
 
 /**
  * 字段断行处理函数，用于断字处截取字符串
+ * @param string $string
+ * @param int $limit
+ * @param char $break
+ * @param string $pad
+ * @return string
  */
 function lineWordTruncate($string, $limit, $break='.', $pad='...'){
     if(strlen($string) <= $limit){
@@ -1140,5 +1139,4 @@ function decrypt_string_by_time($seckey,$key='tips.goitt.com'){
         return false;
      }
     return substr($dec_string,0,10);
-
 }
