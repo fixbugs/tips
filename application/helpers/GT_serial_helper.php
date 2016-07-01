@@ -7,7 +7,6 @@
  */
 function make_shard_id($vsid)
 {
-    //    $model = new Leb_SuperModel();
     return makeSerialId($vsid);
 }
 
@@ -26,12 +25,6 @@ function makeSerialId($vsid)
         return false;
     else
         $vsid = (int)$vsid;
-
-    if(function_exists('make_serial_id'))
-    {
-        $id = make_serial_id($vsid);
-        return $id ? (string)$id : false;
-    }
 
     $auto_inc_sig = getNextValueByShareMemory();
     if(empty($auto_inc_sig))
@@ -66,29 +59,28 @@ function getNextValueByShareMemory()
 
     $sem = $shm = null;
     $retry_times = 1;
-        do
-        {
-            $sem = sem_get($ikey, 1, 0777);
-            $shm = shm_attach($ikey, 128, 0777);
-            if(is_resource($sem) && is_resource($shm))
-                break;
+    do{
+        $sem = sem_get($ikey, 1, 0777);
+        $shm = shm_attach($ikey, 128, 0777);
+        if(is_resource($sem) && is_resource($shm))
+            break;
 
-            $cmd = "ipcrm -M 0x00000000; ipcrm -S 0x00000000; ipcrm -M {$ikey} ; ipcrm -S {$ikey}";
-            $last_line = exec($cmd, $output, $retval);
-        }while($retry_times-- > 0);
+        $cmd = "ipcrm -M 0x00000000; ipcrm -S 0x00000000; ipcrm -M {$ikey} ; ipcrm -S {$ikey}";
+        $last_line = exec($cmd, $output, $retval);
+    }while($retry_times-- > 0);
 
-        if(!sem_acquire($sem))
-            return false;
-
-        $next_value = false;
-        if(shm_has_var($shm, $ikey))
-            shm_put_var($shm, $ikey, $next_value=shm_get_var($shm, $ikey)+1);
-        else
-            shm_put_var($shm, $ikey, $next_value=1);
-
-        $shm && shm_detach($shm);
-        $sem && sem_release($sem);
-        return $next_value;
+    if(!sem_acquire($sem)){
+        return false;
+    }
+    $next_value = false;
+    if(shm_has_var($shm, $ikey)){
+        shm_put_var($shm, $ikey, $next_value=shm_get_var($shm, $ikey)+1);
+    }else{
+        shm_put_var($shm, $ikey, $next_value=1);
+    }
+    $shm && shm_detach($shm);
+    $sem && sem_release($sem);
+    return $next_value;
 }
 
 /**
@@ -99,26 +91,23 @@ function getNextValueByShareMemory()
  */
 function extractVirtShardId($serialId)
 {
-    if(!$serialId || !is_numeric($serialId))
+    if(!$serialId || !is_numeric($serialId)){
         return false;
-    else
+    }else{
         $serialId = (int)$serialId;
-
-    if(function_exists('extract_virt_shard_id'))
-        return extract_virt_shard_id($serialId);
-
-    if(isCompatSerialId($serialId))
-    {
+    }
+    if(isCompatSerialId($serialId)){
         $oldId = $flag = $vsid = 0;
         if(!extractCompatSerialInfo($serialId, $oldId, $flag, $vsid))
             return false;
         else
             return $vsid;
     }
-    elseif(isGlobalSerialId($serialId))
+    elseif(isGlobalSerialId($serialId)){
         return $serialId >> 10 & (0xFFF);
-    else
+    }else{
         return false;
+    }
 }
 
 /**
@@ -150,17 +139,15 @@ function isCompatSerialId($serialId)
  */
 function extractCompatSerialInfo($serialId, &$oldId, &$flag, &$vsid)
 {
-    if(!$serialId || !is_numeric($serialId))
+    if(!$serialId || !is_numeric($serialId)){
         return false;
-    else
+    }else{
         $serialId = (int)$serialId;
+    }
 
-    if(function_exists('extract_compat_serial_info'))
-        return extract_compat_serial_info($serialId, $oldId, $flag, $vsid);
-
-    if(!isCompatSerialId($serialId))
+    if(!isCompatSerialId($serialId)){
         return false;
-
+    }
     $oldId = $serialId & 0xFFFFFFFFF;
     $vsid = $serialId >> 36 & 0xFFF;
     $flag = $serialId >> 48 & 0xFFF;
@@ -176,8 +163,9 @@ function extractCompatSerialInfo($serialId, &$oldId, &$flag, &$vsid)
 function isGlobalSerialId($serialId)
 {
     $high28b = $serialId >> 36;
-    if(!$high28b)
+    if(!$high28b){
         return false;
+    }
     $high4b = ($serialId >> 60) & 0xF; // 最高4位的值
     return 0 != $high4b;
 }
