@@ -668,7 +668,7 @@ function simple_xml_array($simple_xml, &$data){
 /**
 * 过滤调字符串中的所有空格
 * @param string $str
-* @return string 
+* @return string
 */
 function trimall($str){
     $repleace_arr = array(" ", "　", "\t", "\n", "\r");
@@ -682,7 +682,6 @@ function trimall($str){
 function getFloatMicroTime(){
     list($usec, $sec) = explode(' ', microtime());
     return ((float)$usec + (float)$sec);
-
 }
 
 /**
@@ -1114,23 +1113,21 @@ function strip_whitespace($content) {
 
 /**
  * 加密字符串
- *
  * 对传入的key进行加密,根据当前时间，有效时间1小时
- * @param $key
+ * @param string $key
  * @return string
  */
 function encrypt_string_by_time($key='tips.goitt.com'){
     $now_time = time() + 60*60;
     $main_str = (string)$now_time . $key;
     return base64_encode(base64_encode($main_str));
-
 }
 
 /**
- * 加密字符串
- *
+ * 解密字符串
  * 对传入的key进行解密,返回解密出来的时间
- * @param $key
+ * @param string $seckey 密钥串
+ * @param string $key
  * @return string
  */
 function decrypt_string_by_time($seckey,$key='tips.goitt.com'){
