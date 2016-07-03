@@ -78,7 +78,13 @@ class User_model extends GT_Model {
         $data['username'] = $params['username'];
         $data['password'] = $this->createPasswordString($params['password']);
         $data['create_time'] = time();
-        return $this->insert($data);
+        $ret = $this->insert($data);
+        if($ret){
+            $this->setModelError('add user success');
+        }else{
+            $this->setModelError('add user failed');
+        }
+        return $ret;
     }
 
     /**
@@ -137,8 +143,10 @@ class User_model extends GT_Model {
         $params['update_time'] = time();
         $ret = $this->updateBypk($params, $params[$this->_pk]);
         if($ret === false){
+            $this->setModelError('update user data error!');
             return false;
         }else{
+            $this->setModelError('update user data success');
             return true;
         }
 

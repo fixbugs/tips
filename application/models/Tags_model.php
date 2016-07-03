@@ -32,7 +32,13 @@ class Tags_model extends GT_model{
         $data['user_id'] = USER_ID;
         $data['create_time'] = time();
         $data['tag_id'] = make_shard_id(VSID);
-        return $this->insert($data);
+        $ret = $this->insert($data);
+        if($ret){
+            $this->setModelError('add new tag success');
+        }else{
+            $this->setModelError('add new tag failed');
+        }
+        return $ret;
     }
 
     /**
