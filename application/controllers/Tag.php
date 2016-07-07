@@ -52,4 +52,34 @@ class Tag extends GT_Controller {
         }
     }
 
+    /**
+     * 标签编辑方法
+     * @return json or html
+     */
+    public function edit(){
+        if($this->isPost()){
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
+            $ret = $this->tags_model->editTags($params);
+            if($ret){
+                $result = array_for_result(true, $this->tags_model->getModelError());
+            }else{
+                $result = array_for_result(false, $this->tags_model->getModelError());
+            }
+            $this->renderJson($result);
+        }else{
+            $params = $this->input->get();
+            if(!$params['id']){
+                exit('id needed');
+            }
+            $tag_data = $this->tags_model->getById($params['id']);
+            if(!$tag_data){
+                exit("id error");
+            }
+            $data['data'] = $tag_data;
+            $data['title'] = 'Tag Edit';
+            $data['action'] = 'edit';
+            $this->render('tag/edit', $data);
+        }
+    }
+
 }

@@ -38,7 +38,7 @@
     <?php echo $tag['tag_type'];?>
     </td>
     <td>
-    <?php echo convert_time_to_zh($tip['create_time']);?>
+    <?php echo convert_time_to_zh($tag['create_time']);?>
     </td>
     <td>
     <?php echo $tag['user_id'];?>
