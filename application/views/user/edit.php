@@ -4,6 +4,10 @@
 <input type='hidden' name='user_id' value='<?php echo $data["user_id"]; ?>'>
 <?php } ?>
           <div class="form-group">
+          <label for="userid">ID：</label>
+          <input type="text" class="form-control" id="userid" placeholder="User Id" value="<?php if($data["user_id"]){ echo $data["user_id"];}?>" disabled >
+          </div>
+          <div class="form-group">
           <label for="username">用户名：</label>
           <input type="text" class="form-control" id="username" placeholder="User Name" name='username' value="<?php if($data["username"]){ echo $data["username"];}?>">
           </div>

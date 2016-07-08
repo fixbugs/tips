@@ -2,6 +2,10 @@
       <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/tag/edit';}else{ echo '/index.php/tag/add';} ?>' method='post'>
           <input type='hidden' name='tag_id' value="<?php echo $data['tag_id'];?>">
           <div class="form-group">
+          <label for="tagid">ID:</label>
+          <input type="text" class="form-control" id="tagid" placeholder="Tag ID" value="<?php echo $data['tag_id'];?>" disabled >
+          </div>
+          <div class="form-group">
           <label for="tagname">标签名：</label>
           <input type="text" class="form-control" id="tagname" placeholder="Tag Name" name='tag_name' value="<?php echo $data['tag_name'];?>">
           </div>
