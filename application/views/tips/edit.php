@@ -1,3 +1,6 @@
+<div clas="container">
+         <a class="btn btn-default" href="" role="button" onclick="history.go(-1)">返回上一页</a>
+</div>
 <div class="container">
 <form name="post-form" action='<?php if($action == "edit"){ echo '/index.php/tips/edit';}else{ echo '/index.php/tips/add';} ?>' method='post'>
 <?php if($data['tips_id']){ ?>

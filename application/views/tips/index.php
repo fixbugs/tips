@@ -24,7 +24,7 @@
 <?php foreach($tips as $tip){ ?>
 <tr>
     <td>
-    <?php echo $tip['tips_id'];?>
+    <a href="/index.php/tips/edit?id=<?php echo $tip['tips_id'];?>"><?php echo $tip['tips_id'];?></a>
     </td>
     <td>
     <?php echo $tip['parent_id'];?>
