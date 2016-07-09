@@ -1,4 +1,4 @@
-<div clas="container">
+<div class="container">
          <a class="btn btn-default" href="" role="button" onclick="history.go(-1)">返回上一页</a>
 </div>
 <div class="container">
