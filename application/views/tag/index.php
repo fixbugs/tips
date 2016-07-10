@@ -29,7 +29,7 @@
 <?php foreach($tags as $tag){ ?>
 <tr>
     <td>
-    <?php echo $tag['tag_id'];?>
+    <a href="/index.php/tag/edit?id=<?php echo $tag['tag_id'];?>"><?php echo $tag['tag_id'];?>
     </td>
     <td>
     <?php echo $tag['tag_name'];?>
