@@ -41,7 +41,7 @@
     <?php echo convert_time_to_zh($tag['create_time']);?>
     </td>
     <td>
-    <?php echo $tag['user_id'];?>
+    <?php echo $tag['username'];?>
     </td>
 </tr>
 <?php } ?>

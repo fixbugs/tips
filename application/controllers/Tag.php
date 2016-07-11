@@ -25,7 +25,12 @@ class Tag extends GT_Controller {
         }else{
             $params = $this->input->get();
             $data['title'] = 'Tag List';
-            $data['tags'] = $this->tags_model->getAllTags($params);
+            $tags = $this->tags_model->getAllTags($params);
+            foreach($tags as $k=>$v){
+                $this->load->model('user_model');
+                $tags[$k]['username'] = $this->user_model->getTruenameById($v['user_id']);
+            }
+            $data['tags'] = $tags;
             $this->render('tag/index', $data);
         }
     }

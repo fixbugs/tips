@@ -203,4 +203,17 @@ class User_model extends GT_Model {
         }
     }
 
+    /**
+     * 根据用户id获取用户名称
+     * @param int $id
+     * @return string
+     */
+    public function getTruenameById($id){
+        $user_info = $this->getById($id);
+        if(!$user_info){
+            return '';
+        }
+        return $user_info['truename'] ? $user_info['truename']:$user_info['username'];
+    }
+
 }
