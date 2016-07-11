@@ -27,19 +27,19 @@
     <a href="/index.php/tips/edit?id=<?php echo $tip['tips_id'];?>"><?php echo $tip['tips_id'];?></a>
     </td>
     <td>
-    <?php echo $tip['parent_id'];?>
+    <?php if($tip['parent_id']){ echo $tip['parent_id'];} ?>
     </td>
     <td>
     <?php echo $tip['tips_message'];?>
     </td>
     <td>
-    <?php echo $tip['user_id'];?>
+    <?php echo $tip['username'];?>
     </td>
     <td>
     <?php echo convert_time_to_zh($tip['create_time']);?>
     </td>
     <td>
-    <?php echo $tip['edit_time'];?>
+    <?php if($tip['edit_time']){ echo convert_time_to_zh($tip['edit_time']); } ?>
     </td>
     <td>
     <?php echo $tip['status'];?>

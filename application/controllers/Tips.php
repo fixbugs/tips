@@ -25,7 +25,12 @@ class Tips extends GT_Controller {
         }else{
             $params = $this->input->get();
             $data['title'] = 'Tips Index';
-            $data['tips'] = $this->tips_model->findAll();
+            $tips = $this->tips_model->findAll();
+            foreach($tips as $k=>$v){
+                $this->load->model('user_model');
+                $tips[$k]['username'] = $this->user_model->getTruenameById($v['user_id']);
+            }
+            $data['tips'] = $tips;
             $this->render('tips/index', $data);
         }
      }
