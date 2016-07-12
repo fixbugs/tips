@@ -2,7 +2,7 @@
 <div class="row">
           <div class="col-sm-9">
           <a class="btn btn-default" href="/index.php/user/add" role="button">添加</a>
-          <a class="btn btn-default" href="#" role="button">删除</a>
+          <a class="btn btn-default" href="#" role="button" id="deleteAll">删除</a>
           </div>
 </div>
 
@@ -37,9 +37,9 @@
     <td>
     <?php
 if($user['update_time']){
-echo convert_time_to_zh($user['update_time']);
+    echo convert_time_to_zh($user['update_time']);
 }else{
-echo '';
+    echo '';
 }
 ?>
     </td>

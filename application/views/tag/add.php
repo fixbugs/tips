@@ -8,7 +8,7 @@
           <label for="tagtype">标签类型：</label>
           <input type="text" class="form-control" id="tagtype" placeholder="Tag Type" name='tag_type' value="">
           </div>
-           <button type="submit" class="btn btn-default">Add Tag</button>
+          <button type="submit" class="btn btn-default">Add Tag</button>
           <button type="reset" class="btn btn-default">Reset</button>
 </form>
 <script src="/static/js/common.js"></script>

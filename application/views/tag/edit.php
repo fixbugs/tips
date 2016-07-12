@@ -16,5 +16,5 @@
           <button type="submit" class="btn btn-default">Edit Tag</button>
           <button type="reset" class="btn btn-default">Reset</button>
       </form>
-          <script src="/static/js/common.js"></script>
+      <script src="/static/js/common.js"></script>
 </div>
