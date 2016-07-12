@@ -43,8 +43,10 @@
 </nav>
 
 <div style="margin-top:50px">
+<? if(isset($title)){ ?>
 <div class="container">
               <? if(isset($title)){ ?>
                    <h1><?php if(isset($title)){ echo $title;} ?></h1>
               <? } ?>
 </div>
+<? } ?>
