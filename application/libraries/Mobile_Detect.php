@@ -10,8 +10,7 @@
  *
  */
 
-class Mobile_Detect
-{
+class Mobile_Detect{
     /**
      * Mobile detection type.
      *
