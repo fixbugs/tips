@@ -207,7 +207,7 @@ class PC_User_Agent
     public function __construct(
         array $headers = null,
         $userAgent = null
-    ) {
+    ){
         $this->setHttpHeaders($headers);
         $this->setUserAgent($userAgent);
     }
@@ -220,8 +220,7 @@ class PC_User_Agent
      *
      * @return string The version number in semantic version format.
      */
-    public static function getScriptVersion()
-    {
+    public static function getScriptVersion(){
         return self::VERSION;
     }
 
@@ -231,8 +230,7 @@ class PC_User_Agent
      * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
      *                           the headers. The default null is left for backwards compatibilty.
      */
-    public function setHttpHeaders($httpHeaders = null)
-    {
+    public function setHttpHeaders($httpHeaders = null){
         // use global _SERVER if $httpHeaders aren't defined
         if (!is_array($httpHeaders) || !count($httpHeaders)) {
             $httpHeaders = $_SERVER;
@@ -258,8 +256,7 @@ class PC_User_Agent
      *
      * @return array
      */
-    public function getHttpHeaders()
-    {
+    public function getHttpHeaders(){
         return $this->httpHeaders;
     }
 
@@ -273,8 +270,7 @@ class PC_User_Agent
      *
      * @return string|null The value of the header.
      */
-    public function getHttpHeader($header)
-    {
+    public function getHttpHeader($header){
         // are we using PHP-flavored headers?
         if (strpos($header, '_') === false) {
             $header = str_replace('-', '_', $header);
@@ -300,8 +296,7 @@ class PC_User_Agent
      *
      * @return array List of HTTP headers.
      */
-    public function getUaHttpHeaders()
-    {
+    public function getUaHttpHeaders(){
         return self::$uaHttpHeaders;
     }
 
@@ -313,7 +308,7 @@ class PC_User_Agent
      *
      * @return  boolean If there were CloudFront headers to be set
      */
-    public function setCfHeaders($cfHeaders = null) {
+    public function setCfHeaders($cfHeaders = null){
         // use global _SERVER if $cfHeaders aren't defined
         if (!is_array($cfHeaders) || !count($cfHeaders)) {
             $cfHeaders = $_SERVER;
@@ -340,8 +335,7 @@ class PC_User_Agent
      *
      * @return array
      */
-    public function getCfHeaders()
-    {
+    public function getCfHeaders(){
         return $this->cloudfrontHeaders;
     }
 
@@ -352,8 +346,7 @@ class PC_User_Agent
      *
      * @return string|null
      */
-    public function setUserAgent($userAgent = null)
-    {
+    public function setUserAgent($userAgent = null){
         // Invalidate cache due to #375
         $this->cache = array();
 
@@ -383,8 +376,7 @@ class PC_User_Agent
      *
      * @return string|null The user agent if it's set.
      */
-    public function getUserAgent()
-    {
+    public function getUserAgent(){
         return $this->userAgent;
     }
 
@@ -397,8 +389,7 @@ class PC_User_Agent
      * @param string $type The type. Must be a self::DETECTION_TYPE_* constant. The default
      *                     parameter is null which will default to self::DETECTION_TYPE_MOBILE.
      */
-    public function setDetectionType($type = null)
-    {
+    public function setDetectionType($type = null){
         if ($type === null) {
             $type = self::DETECTION_TYPE_MOBILE;
         }
@@ -410,13 +401,11 @@ class PC_User_Agent
         $this->detectionType = $type;
     }
 
-    public function getMatchingRegex()
-    {
+    public function getMatchingRegex(){
         return $this->matchingRegex;
     }
 
-    public function getMatchesArray()
-    {
+    public function getMatchesArray(){
         return $this->matchesArray;
     }
 
@@ -425,8 +414,7 @@ class PC_User_Agent
      *
      * @return array List of user agents.
      */
-    public static function getUserAgents()
-    {
+    public static function getUserAgents(){
         return self::getBrowsers();
     }
 
@@ -435,8 +423,7 @@ class PC_User_Agent
      *
      * @return array List of browsers / user agents.
      */
-    public static function getBrowsers()
-    {
+    public static function getBrowsers(){
         return self::$browsers;
     }
 
@@ -445,8 +432,7 @@ class PC_User_Agent
      *
      * @return array List of utilities.
      */
-    public static function getUtilities()
-    {
+    public static function getUtilities(){
         return self::$utilities;
     }
 
@@ -457,11 +443,10 @@ class PC_User_Agent
      *
      * @return array All the rules (but not extended).
      */
-    public static function getMobileDetectionRules()
-    {
+    public static function getMobileDetectionRules(){
         static $rules;
 
-        if (!$rules) {
+        if (!$rules){
             $rules = array_merge(
                 self::$operatingSystems,
                 self::$browsers
@@ -482,8 +467,7 @@ class PC_User_Agent
      *
      * @return array All the rules + extended.
      */
-    public function getMobileDetectionRulesExtended()
-    {
+    public function getMobileDetectionRulesExtended(){
         static $rules;
 
         if (!$rules) {
@@ -505,8 +489,7 @@ class PC_User_Agent
      *
      * @return array
      */
-    public function getRules()
-    {
+    public function getRules(){
         if ($this->detectionType == self::DETECTION_TYPE_EXTENDED) {
             return self::getMobileDetectionRulesExtended();
         } else {
@@ -519,8 +502,7 @@ class PC_User_Agent
      *
      * @return array The list of mobile operating systems.
      */
-    public static function getOperatingSystems()
-    {
+    public static function getOperatingSystems(){
         return self::$operatingSystems;
     }
 
@@ -531,8 +513,7 @@ class PC_User_Agent
      *
      * @return bool
      */
-    public function checkHttpHeadersForMobile()
-    {
+    public function checkHttpHeadersForMobile(){
 
         foreach ($this->getMobileHeaders() as $mobileHeader => $matchType) {
             if (isset($this->httpHeaders[$mobileHeader])) {
@@ -563,8 +544,7 @@ class PC_User_Agent
      * @return mixed
      * @throws BadMethodCallException when the method doesn't exist and doesn't start with 'is'
      */
-    public function __call($name, $arguments)
-    {
+    public function __call($name, $arguments){
         // make sure the name starts with 'is', otherwise
         if (substr($name, 0, 2) !== 'is') {
             throw new BadMethodCallException("No such method exists: $name");
@@ -583,8 +563,7 @@ class PC_User_Agent
      * @param  null    $userAgent deprecated
      * @return boolean
      */
-    protected function matchDetectionRulesAgainstUA($userAgent = null)
-    {
+    protected function matchDetectionRulesAgainstUA($userAgent = null){
         // Begin general search.
         foreach ($this->getRules() as $_regex) {
             if (empty($_regex)) {
@@ -608,8 +587,7 @@ class PC_User_Agent
      *
      * @return boolean
      */
-    protected function matchUAAgainstKey($key)
-    {
+    protected function matchUAAgainstKey($key){
         // Make the keys lowercase so we can match: isIphone(), isiPhone(), isiphone(), etc.
         $key = strtolower($key);
         if (false === isset($this->cache[$key])) {
@@ -638,8 +616,7 @@ class PC_User_Agent
      * @param  string        $httpHeaders deprecated
      * @return bool|int|null
      */
-    public function is($key, $userAgent = null, $httpHeaders = null)
-    {
+    public function is($key, $userAgent = null, $httpHeaders = null){
         // Set the UA and HTTP headers only if needed (eg. batch mode).
         if ($httpHeaders) {
             $this->setHttpHeaders($httpHeaders);
@@ -669,8 +646,7 @@ class PC_User_Agent
      *
      * @todo: search in the HTTP headers too.
      */
-    public function match($regex, $userAgent = null)
-    {
+    public function match($regex, $userAgent = null){
         $match = (bool) preg_match(sprintf('#%s#is', $regex), (false === empty($userAgent) ? $userAgent : $this->userAgent), $matches);
         // If positive match is found, store the results for debug.
         if ($match) {
@@ -686,8 +662,7 @@ class PC_User_Agent
      *
      * @return array
      */
-    public static function getProperties()
-    {
+    public static function getProperties(){
         return self::$properties;
     }
 
@@ -725,8 +700,7 @@ class PC_User_Agent
      *
      * @return string|float The version of the property we are trying to extract.
      */
-    public function version($propertyName, $type = self::VERSION_TYPE_STRING)
-    {
+    public function version($propertyName, $type = self::VERSION_TYPE_STRING){
         if (empty($propertyName)) {
             return false;
         }
