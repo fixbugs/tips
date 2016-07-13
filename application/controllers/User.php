@@ -4,10 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 用户model
  */
-class User extends GT_Controller {
+class User extends GT_Controller{
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->model('user_model');
         $this->load->helper('url_helper');
@@ -17,8 +16,7 @@ class User extends GT_Controller {
      * 默认方法
      * @return mixed
      */
-    public function index()
-    {
+    public function index(){
         if($this->isPost()){
             $params = $this->input->post();
             var_dump($params);
