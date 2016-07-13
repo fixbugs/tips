@@ -10,8 +10,7 @@
  * @package Plugin
  */
 
-class Plugin_Array
-{
+class Plugin_Array{
     /**
      * 从数组中删除空白的元素（包括只有空白字符的元素）
      *
@@ -27,23 +26,15 @@ class Plugin_Array
      * @param array $arr 要处理的数组
      * @param boolean $trim 是否对数组元素调用 trim 函数
      */
-    static function removeEmpty(& $arr, $trim = true)
-    {
-        foreach ($arr as $key => $value) 
-        {
-            if (is_array($value)) 
-            {
+    static function removeEmpty(& $arr, $trim = true){
+        foreach ($arr as $key => $value){
+            if (is_array($value)){
                 self::removeEmpty($arr[$key]);
-            } 
-            else 
-            {
+            }else{
                 $value = trim($value);
-                if ($value == '') 
-                {
+                if ($value == ''){
                     unset($arr[$key]);
-                } 
-                elseif ($trim) 
-                {
+                }elseif ($trim){
                     $arr[$key] = $value;
                 }
             }
@@ -74,23 +65,19 @@ class Plugin_Array
      *
      * @return array 包含指定键所有值的数组
      */
-    static function getCols($arr, $col)
-    {
+    static function getCols($arr, $col){
         $ret = array();
-        foreach ($arr as $row) 
-        {
+        foreach ($arr as $row){
             if (isset($row[$col])) { $ret[] = $row[$col]; }
         }
         return $ret;
     }
-    
-    static function getMultiCols($arr, $cols=array())
-    {
+
+    static function getMultiCols($arr, $cols=array()){
         if(empty($cols)) return array();
         $ret = array();
         $i=0;
-        foreach ($arr as $key=>$row) 
-        {
+        foreach ($arr as $key=>$row){
             foreach ($cols as $col)
             {
                 if (isset($row[$col])) { $ret[$i][$col] = $row[$col]; }
@@ -143,20 +130,14 @@ class Plugin_Array
      *
      * @return array 转换后的 HashMap 样式数组
      */
-    static function toHashmap($arr, $key_field, $value_field = null)
-    {
+    static function toHashmap($arr, $key_field, $value_field = null){
         $ret = array();
-        if ($value_field) 
-        {
-            foreach ($arr as $row) 
-            {
+        if ($value_field){
+            foreach ($arr as $row){
                 $ret[$row[$key_field]] = $row[$value_field];
             }
-        } 
-        else 
-        {
-            foreach ($arr as $row) 
-            {
+        }else{
+            foreach ($arr as $row){
                 $ret[$row[$key_field]] = $row;
             }
         }
@@ -201,11 +182,9 @@ class Plugin_Array
      *
      * @return array 分组后的结果
      */
-    static function groupBy($arr, $key_field)
-    {
+    static function groupBy($arr, $key_field){
         $ret = array();
-        foreach ($arr as $row) 
-        {
+        foreach ($arr as $row){
             $key = $row[$key_field];
             $ret[$key][] = $row;
         }
@@ -265,31 +244,24 @@ class Plugin_Array
      * return array 树形结构的数组
      */
     static function toTree($arr, $key_node_id, $key_parent_id = 'parent_id',
-                           $key_childrens = 'childrens', & $refs = null)
-    {
+                           $key_childrens = 'childrens', & $refs = null){
         $refs = array();
-        foreach ($arr as $offset => $row) 
-        {
+        foreach ($arr as $offset => $row){
             $arr[$offset][$key_childrens] = array();
             $refs[$row[$key_node_id]] =& $arr[$offset];
         }
 
         $tree = array();
-        foreach ($arr as $offset => $row) 
-        {
+        foreach ($arr as $offset => $row){
             $parent_id = $row[$key_parent_id];
-            if ($parent_id)
-            {
-                if (!isset($refs[$parent_id]))
-                {
+            if ($parent_id){
+                if (!isset($refs[$parent_id])){
                     $tree[] =& $arr[$offset];
                     continue;
                 }
                 $parent =& $refs[$parent_id];
                 $parent[$key_childrens][] =& $arr[$offset];
-            }
-            else
-            {
+            }else{
                 $tree[] =& $arr[$offset];
             }
         }
@@ -307,20 +279,15 @@ class Plugin_Array
      *
      * @return array 展开后的数组
      */
-    static function treeToArray($tree, $key_childrens = 'childrens')
-    {
+    static function treeToArray($tree, $key_childrens = 'childrens'){
         $ret = array();
-        if (isset($tree[$key_childrens]) && is_array($tree[$key_childrens])) 
-        {
-            foreach ($tree[$key_childrens] as $child) 
-            {
+        if (isset($tree[$key_childrens]) && is_array($tree[$key_childrens])){
+            foreach ($tree[$key_childrens] as $child){
                 $ret = array_merge($ret, self::treeToArray($child, $key_childrens));
             }
             unset($node[$key_childrens]);
             $ret[] = $node;
-        }
-        else
-        {
+        }else{
             $ret[] = $node;
         }
         return $ret;
@@ -380,14 +347,11 @@ class Plugin_Array
      *
      * @return array 排序后的数组
      */
-    static function sortByMultiCols($rowset, $args)
-    {
+    static function sortByMultiCols($rowset, $args){
         $sortArray = array();
         $sortRule = '';
-        foreach ($args as $sortField => $sortDir) 
-        {
-            foreach ($rowset as $offset => $row) 
-            {
+        foreach ($args as $sortField => $sortDir){
+            foreach ($rowset as $offset => $row){
                 $sortArray[$sortField][$offset] = $row[$sortField];
             }
             $sortRule .= '$sortArray[\'' . $sortField . '\'], ' . $sortDir . ', ';
