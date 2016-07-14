@@ -87,4 +87,21 @@ class Tag extends GT_Controller {
         }
     }
 
+    public function delete(){
+        if($this->isPost()){
+            $params = $this->isPost() ? $this->input->post():$this->input->get();
+            if(!$params['id']){
+                $result = array_for_result(false, $this->tags_model->getModelError());
+                $this->renderJson($result);
+            }
+            $ret = $this->tags_model->deleteTags($params['id']);
+            if($ret){
+                $result = array_for_result(true, $this->tags_model->getModelError());
+            }else{
+                $result = array_for_result(false, $this->tags_model->getModelError());
+            }
+            $this->renderJson($result);
+        }
+    }
+
 }
