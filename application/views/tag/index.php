@@ -16,6 +16,7 @@
         <th>标签类型</th>
         <th>创建时间</th>
         <th>创建者ID</th>
+        <th>操作</th>
     </tr>
 </thead>
 <tbody>
@@ -29,7 +30,7 @@
 <?php foreach($tags as $tag){ ?>
 <tr>
     <td>
-    <a href="/index.php/tag/edit?id=<?php echo $tag['tag_id'];?>"><?php echo $tag['tag_id'];?>
+    <a href="/index.php/tag/edit?id=<?php echo $tag['tag_id'];?>"><?php echo $tag['tag_id'];?></a>
     </td>
     <td>
     <?php echo $tag['tag_name'];?>
@@ -43,6 +44,9 @@
     <td>
     <?php echo $tag['username'];?>
     </td>
+    <td>
+    <a action="/index.php/tag/delete?id=<?php echo $tag['tag_id'];?>" class="deleteBtn">删除</a>
+    </td>
 </tr>
 <?php } ?>
 </tbody>
@@ -53,6 +57,7 @@
         <th>标签类型</th>
         <th>创建时间</th>
         <th>创建者ID</th>
+        <th>操作</th>
     </tr>
  </thead>
 </table>
