@@ -21,7 +21,7 @@ class Tag extends GT_Controller {
     {
         if($this->isPost()){
             $params = $this->input->post();
-            var_dump($params);
+            die("error require");
         }else{
             $params = $this->input->get();
             $data['title'] = 'Tag List';
