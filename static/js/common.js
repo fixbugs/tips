@@ -29,3 +29,25 @@ $("button[type=submit]").click(function(e){
         }
     });
 });
+$(".deleteBtn").click(function(e){
+    var url = this.attr('action');
+    if(url.length > 0){
+        $.ajax({
+            type: 'get',
+            url: url,
+            dataType: "json",
+            success: function(data) {
+                if(data.status){
+                    if(data.redirect){
+                        location.href=data.redirect;
+                        return;
+                    }else{
+                        alert(data.message);
+                    }
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+});
