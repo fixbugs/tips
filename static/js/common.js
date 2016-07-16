@@ -51,3 +51,28 @@ $(".deleteBtn").click(function(e){
         });
     }
 });
+
+$(".postBtn").click(function(e){
+    var url = this.attr('action');
+    if(url.length > 0){
+        var serialize_data = $("form[name='post-form']").serialize();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: serialize_data,
+            dataType: "json",
+            success: function(data) {
+                if(data.status){
+                    if(data.redirect){
+                        location.href=data.redirect;
+                        return;
+                    }else{
+                        alert(data.message);
+                    }
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+});
