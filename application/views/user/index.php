@@ -2,7 +2,6 @@
 <div class="row">
           <div class="col-sm-9">
           <a class="btn btn-default" href="/index.php/user/add" role="button">添加</a>
-          <a class="btn btn-default" href="#" role="button" id="deleteAll">删除</a>
           </div>
 </div>
 
@@ -45,6 +44,7 @@ if($user['update_time']){
     </td>
     <td>
 <a href="/index.php/user/edit?id=<?php echo $user['user_id'];?>">编辑</a>
+<a href="/index.php/user/delete?id=<?php echo $user['user_id'];?>" class="deleteBtn">删除</a>
     </td>
 </tr>
 <?php } ?>
