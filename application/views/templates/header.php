@@ -33,8 +33,8 @@
               <li><a href="/index.php/tips/index">Tips</a></li>
               <li><a href="/index.php/user/index">User List</a></li>
               <li><a href="/index.php/welcome/features">Features</a></li>
-              <li><a class="loginbtn" href="/index.php/login/index">Log In</a></li>
-              <li><a class="loginbtn" href="/index.php/login/index" data-toggle="modal" data-target="#loginOut" >Log Out</a></li>
+              <li><a class="loginbtn" href="/index.php/login/index">Login</a></li>
+              <li><a class="loginbtn" href="/index.php/login/index" data-toggle="modal" data-target="#loginOut" >Login Out</a></li>
               <!-- <li><a id="signup-header-btn" class="btn btn-warning signupbtn" href="#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Sign Up</a></li> -->
 
               </ul>
