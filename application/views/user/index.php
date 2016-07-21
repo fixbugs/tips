@@ -22,7 +22,7 @@
 <?php foreach($users as $user){ ?>
 <tr>
     <td>
-    <a href="/index.php/user/edit?id=<?php echo $user['user_id'];?>"><?php echo $user['user_id'];?></a>
+    <?php echo $user['user_id'];?>
     </td>
     <td>
     <?php echo $user['truename'];?>
