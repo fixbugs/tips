@@ -540,6 +540,18 @@ function curl_post($url, $data = array(), $header = array(), $timeout = 3, $port
 }
 
 /**
+ * 根据url获取根域名
+ * @param string $url
+ * @return bool or string
+ */
+function get_url_domain($url){
+    if(preg_match('/^(https?:\/\/)?([a-z0-9.-]+)(\/.*)?$/i', $url,$matches)){
+        return $matches[2];
+    }
+    return false;
+}
+
+/**
  * 对数组进行编码转换
  *
  * @param strint       $in_charset   输入编码
