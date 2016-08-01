@@ -793,6 +793,9 @@ function getCityInfoByIp($ip){
     );
     if($res['result']){
         $result = json_decode($res['result'], true);
+        if($result['data']['city'] == '省直辖县级行政区划' && $result['data']['county']){
+            $result['data']['city'] = $result['data']['county'];
+        }
     }else{
         return $default_result;
     }
