@@ -809,8 +809,7 @@ function getCityInfoByIp($ip){
 * @description 判断是否是移动设备访问
 * @return bool
 */
-function isMobile ()
-{
+function isMobile (){
     $_SERVER['ALL_HTTP'] = isset( $_SERVER['ALL_HTTP'] ) ? $_SERVER['ALL_HTTP'] : '';
     $mobile_browser      = '0';
     if ( preg_match( '/(up.browser|up.link|mmp|symbian|smartphone|midp|wap|phone|iphone|ipad|ipod|android|xoom)/i' , strtolower( $_SERVER['HTTP_USER_AGENT'] ) ) ){
@@ -864,7 +863,7 @@ function isMobile ()
  * @param $string
  * @return string
  */
-function safe_replace($string) {
+function safe_replace($string){
     $string = str_replace('%20', '', $string);//空格
     $string = str_replace('%2b', '', $string);//加号+
     $string = str_replace('%27', '', $string);//单引号'
@@ -923,15 +922,12 @@ function strrevv($str){
  * @param bool $low
  * @return void
  */
-function clean_xss(&$string, $low = False)
-{
-    if (! is_array ( $string ))
-    {
+function clean_xss(&$string, $low = False){
+    if (! is_array ( $string )){
         $string = trim ( $string );
         $string = strip_tags ( $string );
         $string = htmlspecialchars ( $string );
-        if ($low)
-        {
+        if ($low){
             return True;
 
         }
@@ -945,8 +941,7 @@ function clean_xss(&$string, $low = False)
         return True;
     }
     $keys = array_keys ( $string );
-    foreach ( $keys as $key )
-    {
+    foreach ( $keys as $key ){
         clean_xss ( $string [$key] );
 
     }
@@ -963,7 +958,6 @@ function inputCheck($params) {
     $params = str_replace("%", "\%", $params);
     $params = nl2br($params);
     $params = htmlspecialchars($params);
-
     return $params;
 }
 
