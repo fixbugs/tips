@@ -206,6 +206,9 @@ class Http_Package_Analysis{
         );
         if($res['result']){
             $result = json_decode($res['result'], true);
+            if($result['data']['city'] == '省直辖县级行政区划' && $result['data']['county']){
+                $result['data']['city'] = $result['data']['county'];
+            }
         }else{
             return $defaultResult;
         }
@@ -238,7 +241,7 @@ class Http_Package_Analysis{
         if(isset($header['host'])){
             if(preg_match('/^[0-9]{1,3}(\.[0-9]{1,3}){3}$/', $header['host'])){
                 $ip = $header['host'];
-                $host = get_url_domain($url);
+                $host = self::get_url_domain($url);
                 if($host){
                     $setheader = array("Host:".$host);
                     $url = preg_replace("/{$host}/", $ip, $url, 1);
