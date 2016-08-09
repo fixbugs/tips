@@ -11,6 +11,7 @@ class Tips extends GT_Controller {
         parent::__construct();
         $this->load->model('tips_model');
         $this->load->helper('url_helper');
+        
     }
 
     /**
