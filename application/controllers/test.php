@@ -203,5 +203,41 @@ class test extends GT_Controller{
         var_dump($this->config->item('default'));
     }
 
+    public function testpy(){
+        $fh = fopen('/html/NginxServer/tips/application/controllers/aaa.txt', 'r');
+        $con_arr = array();
+        while(!feof($fh)){
+            $data = fgets($fh);
+            if($data){
+                $con_arr[] = $data;
+            }
+        }
+        include('/html/NginxServer/tips/application/libraries/pinyin.php');
+        // $this->load->library('stringtopy');
+        // $a = new StringToPY();
+        $res = array();
+        foreach($con_arr as $word){
+            //$tr = $a->encode($word, 'all');
+            $tr = pinyin($word);
+            $tr = trimall($tr);
+            $sp_len = strlen($tr);
+            //var_dump($word.'-'.$tr);
+            $res[] = $tr;
+        }
+        var_dump(implode('-', $res));
+        
+    }
+
+    public function testtt(){
+
+        include('/html/NginxServer/tips/application/libraries/pinyin.php');
+
+        // $this->load->library('stringtopy');
+        // $a = new StringToPY();
+        $word = '素媛';
+        $tr = pinyin($word);
+        var_dump($tr);
+    }
+
 }
 

@@ -51,6 +51,7 @@ class StringToPY {
             $iChr = ord($sGBK{$i});
             if ($iChr>160)
                 $iChr = ($iChr<<8) + ord($sGBK{++$i}) - 65536;
+            //var_dump($iChr);
             if ('head' === $sRetFormat)
                 $aBuf[] = substr(self::zh2py($iChr),0,1);
             else
@@ -68,6 +69,12 @@ class StringToPY {
      * @return string 拼音
      */
     private static function zh2py($iWORD) {
+        if($iWORD == -6661){
+            return 'yuan';
+        }
+        if($iWORD == -6462){
+            return 'yuan';
+        }
         if($iWORD>0 && $iWORD<160 ) {
             return chr($iWORD);
         } elseif ($iWORD<-20319||$iWORD>-10247) {
