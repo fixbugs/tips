@@ -30,7 +30,7 @@ class Login extends GT_Controller {
             }else{
                 $result = array_for_result(false, 'login failed');
             }
-            $this->renderJsonp($result);
+            $this->renderJsonp($result, $params);
         }else{
             $params = $this->input->get();
             $return_url = isset($params['returnurl']) ? $params['returnurl']:'';

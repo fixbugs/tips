@@ -55,7 +55,7 @@ class GT_Controller extends CI_Controller{
         //    return true;
         //}
         if(!$this->isLogin()){
-            if(!$this->checkNeedLogin()){
+            if($this->checkNeedLogin()){
                 return true;
             }
             $this->_gotoLogin();
@@ -72,15 +72,21 @@ class GT_Controller extends CI_Controller{
      * @return bool
      */
     public function checkNeedLogin(){
-        $requestUri = $_SERVER['REQUEST_URI'];
-        $urlArr = explode('?', $requestUri);
-        $url = isset($urlArr[0]) ? $urlArr[0]:'';
-        if(!$url){
+        if(isset($_GET['returnurl']) && !empty($_GET['returnurl']) ){
             return true;
         }
+        if($_SERVER['REQUEST_URI'] == '/index.php/login/index'){
+            return true;
+        }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
+            return true;
+        }
+        $requestUri = $_SERVER['REQUEST_URI'];
+        
+        $urlArr = explode('?', $requestUri);
+        $url = isset($urlArr[0]) ? $urlArr[0]:'';
         $noNeedLoginUrls[] = '/features';
         $noNeedLoginUrls[] = '/features/';
-        if(in_array($url, $noNeedLoginUrls) ){
+        if(!in_array($url, $noNeedLoginUrls) ){
             return false;
         }
         return true;
@@ -118,14 +124,14 @@ class GT_Controller extends CI_Controller{
      * @return boolean [description]
      */
     public function isLogin(){
-        if(isset($_GET['returnurl']) && !empty($_GET['returnurl']) ){
-            return true;
-        }
-        if($_SERVER['REQUEST_URI'] == '/index.php/login/index'){
-            return true;
-        }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
-            return true;
-        }
+        // if(isset($_GET['returnurl']) && !empty($_GET['returnurl']) ){
+        //     return true;
+        // }
+        // if($_SERVER['REQUEST_URI'] == '/index.php/login/index'){
+        //     return true;
+        // }elseif(startWith($_SERVER['REQUEST_URI'],'/index.php/login/index')){
+        //     return true;
+        // }
         if(!isset($_COOKIE['admin_permit']) || !$_COOKIE['admin_permit']){
             return false;
         }else{

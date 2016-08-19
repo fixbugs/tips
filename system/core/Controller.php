@@ -122,7 +122,7 @@ class CI_Controller {
      * @return finally
      */
     public function renderJsonp($result, $params, $options=JSON_UNESCAPED_UNICODE){
-        ob_clean();
+        if (ob_get_contents()) ob_end_clean();
         $content = json_encode($result, $options);
         if(!empty($params['jsonpcallback'])){
             $jsonpcallback = isset($params['jsonpcallback']) ? trim($params['jsonpcallback']) : '';
