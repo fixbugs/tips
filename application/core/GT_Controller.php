@@ -81,7 +81,7 @@ class GT_Controller extends CI_Controller{
             return true;
         }
         $requestUri = $_SERVER['REQUEST_URI'];
-        
+
         $urlArr = explode('?', $requestUri);
         $url = isset($urlArr[0]) ? $urlArr[0]:'';
         $noNeedLoginUrls[] = '/features';
