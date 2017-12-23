@@ -19,6 +19,7 @@ class Tips_model extends GT_Model{
     public function __construct(){
         parent::__construct();
         $this->load->model('trace_model');
+        //$this->db = $this->load->database('testdb', true);
     }
 
     /**
